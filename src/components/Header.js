@@ -4,7 +4,7 @@ import logo from "../assets/img/logo.png"
 import Nav from './Nav';
 import NavMobile from './NavMobile';
 
-import Logo from '../assets/img/logo.png'
+// import Logo from '../assets/img/logo.png'
 
 const Header = () => {
   const [header, setHeader] = useState('false');
@@ -22,7 +22,7 @@ const Header = () => {
     z-20 transition-all duration-500 flex items-center justify-between`}>
       <div className="flex items-center">
         {/* Logo */}
-        <a href='#'>
+        <a href='/'>
           <img src={logo} alt=''/>
         </a>
         {/* nav */}

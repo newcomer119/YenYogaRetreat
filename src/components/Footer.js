@@ -12,7 +12,7 @@ const Footer = () => {
         <div className='flex flex-col justify-between 
         items-center lg:flex-row gap-y-5'>
            {/* logo  */}
-           <a href="#">
+           <a href="/">
             <img src={Logo} alt="" srcset="" />
            </a>
            {/* CopyRight Text  */}

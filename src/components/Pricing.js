@@ -21,7 +21,7 @@ const Pricing = () => {
         lg:flex-row lg:gap-x-[39px]">
           {pricing.map((card, currentIndex) => {
             // destructure card
-            const {title,price,list,buttonIcon,buttonText,dealy} = card;
+            const {title,price,list,buttonText,} = card;
             return <div onClick={()=> setIndex(currentIndex)} className="bg-white w-full max-w-[368px] min-h-[668px] h-full 
             cursor-pointer relative" key={currentIndex}>
               {/* card top  */}
