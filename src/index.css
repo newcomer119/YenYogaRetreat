@@ -8,11 +8,7 @@
     background: linear-gradient(to bottom, #fafafa 0%, #cfcece 100%);
   }
   a {
-    @apply transition;
-  }
-
-  a:hover {
-    color: #9cb250;
+    @apply hover:text-egreen transition;
   }
 
   h1,
@@ -42,10 +38,10 @@
     @apply font-medium rounded text-base bg-shape;
   }
   .btn-sm {
-    @apply h-[48px] px-[25px];
+    @apply h-[35px] px-[10px];
   }
   .btn-md {
-    @apply h-[50px] px-[16px];
+    @apply h-[50px] px-[30px];
   }
   .btn-lg {
     @apply h-[58px] rounded-md px-[40px];
