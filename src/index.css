@@ -5,10 +5,16 @@
 @layer base {
   body {
     @apply font-primary text-paragraph;
+    background: linear-gradient(to bottom, #fafafa 0%, #cfcece 100%);
   }
   a {
-    @apply hover:text-orange transition;
+    @apply transition;
   }
+
+  a:hover {
+    color: #9cb250;
+  }
+
   h1,
   h2,
   h3,

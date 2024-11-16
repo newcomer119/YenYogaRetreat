@@ -5,7 +5,7 @@ import { navigation } from "../data";
 
 const Nav = () => {
   return (
-    <nav className="ml-[70px]">
+    <nav className="">
       <ul className="flex gap-x-[42px]">
         {navigation.map((item, index) => {
           return (
