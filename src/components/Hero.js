@@ -4,14 +4,14 @@ import React from "react";
 import { Parallax } from "react-parallax";
 
 // import images
-import Image from "../assets/img/hero/guy4.png";
+import Image from "../assets/img/hero/guy.png";
 
 const Hero = () => {
   return (
-    <section className="min-h-[[618px] lg:min-h-[815px] pt-9 lg:bg-circle lg:bg-no-repeat lg:bg-right-top">
+    <section className="sm:min-h-[450px] lg:min-h-[500px] pt-9 lg:bg-circle lg:bg-no-repeat lg:bg-right-top">
       <div className="lg:pl-32 mx-auto">
-        <div className="flex flex-col items-center lg:flex-row lg:items-start pt-10 lg:pt-32">
-          <div className=" flex-1 mt-12 mx-10 md:ml-0">
+        <div className="flex flex-col items-center lg:flex-row lg:items-start pt-10 lg:pt-32 xxl:max-w-[70%]">
+          <div className=" flex-1 mt-12 mx-8 md:mx-0">
             <h1
               className="h1 mb-3 lg:mb-[22px]"
               data-aos="fade-down"
@@ -20,7 +20,7 @@ const Hero = () => {
               Reconnect with Mind, Body and Soul
             </h1>
             <p
-              className="mb-6 lg:mb-12 max-w-[480px] lg:text-lg"
+              className="mb-6 lg:mb-12 max-w-[60%] sm:max-w-[500px] lg:text-lg"
               data-aos="fade-down"
               data-aos-delay="500"
             >
@@ -42,11 +42,11 @@ const Hero = () => {
             </div>
           </div>
           {/* images */}
-          <div className="w-full bg-circle bg-cover lg:bg-none lg:w-auto">
-            <div className="flex-1 flex justify-center lg:justify-end">
-              <div className="w-[234px] h-[234px] lg:w-[504px] lg:h-[744px] lg:mt-0">
+          <div className="absolute right-0 -top-10  lg:static w-full bg-circle bg-cover w-auto lg:bg-none -z-50 lg:z-0 opacity-60 md:opacity-100">
+            <div className=" flex-1 flex justify-end lg:justify-end">
+              <div className=" w-[300px] h-[450px] sm:w-[300px] sm:h-[400px] lg:w-[504px] lg:h-[680px] mt-56 lg:mt-10 md:mr-4">
                 <Parallax
-                  className="w-full h-full p-28 lg:p-16"
+                  className="w-full h-full p-24 sm:p-16 lg:p-16 xxl:p-20"
                   bgImage={Image}
                   bgImageAlt="image"
                   strength={200}

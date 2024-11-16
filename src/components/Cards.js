@@ -7,7 +7,7 @@ import CardImage2 from '../assets/img/cards/card-3.png'
 
 
 const Cards = () => {
-  return <section className='bg-cardsBg min-h-[260px] pb-[55px] lg:mt-24'>
+  return <section className='bg-cardsBg min-h-[260px] pb-[55px] lg:mt-24 mt-24'>
     <div className="container mx-auto flex flex-col lg:flex-row gap-x-[32px]">
       {/* card group */}
       <div className='flex-1 flex gap-x-[15px] lg:gap-x-[32px] -mt-[38px]
