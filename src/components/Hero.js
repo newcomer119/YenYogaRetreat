@@ -32,11 +32,11 @@ const Hero = () => {
             <div className="mb-6 md:mb-12 space-x-4">
               <button
                 className="btn btn-sm lg:btn-lg btn-orange hover:text-lg text-white bg-transparent-border border-stroke-1  
-              hover:bg-stroke-3 hover:shadow-lg hover:-translate-y-1 hover:text-orange transition-all duration-300"
+              hover:bg-stroke-3 hover:shadow-lg hover:-translate-y-1 hover:text-orange transition-all duration-300 shadow-primary"
               >
                 Book Now
               </button>
-              <button className="btn btn-sm lg:btn-lg bg-egreen hover:text-lg text-white hover:bg-[#7a8f3f] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+              <button className="btn btn-sm lg:btn-lg bg-egreen hover:text-lg text-white hover:bg-[#7a8f3f] hover:shadow-lg hover:-translate-y-1 transition-all duration-300 shadow-primary">
                 Gallery {">"}
               </button>
             </div>
