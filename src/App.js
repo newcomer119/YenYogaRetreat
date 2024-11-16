@@ -6,6 +6,7 @@ import 'aos/dist/aos.css';
 
 
 // import components
+import Header from "./components/Header";
 import Hero from './components/Hero';
 import Cards from './components/Cards';
 import Facts from './components/Facts';
@@ -26,7 +27,8 @@ const App = () => {
   })
 
   return(
-    <div className="overflow-hidden">
+    <div className="overflow-hidden ">
+      <Header />
       <Hero/>
       <Cards/>
       <Facts/>
