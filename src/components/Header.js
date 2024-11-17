@@ -28,16 +28,16 @@ const Header = () => {
 
   return (
     <header
-      className={`${
-        header ? "top-0" : "top-16"
-      } fixed bg-white w-full max-w-[90%] my-3 rounded-md h-[80px] shadow-primary px-4 lg:px-6 
-  z-20 transition-all duration-300 flex items-center justify-between`}
+      className={`${header ? "top-0" : "top-8 lg:top-16"} fixed bg-white my-3 rounded-md w-full z-20 transition-all duration-300  shadow-primary flex items-center justify-between
+        gap-[20px] max-w-[90%] xxl:max-w-[70%]
+        h-[50px] lg:h-[80px] px-4 lg:px-6 
+        `}
       style={{ left: "50%", transform: "translateX(-50%)" }}
     >
       <div className="flex items-center xl:gap-[50px] gap-[20px]">
         {/* Logo */}
         <a href="/">
-          <img src={logo} alt="" className="w-32 h-auto p-2" />
+          <img src={logo} alt="" className="w-20 lg:w-32 h-auto lg:p-2" />
         </a>
         {/* nav */}
         <div className="hidden lg:flex">

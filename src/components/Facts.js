@@ -4,7 +4,7 @@ import React from 'react';
 import CountUp from 'react-countup';
 
 //import image 
-import Image from '../assets/img/john-cena.png'
+import Image from '../assets/img/signature.png'
 
 // import data
 import {facts} from '../data'
