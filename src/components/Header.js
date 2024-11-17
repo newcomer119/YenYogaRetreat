@@ -1,17 +1,29 @@
 import React, { useState, useEffect } from "react";
 import logo from "../assets/img/logos/logo.png";
+import { Link } from "react-router-dom";
+import { auth } from '../firebase'; // Import auth from your Firebase configuration
 
 import Nav from "./Nav";
 import NavMobile from "./NavMobile";
 
 const Header = () => {
   const [header, setHeader] = useState(false);
+  const [user, setUser] = useState(null); // State to hold user information
 
   useEffect(() => {
     // scroll event listener
     window.addEventListener("scroll", () => {
       window.scrollY > 24 ? setHeader(true) : setHeader(false);
     });
+
+    // Monitor authentication state
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user); // Update user state
+    });
+
+    return () => {
+      unsubscribe(); // Cleanup subscription on unmount
+    };
   }, []);
 
   return (
@@ -33,17 +45,25 @@ const Header = () => {
         </div>
       </div>
       <div className="flex items-center">
-        {/* buttons */}
+        {/* buttons or user email */}
         <div className="flex gap-5">
-          <button className="text-heading font-medium text-sm lg:text-base hover:text-orange transition">
-            Sign In
-          </button>
-          <button
-            className="btn btn-md lg:px-[30px] bg-orange-100 border border-orange text-orange font-medium text-sm 
-          lg:text-base hover:bg-orange-200 hover:text-white transition"
-          >
-            Sign Up
-          </button>
+          {user ? ( // Conditional rendering based on user state
+            <span className="text-heading font-medium text-sm lg:text-base">
+              Welcome, {user.email} {/* Display user email */}
+            </span>
+          ) : (
+            <>
+              <button className="text-heading font-medium text-sm lg:text-base hover:text-orange transition">
+                <Link to="/sign-in">Sign In</Link>
+              </button>
+              <button
+                className="btn btn-md lg:px-[30px] bg-orange-100 border border-orange text-orange font-medium text-sm 
+              lg:text-base hover:bg-orange-200 hover:text-white transition"
+              >
+                <Link to="/sign-up">Sign Up</Link>
+              </button>
+            </>
+          )}
         </div>
         {/* nav mobile */}
         <NavMobile />

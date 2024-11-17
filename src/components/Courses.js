@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from 'react-router-dom';
 //  import data
 
 import { courses } from "../data";
@@ -63,7 +63,9 @@ const Courses = () => {
         </div>
         {/* btn */}
         <div className="flex justify-center">
-          <button className="btn btn-sm btn-orange">Browse All</button>
+          <button className="btn btn-sm btn-orange">
+            <Link to="/AllCourses">Browse All</Link>
+          </button>
         </div>
       </div>
     </section>
