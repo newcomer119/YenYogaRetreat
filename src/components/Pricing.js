@@ -18,7 +18,7 @@ const Pricing = () => {
         </div>
         {/* cards  */}
         <div className="flex flex-col mx-auto items-center gap-y-5 
-        lg:flex-row lg:gap-x-[39px]">
+        lg:flex-row lg:gap-x-[39px] justify-center">
           {pricing.map((card, currentIndex) => {
             // destructure card
             const {title,price,list,buttonText,} = card;
