@@ -1,3 +1,4 @@
+// src/components/AllCourses.js
 import React, { useContext, useState } from 'react';
 import Navbar from './Navbar'; // Import Navbar
 import { Link } from 'react-router-dom';
@@ -8,14 +9,16 @@ import { courses } from "../data";
 import { BsStarFill, BsStarHalf } from "react-icons/bs";
 
 const AllCourses = () => {
-  const { addToCart, cart } = useContext(CartContext); // Access addToCart function from context
+  const { addToCart, cart, isLoggedIn } = useContext(CartContext); // Access addToCart function and isLoggedIn from context
   const [successMessage, setSuccessMessage] = useState(''); // State for success message
 
   const handleAddToCart = (course) => {
     const isCourseInCart = cart.some(item => item.id === course.id);
     if (!isCourseInCart) {
       addToCart(course); // Call addToCart when a course is selected
-      setSuccessMessage(`${course.title} added to cart successfully!`); // Set success message for addition
+      if (isLoggedIn) { // Check if user is logged in
+        setSuccessMessage(`${course.title} added to cart successfully!`); // Set success message for addition
+      }
     } else {
       setSuccessMessage(`${course.title} is already in the cart!`); // Set message for duplicate
     }
@@ -35,7 +38,7 @@ const AllCourses = () => {
         )}
         {/* Text */}
         <div className="text-center mb-16 lg:mb-32">
-          <h2 className="h2 mb-3 lg:mb-[18px]">Courses</h2>
+          <h2 className="h2 mb-3 lg:mb-[18px] mt-[49px] text-2xl font-bold">Courses</h2>
           <p className="max-w-[480px] mx-auto">
             Practice Anywhere, anytime. Explore a new way to exercises and
             learn more about yourself. We are providing the best.
