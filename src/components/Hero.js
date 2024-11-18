@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // import parallax
 import { Parallax } from "react-parallax";
@@ -10,7 +11,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 const Hero = () => {
   return (
     <section className="sm:min-h-[450px] lg:min-h-[500px] pt-9 lg:bg-circle lg:bg-no-repeat lg:bg-right-top">
-      <LanguageSwitcher/>
+      <LanguageSwitcher />
       <div className="lg:pl-32 mx-auto">
         <div className="flex flex-col items-center lg:flex-row lg:items-start pt-10 lg:pt-32 xxl:max-w-[70%]">
           <div className=" flex-1 mt-12 mx-8 md:mx-0 lg:min-w-[50%] ">
@@ -38,9 +39,15 @@ const Hero = () => {
               >
                 Book Now
               </button>
-              <button className="btn btn-sm lg:btn-lg bg-egreen hover:text-lg text-white hover:bg-[#7a8f3f] hover:shadow-lg hover:-translate-y-1 transition-all duration-300 shadow-primary">
+              <Link
+                to="/gallery"
+                className="btn btn-md lg:btn-xl bg-egreen hover:text-xl text-white
+             hover:bg-[#7a8f3f] hover:shadow-xl hover:-translate-y-1.5 
+             transition-all duration-300 shadow-primary border-2
+             px-6 py-3 lg:px-8 lg:py-4 text-lg lg:text-xl rounded-xl"
+              >
                 Gallery {">"}
-              </button>
+              </Link>
             </div>
           </div>
           {/* images */}
