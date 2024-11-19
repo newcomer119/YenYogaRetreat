@@ -6,6 +6,16 @@ import CourseImage1 from "../src/assets/img/courses/course-1.png";
 import CourseImage2 from "../src/assets/img/courses/course-2.png";
 import CourseImage3 from "../src/assets/img/courses/course-3.png";
 
+import GalleryImg from "../src/galleryimg/galleryimg.png"
+import GalleryImg1 from "../src/galleryimg/galleryimg1.png"
+import GalleryImg2 from "../src/galleryimg/galleryimg2.png"
+import GalleryImg3 from "../src/galleryimg/galleryimg3.png"
+import GalleryImg4 from "../src/galleryimg/galleryimg4.png"
+import GalleryImg5 from "../src/galleryimg/galleryimg5.png"
+import GalleryImg6 from "../src/galleryimg/galleryimg6.png"
+import GalleryImg7 from "../src/galleryimg/galleryimg7.png"
+import GalleryImg8 from "../src/galleryimg/galleryimg8.png"
+
 export const navigation = [
   {
     name: "Home",
@@ -155,5 +165,44 @@ export const pricing = [
     buttonText: "Book now",
     buttonIcon: <BsChevronRight />,
     delay: "900",
+  },
+];
+
+export const Galleryimgs = [
+  {
+    image: GalleryImg, 
+    title: "Gallery Image 1",
+  },
+  {
+    image: GalleryImg1, 
+    title: "Gallery Image 1",
+  },
+  {
+    image: GalleryImg2, 
+    title: "Gallery Image 1",
+  },
+  {
+    image: GalleryImg3, 
+    title: "Gallery Image 1",
+  },
+  {
+    image: GalleryImg4, 
+    title: "Gallery Image 1",
+  },
+  {
+    image: GalleryImg5, 
+    title: "Gallery Image 1",
+  },
+  {
+    image: GalleryImg6, 
+    title: "Gallery Image 1",
+  },
+  {
+    image: GalleryImg7, 
+    title: "Gallery Image 1",
+  },
+  {
+    image: GalleryImg8, 
+    title: "Gallery Image 1",
   },
 ];

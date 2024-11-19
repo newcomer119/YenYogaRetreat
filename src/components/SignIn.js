@@ -1,19 +1,23 @@
-import React, { useState } from 'react';
+// src/components/SignIn.js
+import React, { useState, useContext } from 'react'; // Import useContext
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import { auth } from '../firebase'; 
 import { signInWithEmailAndPassword } from 'firebase/auth'; 
+import { CartContext } from '../context/CartContext'; // Import CartContext
 
 const SignIn = () => {
   const [email, setEmail] = useState(''); // State for email
   const [password, setPassword] = useState(''); // State for password
   const [message, setMessage] = useState(''); // State for success/error message
   const navigate = useNavigate(); // Initialize useNavigate
+  const { login } = useContext(CartContext); // Access login function from context
 
   const handleSignIn = async (event) => {
     event.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password); // Sign in with email and password
       setMessage("Sign in successful!"); // Set success message
+      login(); // Call login function to update isLoggedIn state
       navigate('/'); // Redirect to the main page (adjust the path as needed)
     } catch (error) {
       console.error("Error signing in:", error); // Handle errors
