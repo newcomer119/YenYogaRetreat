@@ -1,3 +1,5 @@
+// Changed the gallery file now images are visible with slideshow 
+
 import React, { useState } from "react"; // Added useState for managing modal state
 import "slick-carousel/slick/slick.css"; // Import slick-carousel styles
 import "slick-carousel/slick/slick-theme.css";
