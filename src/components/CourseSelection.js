@@ -24,7 +24,7 @@ const CourseSelection = () => {
     setLoading(true);
     setError("");
     setFormSubmitted(false);
-  
+
     try {
       // Add the form data to the Firestore collection
       await addDoc(collection(db, "courseSelections"), {
@@ -41,9 +41,9 @@ const CourseSelection = () => {
         selectedCourse,
         timestamp: new Date(),
       });
-  
+
       setFormSubmitted(true);
-  
+
       // Reset form fields
       setName("");
       setEmail("");
@@ -56,7 +56,7 @@ const CourseSelection = () => {
       setGoal("");
       setQuestions("");
       setSelectedCourse("");
-  
+
       // Reload the page after successful submission
       window.location.reload();
     } catch (e) {
@@ -66,7 +66,6 @@ const CourseSelection = () => {
       setLoading(false);
     }
   };
-  
 
   return (
     <div className="min-h-screen mt-[136px] bg-blue-900 py-8 px-4">
@@ -113,7 +112,10 @@ const CourseSelection = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block mb-2 text-black font-bold" htmlFor="phone">
+              <label
+                className="block mb-2 text-black font-bold"
+                htmlFor="phone"
+              >
                 Phone Number
               </label>
               <input
@@ -126,7 +128,10 @@ const CourseSelection = () => {
               />
             </div>
             <div className="mb-4">
-              <label className="block mb-2 text-black font-bold" htmlFor="address">
+              <label
+                className="block mb-2 text-black font-bold"
+                htmlFor="address"
+              >
                 Mailing Address
               </label>
               <input
@@ -143,7 +148,10 @@ const CourseSelection = () => {
           {/* Referral and Retreat */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="mb-4">
-              <label className="block mb-2 text-black font-bold" htmlFor="referral">
+              <label
+                className="block mb-2 text-black font-bold"
+                htmlFor="referral"
+              >
                 How did you hear about the course?
               </label>
               <select
@@ -160,7 +168,10 @@ const CourseSelection = () => {
               </select>
             </div>
             <div className="mb-4">
-              <label className="block mb-2 text-black font-bold" htmlFor="retreat">
+              <label
+                className="block mb-2 text-black font-bold"
+                htmlFor="retreat"
+              >
                 Will you be attending the Retreat and Graduation Ceremony?
               </label>
               <select
@@ -178,7 +189,10 @@ const CourseSelection = () => {
 
           {/* Health and Goal */}
           <div className="mb-4">
-            <label className="block mb-2 text-black font-bold" htmlFor="healthChallenges">
+            <label
+              className="block mb-2 text-black font-bold"
+              htmlFor="healthChallenges"
+            >
               Do you have any health or mental challenges you would like to
               share to better support you during the course?
             </label>
@@ -203,7 +217,10 @@ const CourseSelection = () => {
             ></textarea>
           </div>
           <div className="mb-4">
-            <label className="block mb-2 text-black font-bold" htmlFor="questions">
+            <label
+              className="block mb-2 text-black font-bold"
+              htmlFor="questions"
+            >
               Do you need additional information about the course? Please leave
               any questions here
             </label>
@@ -218,27 +235,46 @@ const CourseSelection = () => {
 
           {/* Course Selection */}
           <div className="bg-blue-800 p-4 rounded-md shadow-lg">
-            <h3 className="text-xl  text-black font-bold mb-4">
+            <h3 className="text-xl text-black font-bold mb-4">
               Select a Course
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {["Course 1", "Course 2", "Course 3", "Course 4"].map(
-                (course, index) => (
-                  <div
-                    key={index}
-                    className="p-4 bg-white border border-gray-300 rounded-md shadow-sm hover:shadow-lg cursor-pointer"
-                    onClick={() => setSelectedCourse(course)}
-                  >
-                    <h4 className="font-semibold text-gray-800">{course}</h4>
-                    <p className="text-gray-600">
-                      Brief description of {course}.
-                    </p>
-                  </div>
-                )
-              )}
+              {[
+                {
+                  name: "Kundalini Yoga & Mantra Foundation",
+                  description:
+                    "A foundation course focusing on the principles of Kundalini Yoga and the power of mantra chanting.",
+                },
+                {
+                  name: "Yoga & Meditation Lifestyle",
+                  description:
+                    "Learn to incorporate yoga and meditation into your daily life for holistic wellness.",
+                },
+                {
+                  name: "Advanced Kundalini Yoga",
+                  description:
+                    "An advanced-level course to deepen your practice of Kundalini Yoga.",
+                },
+                {
+                  name: "Retreat & Wellness",
+                  description:
+                    "A rejuvenating retreat focusing on relaxation, wellness, and mindfulness.",
+                },
+              ].map((course, index) => (
+                <div
+                  key={index}
+                  className="p-4 bg-white border border-gray-300 rounded-md shadow-sm hover:shadow-lg cursor-pointer"
+                  onClick={() => setSelectedCourse(course.name)}
+                >
+                  <h4 className="font-semibold text-gray-800">{course.name}</h4>
+                  <p className="text-gray-600">{course.description}</p>
+                </div>
+              ))}
             </div>
             <div className="mt-4">
-              <p className="text-black font-bold">Selected Course: {selectedCourse}</p>
+              <p className="text-black font-bold">
+                Selected Course: {selectedCourse}
+              </p>
             </div>
           </div>
 
