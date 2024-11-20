@@ -9,6 +9,13 @@ import Image from "../assets/img/hero/guy.png";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 const Hero = () => {
+  const scrollToGallery = () => {
+    const gallerySection = document.getElementById("gallery");
+    if (gallerySection) {
+      gallerySection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="sm:min-h-[450px] lg:min-h-[500px] pt-9 lg:bg-circle lg:bg-no-repeat lg:bg-right-top">
       <LanguageSwitcher />
@@ -39,15 +46,15 @@ const Hero = () => {
               >
                 Book Now
               </button>
-              <Link
-                to="/gallery"
+              <button
+                onClick={scrollToGallery}
                 className="btn btn-md lg:btn-xl bg-egreen hover:text-xl text-white
-             hover:bg-[#7a8f3f] hover:shadow-xl hover:-translate-y-1.5 
-             transition-all duration-300 shadow-primary border-2
-             px-6 py-3 lg:px-8 lg:py-4 text-lg lg:text-xl rounded-xl"
+                  hover:bg-[#7a8f3f] hover:shadow-xl hover:-translate-y-1.5 
+                  transition-all duration-300 shadow-primary border-2
+                  px-6 py-3 lg:px-8 lg:py-2 text-lg lg:text-xl rounded-xl"
               >
                 Gallery {">"}
-              </Link>
+              </button>
             </div>
           </div>
           {/* images */}

@@ -3,6 +3,7 @@ module.exports = {
   theme: {
     fontFamily: {
       primary: "Inter",
+      roboto: ['Roboto', 'sans-serif'],
     },
     container: {
       padding: {

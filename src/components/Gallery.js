@@ -1,4 +1,4 @@
-// Changed the gallery file now images are visible with slideshow 
+// Changed the gallery file now images are visible with slideshow
 
 import React, { useState } from "react"; // Added useState for managing modal state
 import "slick-carousel/slick/slick.css"; // Import slick-carousel styles
@@ -87,23 +87,31 @@ const Gallery = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-light-blue-100"> {/* Updated background color to light blue */}
-      <div className="w-full max-w-6xl"> {/* Increased max width for larger screens */}
-        {/* Image Carousel */}
+    <div
+      id="gallery"
+      className="flex items-center justify-center min-h-screen bg-light-blue-200"
+    >
+      {" "}
+      {/* Updated background color to a lighter blue */}
+      <div className="w-full max-w-6xl p-8">
+        {" "}
+        {/* Added padding to the container */}
+        <h2 className="text-5xl font-extrabold text-center mb-8 text-blue-100 text-gray-800 tracking-wide font-roboto">GALLERY</h2> {/* Enhanced font style */}
         <Slider {...sliderSettings}>
           {images.map((image, index) => (
             <div key={index} className="px-2">
               <img
                 src={image}
                 alt={`Slideshow Image ${index + 1}`}
-                className="rounded-lg shadow-lg w-full h-80 md:h-96 lg:h-112 object-cover transition-transform duration-300 transform hover:scale-105 focus:outline-none cursor-pointer"
+                className="rounded-lg shadow-md w-full h-80 md:h-96 lg:h-112 object-cover transition-transform duration-300 transform hover:scale-105 focus:outline-none cursor-pointer"
                 onClick={() => openModal(image)} // Open modal on click
               />
             </div>
           ))}
         </Slider>
       </div>
-      <Modal isOpen={isModalOpen} image={selectedImage} onClose={closeModal} /> {/* Modal for zoomed image */}
+      <Modal isOpen={isModalOpen} image={selectedImage} onClose={closeModal} />{" "}
+      {/* Modal for zoomed image */}
     </div>
   );
 };

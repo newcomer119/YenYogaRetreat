@@ -9,11 +9,14 @@ const Navbar = () => {
           <Link to="/" className="text-gray-800 text-lg font-semibold">Home</Link>
         </div>
         <div className="bg-white shadow-md rounded-lg p-4">
-          <Link to="/AllCourses" className="text-gray-800 text-lg font-semibold">Courses</Link>
+          <Link to="/courses" className="text-gray-800 text-lg font-semibold">Courses</Link>
         </div>
         <div className="bg-white shadow-md rounded-lg p-4">
           <Link to="/About" className="text-gray-800 text-lg font-semibold">About</Link>
         </div>
+        <div className="bg-white shadow-md rounded-lg p-4">
+          <Link to="/contact" className="text-gray-800 text-lg font-semibold">Contact</Link>
+        </div>  
       </div>
     </nav>
   );

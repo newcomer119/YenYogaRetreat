@@ -10,7 +10,7 @@ import Cards from './components/Cards';
 import Facts from './components/Facts';
 import Features from './components/Features';
 import Courses from './components/Courses';
-import Pricing from './components/Pricing';
+// import Pricing from './components/Pricing';
 import Newsletter from './components/Newsletter';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -36,7 +36,6 @@ const App = () => {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/AllCourses" element={<AllCourses />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/gallery" element={<Gallery />} />
           <Route path="/" element={
             <>
               <Hero />
@@ -44,7 +43,7 @@ const App = () => {
               <Facts />
               <Features />
               <Courses />
-              <Pricing />
+              <Gallery/>
               <Newsletter />
               <Contact />
               <Footer />
