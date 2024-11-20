@@ -73,25 +73,34 @@ export const facts = [
 export const courses = [
   {
     image: CourseImage1,
-    title: "Resortive Yoga Training & Immersion",
-    desc: "Here is some tips for new job seekars who want to get a dream job and want to shine in his career.",
+    title: "Lớp tập Kundalini Yoga #online: 4:30 - 6:00 (3,5,7)",
+    desc: "1.200.000₫/12 class or pay as you wish",
     link: "Get started",
     delay: "600",
   },
   {
     image: CourseImage2,
-    title: "Resortive Yoga Training & Immersion",
-    desc: "Here is some tips for new job seekars who want to get a dream job and want to shine in his career.",
+    title: "Lễ hội Sat Nam Fest Nha Trang 2024: 2N1Đ (14,15/12)",
+    desc: "https://forms.gle/sxygKTgHr1DUUCCGA",
     link: "Get started",
     delay: "800",
   },
   {
     image: CourseImage3,
-    title: "Resortive Yoga Training & Immersion",
-    desc: "Here is some tips for new job seekars who want to get a dream job and want to shine in his career.",
+    title: "Khoá đào tạo 100h Online 'Kundalini Yoga & Thiền Mantra' khai giảng 18/12",
+    desc: "https://forms.gle/EKCBARsz8BrGT3AU7",
     link: "Get started",
     delay: "900",
   },
+  {
+    image: "", // Assuming you have an image for the fourth course
+    title: "Kundalini Yoga & Mantra Meditation ",
+    desc: "100-hour training course in Nha Trang (December 28 - January 5)",
+    link: "Get started",
+    delay: "1000", // Adjust delay as needed
+  },
+  // ... existing code ...
+  
 ];
 
 export const pricing = [

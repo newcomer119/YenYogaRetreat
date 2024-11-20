@@ -1,7 +1,7 @@
 // src/components/AllCourses.js
 import React, { useContext, useState } from 'react';
 import Navbar from './Navbar'; // Import Navbar
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext'; // Import CartContext
 // import data
 import { courses } from "../data";
@@ -11,6 +11,7 @@ import { BsStarFill, BsStarHalf } from "react-icons/bs";
 const AllCourses = () => {
   const { addToCart, cart, isLoggedIn } = useContext(CartContext); // Access addToCart function and isLoggedIn from context
   const [successMessage, setSuccessMessage] = useState(''); // State for success message
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleAddToCart = (course) => {
     const isCourseInCart = cart.some(item => item.id === course.id);
@@ -80,10 +81,10 @@ const AllCourses = () => {
                   </div>
                   {/* Add to Cart button */}
                   <button 
-                    onClick={() => handleAddToCart(item)} // Call handleAddToCart on click
+                    onClick={() => navigate(`/course-selection/${item.link}`)} // Navigate to CourseSelection
                     className="font-medium text-blue-500 hover:underline"
                   >
-                    Add to Cart
+                    Buy Course
                   </button>
                 </div>
               </div>

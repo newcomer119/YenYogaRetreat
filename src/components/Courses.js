@@ -55,7 +55,7 @@ const Courses = () => {
                     <BsStarHalf />
                   </div>
                   {/* link  */}
-                  <a className="font-medium" href="#">{link}</a>
+                  <Link className="font-medium" to={`/course-selection/${link}`}>Get Started</Link>
                 </div>
               </div>
             );

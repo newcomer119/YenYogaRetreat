@@ -10,6 +10,7 @@ import Cards from './components/Cards';
 import Facts from './components/Facts';
 import Features from './components/Features';
 import Courses from './components/Courses';
+import CourseSelection from './components/CourseSelection'; // Import CourseSelection
 // import Pricing from './components/Pricing';
 import Newsletter from './components/Newsletter';
 import Contact from './components/Contact';
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/AllCourses" element={<AllCourses />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/course-selection/:link" element={<CourseSelection />} /> {/* New route for CourseSelection */}
           <Route path="/" element={
             <>
               <Hero />
