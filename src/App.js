@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { CartProvider } from './context/CartContext'; // Ensure this import is correct
+import { CartProvider } from './context/CartContext';
 import SignUp from './components/SignUp';
 import AllCourses from './components/AllCourses';
 import Checkout from './components/Checkout';
@@ -29,7 +29,7 @@ const App = () => {
   });
 
   return (
-    <CartProvider> {/* Ensure CartProvider wraps the Router */}
+    <CartProvider>
       <Router>
         <Header />
         <Routes>

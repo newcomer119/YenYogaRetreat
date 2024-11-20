@@ -9,24 +9,11 @@ import { courses } from "../data";
 import { BsStarFill, BsStarHalf } from "react-icons/bs";
 
 const AllCourses = () => {
-  const { addToCart, cart, isLoggedIn } = useContext(CartContext); // Access addToCart function and isLoggedIn from context
+  // const { addToCart, cart, isLoggedIn } = useContext(CartContext); // Access addToCart function and isLoggedIn from context
   const [successMessage, setSuccessMessage] = useState(''); // State for success message
   const navigate = useNavigate(); // Initialize useNavigate
 
-  const handleAddToCart = (course) => {
-    const isCourseInCart = cart.some(item => item.id === course.id);
-    if (!isCourseInCart) {
-      addToCart(course); // Call addToCart when a course is selected
-      if (isLoggedIn) { // Check if user is logged in
-        setSuccessMessage(`${course.title} added to cart successfully!`); // Set success message for addition
-      }
-    } else {
-      setSuccessMessage(`${course.title} is already in the cart!`); // Set message for duplicate
-    }
-    setTimeout(() => {
-      setSuccessMessage(''); // Clear message after 3 seconds
-    }, 3000);
-  };
+
 
   return (
     <section className="section-sm lg:section-lg">
