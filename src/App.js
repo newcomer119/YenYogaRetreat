@@ -32,7 +32,7 @@ const App = () => {
     <CartProvider>
       <Router>
         <Header />
-        <div className="pt-[110px]">
+        <div className="pt-[130px]">
         <Routes>
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
