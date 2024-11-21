@@ -3,50 +3,54 @@ import React from "react";
 // Import images for instructors
 import Teacher1Image from "../assets/img/hero/guy.png";
 import Teacher2Image from "../assets/img/hero/guy.png";
+import Footer from "./Footer";
 
 const Instructors = () => {
   return (
-    <section id="instructors" className="instructors-section py-12 bg-gradient-to-b from-gray-100 to-gray-200">
-      <div className="container mx-auto text-center">
-        <h1 className="text-4xl font-bold mb-12 text-gray-800">
-          Meet Our Instructors
-        </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
+    <>
+      <section className="instructors-section py-10">
+        <div className="container mx-auto">
           {/* Instructor 1 */}
-          <div className="flex flex-col items-center bg-white rounded-lg shadow-lg p-6 transition-transform transform hover:-translate-y-2 hover:shadow-2xl">
-            <img
-              src={Teacher1Image}
-              alt="Khanh Vo"
-              className="w-44 h-44 rounded-full border-4 border-orange-500 shadow-lg"
-            />
-            <p className="mt-4 text-lg font-semibold text-gray-800">
-              Khanh Vo
-            </p>
-            <p className="text-sm text-gray-600 mt-2">
-              Professional Musician & Guitar Instructor
-            </p>
+          <div className="flex flex-col lg:flex-row items-center mb-10">
+            <div className="flex-1">
+              <img
+                src={Teacher1Image}
+                alt="Teacher No. 1"
+                className="w-full h-auto rounded-lg"
+              />
+            </div>
+            <div className="flex-1 p-5">
+              <h2 className="text-2xl font-bold mb-3">Teacher No. 1</h2>
+              <p className="text-lg font-bold">
+                Teacher No. 1 has over 10 years of experience in yoga and
+                meditation. They specialize in Hatha Yoga and have trained
+                numerous students to achieve their wellness goals.
+              </p>
+            </div>
           </div>
 
           {/* Instructor 2 */}
-          <div className="flex flex-col items-center bg-white rounded-lg shadow-lg p-6 transition-transform transform hover:-translate-y-2 hover:shadow-2xl">
-            <img
-              src={Teacher2Image}
-              alt="Heather Drageset"
-              className="w-44 h-44 rounded-full border-4 border-orange-500 shadow-lg"
-            />
-            <p className="mt-4 text-lg font-semibold text-gray-800">
-              Heather Drageset
-            </p>
-            <p className="text-sm text-gray-600 mt-2">
-              Yoga Enthusiast & Wellness Coach
-            </p>
+          <div className="flex flex-col lg:flex-row items-center">
+            <div className="flex-1 p-5">
+              <h2 className="text-2xl font-bold mb-3">Teacher No. 2</h2>
+              <p className="text-lg font-bold text-blue-600">
+                Teacher No. 2 is a certified yoga instructor with a passion for
+                teaching Vinyasa Yoga. They focus on creating a supportive
+                environment for students of all levels.
+              </p>
+            </div>
+            <div className="flex-1">
+              <img
+                src={Teacher2Image}
+                alt="Teacher No. 2"
+                className="w-full h-auto rounded-lg"
+              />
+            </div>
           </div>
         </div>
-        <button className="mt-12 px-6 py-3 bg-orange-500 black font-semibold rounded-lg shadow-md hover:bg-orange-600 transition">
-          See More
-        </button>
-      </div>
-    </section>
+      </section>
+      <Footer />
+    </>
   );
 };
 
