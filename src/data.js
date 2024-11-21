@@ -27,11 +27,11 @@ export const navigation = [
   },
   {
     name: "Courses",
-    href: "/courses",
+    href: "/AllCourses",
   },
   {
     name: "Instructors",
-    href: "/instructors",
+    href: "#instructors",
   },
   {
     name: "Contact",
