@@ -9,9 +9,9 @@ module.exports = function override(config, env) {
                 
                 return middlewares;
             },
-            // Remove deprecated options if they exist
-            // onBeforeSetupMiddleware: () => { ... },
-            // onAfterSetupMiddleware: () => { ... },
+            // Ensure these deprecated options are removed
+            // onBeforeSetupMiddleware: () => { ... }, // REMOVE THIS
+            // onAfterSetupMiddleware: () => { ... },  // REMOVE THIS
         };
     }
     return config;
