@@ -19,23 +19,23 @@ import GalleryImg8 from "../src/galleryimg/galleryimg8.png"
 export const navigation = [
   {
     name: "Home",
-    href: "#",
+    href: "/",
   },
   {
     name: "Yoga Retreat",
-    href: "#",
+    href: "/yoga-retreat",
   },
   {
     name: "Courses",
-    href: "#",
+    href: "/courses",
   },
   {
-    name: "About",
-    href: "#",
+    name: "Instructors",
+    href: "/instructors",
   },
   {
     name: "Contact",
-    href: "#",
+    href: "#contact",
   },
 ];
 

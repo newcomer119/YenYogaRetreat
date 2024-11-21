@@ -68,7 +68,7 @@ const CourseSelection = () => {
   };
 
   return (
-    <div className="min-h-screen mt-[136px] bg-blue-900 py-8 px-4">
+    <div className="min-h-screen mt-[16px] bg-blue-900 py-8 px-4">
       <div className="container mx-auto bg-blue-900 p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl text-center text-black font-bold mb-6">
           Course Selection

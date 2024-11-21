@@ -10,14 +10,14 @@ import Cards from './components/Cards';
 import Facts from './components/Facts';
 import Features from './components/Features';
 import Courses from './components/Courses';
-import CourseSelection from './components/CourseSelection'; // Import CourseSelection
-// import Pricing from './components/Pricing';
+import CourseSelection from './components/CourseSelection'; 
 import Newsletter from './components/Newsletter';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import SignIn from './components/SignIn';
 import Gallery from './components/Gallery';
-
+import Retreat from './components/Retreat';
+import Instructor from './components/Instructor';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
 
@@ -32,12 +32,15 @@ const App = () => {
     <CartProvider>
       <Router>
         <Header />
+        <div className="pt-[110px]">
         <Routes>
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/AllCourses" element={<AllCourses />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/course-selection/:link" element={<CourseSelection />} /> {/* New route for CourseSelection */}
+          <Route path="/yoga-retreat" element={<Retreat />} />
+          <Route path="/instructors" element={<Instructor />} />
+          <Route path="/course-selection/:link" element={<CourseSelection />} /> 
           <Route path="/" element={
             <>
               <Hero />
@@ -52,6 +55,7 @@ const App = () => {
             </>
           } />
         </Routes>
+        </div>
       </Router>
     </CartProvider>
   );
