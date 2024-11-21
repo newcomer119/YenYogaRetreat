@@ -39,7 +39,7 @@ const Header = () => {
 
   return (
     <header
-      className={`${header ? "top-0" : "top-8 lg:top-10"} fixed bg-white my-3 rounded-md w-full z-20 transition-all duration-300 shadow-primary flex items-center justify-between gap-[20px] max-w-[90%] xxl:max-w-[70%] h-[50px] lg:h-[80px] px-4 lg:px-6`}
+      className={`${header ? "top-0" : "top-4 lg:top-12"} fixed bg-white my-3 rounded-md w-full z-20 transition-all duration-300 shadow-primary flex items-center justify-between gap-[20px] max-w-[90%] xxl:max-w-[70%] h-[50px] lg:h-[80px] px-4 lg:px-6`}
       style={{ left: "50%", transform: "translateX(-50%)" }}
     >
       <div className="flex items-center xl:gap-[50px] gap-[20px]">
