@@ -22,6 +22,7 @@ module.exports = {
       egreen: {
         DEFAULT: "#9CB250",
         70: "#9CB25070",
+        90: "#9CB25090",
       },
       orange: {
         DEFAULT: "#FF9F66",

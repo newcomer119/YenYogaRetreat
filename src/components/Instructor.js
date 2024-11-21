@@ -1,53 +1,79 @@
 import React from "react";
+import { useParams, Link } from "react-router-dom";
+import { inst } from "../data";
 
-// Import images for instructors
-import Teacher1Image from "../assets/img/hero/guy.png";
-import Teacher2Image from "../assets/img/hero/guy.png";
+const Instructor = () => {
+  const { id } = useParams();
+  const instructor = inst.instructors.find((ins) => ins.id === id);
 
-const Instructors = () => {
-  return (
-    <section id="instructors" className="instructors-section py-12 bg-gradient-to-b from-gray-100 to-gray-200">
-      <div className="container mx-auto text-center">
-        <h1 className="text-4xl font-bold mb-12 text-gray-800">
-          Meet Our Instructors
+  if (!instructor) {
+    return (
+      <div className="h-[70vh] text-center py-12">
+        <h1 className="mt-8 mb-16 text-gray-800 h2 text-center">
+          Instructor Not Found
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
-          {/* Instructor 1 */}
-          <div className="flex flex-col items-center bg-white rounded-lg shadow-lg p-6 transition-transform transform hover:-translate-y-2 hover:shadow-2xl">
-            <img
-              src={Teacher1Image}
-              alt="Khanh Vo"
-              className="w-44 h-44 rounded-full border-4 border-orange-500 shadow-lg"
-            />
-            <p className="mt-4 text-lg font-semibold text-gray-800">
-              Khanh Vo
-            </p>
-            <p className="text-sm text-gray-600 mt-2">
-              Professional Musician & Guitar Instructor
-            </p>
+        <Link to="/instructors">
+          <button className="btn-md bg-egreen-90 hover:bg-egreen text-white transition-all duration-300">
+            Back to Instructors
+          </button>
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <section className="bg-egreen-70 py-12">
+      <div className="mx-auto md:px-32 px-4">
+        <h1 className="mt-8 mb-4 text-gray-800 h2 text-center">
+          {instructor.name}
+        </h1>
+        <p className=" mb-10 text-md font-semibold text-center">
+          {instructor.title}
+        </p>
+        <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
+
+            
+          {/* Image */}
+
+          <div className="flex flex-col items-center w-full md:w-2/5 h-auto bg-orange">
+            <div className="w-full md:w-2/5 h-auto">
+              <img
+                src={instructor.imageS}
+                alt={instructor.name}
+                className="w-full h-auto object-cover shadow-lg"
+              />
+            </div>
+            <div className="flex flex-row items-center w-full md:w-2/5 h-auto bg-yellow">
+              <div className="w-1/3 h-auto bg-green">I</div>
+              <div className="w-1/3 h-auto bg-blue">F</div>
+              <div className="w-1/3 h-auto bg-blue">V</div>
+            </div>
           </div>
 
-          {/* Instructor 2 */}
-          <div className="flex flex-col items-center bg-white rounded-lg shadow-lg p-6 transition-transform transform hover:-translate-y-2 hover:shadow-2xl">
-            <img
-              src={Teacher2Image}
-              alt="Heather Drageset"
-              className="w-44 h-44 rounded-full border-4 border-orange-500 shadow-lg"
-            />
-            <p className="mt-4 text-lg font-semibold text-gray-800">
-              Heather Drageset
-            </p>
-            <p className="text-sm text-gray-600 mt-2">
-              Yoga Enthusiast & Wellness Coach
-            </p>
+          {/* Details */}
+          <div className="bg-white shadow-lg p-6 w-full md:w-3/5">
+            {id === "hoan" && (
+              <ul className="mt-4 space-y-2 text-gray-800">
+                {instructor.qualifications.map((qual, index) => (
+                  <li key={index} className="list-disc list-inside">
+                    {qual}
+                  </li>
+                ))}
+              </ul>
+            )}
+            <Link
+              to="/instructors"
+              className="inline-block mt-4 btn-md bg-egreen text-white"
+            >
+              Back to Instructors
+            </Link>
           </div>
         </div>
-        <button className="mt-12 px-6 py-3 bg-orange-500 black font-semibold rounded-lg shadow-md hover:bg-orange-600 transition">
-          See More
-        </button>
+        
+        <p className="mt-2 text-lg">{instructor.bio}</p>
       </div>
     </section>
   );
 };
 
-export default Instructors;
+export default Instructor;

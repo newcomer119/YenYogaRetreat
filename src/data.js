@@ -6,15 +6,20 @@ import CourseImage1 from "../src/assets/img/courses/course-1.png";
 import CourseImage2 from "../src/assets/img/courses/course-2.png";
 import CourseImage3 from "../src/assets/img/courses/course-3.png";
 
-import GalleryImg from "../src/galleryimg/galleryimg.png"
-import GalleryImg1 from "../src/galleryimg/galleryimg1.png"
-import GalleryImg2 from "../src/galleryimg/galleryimg2.png"
-import GalleryImg3 from "../src/galleryimg/galleryimg3.png"
-import GalleryImg4 from "../src/galleryimg/galleryimg4.png"
-import GalleryImg5 from "../src/galleryimg/galleryimg5.png"
-import GalleryImg6 from "../src/galleryimg/galleryimg6.png"
-import GalleryImg7 from "../src/galleryimg/galleryimg7.png"
-import GalleryImg8 from "../src/galleryimg/galleryimg8.png"
+import GalleryImg from "../src/galleryimg/galleryimg.png";
+import GalleryImg1 from "../src/galleryimg/galleryimg1.png";
+import GalleryImg2 from "../src/galleryimg/galleryimg2.png";
+import GalleryImg3 from "../src/galleryimg/galleryimg3.png";
+import GalleryImg4 from "../src/galleryimg/galleryimg4.png";
+import GalleryImg5 from "../src/galleryimg/galleryimg5.png";
+import GalleryImg6 from "../src/galleryimg/galleryimg6.png";
+import GalleryImg7 from "../src/galleryimg/galleryimg7.png";
+import GalleryImg8 from "../src/galleryimg/galleryimg8.png";
+
+import Instructor1 from "../src/assets/img/instructors/hoan.jpg";
+import Instructor2 from "../src/assets/img/instructors/yen.jpg";
+import Instructor1s from "../src/assets/img/instructors/hoan-s.jpg";
+import Instructor2s from "../src/assets/img/instructors/yen-s.jpg";
 
 export const navigation = [
   {
@@ -31,7 +36,7 @@ export const navigation = [
   },
   {
     name: "Instructors",
-    href: "#instructors",
+    href: "/instructors",
   },
   {
     name: "Contact",
@@ -87,7 +92,8 @@ export const courses = [
   },
   {
     image: CourseImage3,
-    title: "Khoá đào tạo 100h Online 'Kundalini Yoga & Thiền Mantra' khai giảng 18/12",
+    title:
+      "Khoá đào tạo 100h Online 'Kundalini Yoga & Thiền Mantra' khai giảng 18/12",
     desc: "https://forms.gle/EKCBARsz8BrGT3AU7",
     link: "Get started",
     delay: "900",
@@ -100,7 +106,6 @@ export const courses = [
     delay: "1000", // Adjust delay as needed
   },
   // ... existing code ...
-  
 ];
 
 export const pricing = [
@@ -179,39 +184,75 @@ export const pricing = [
 
 export const Galleryimgs = [
   {
-    image: GalleryImg, 
+    image: GalleryImg,
     title: "Gallery Image 1",
   },
   {
-    image: GalleryImg1, 
+    image: GalleryImg1,
     title: "Gallery Image 1",
   },
   {
-    image: GalleryImg2, 
+    image: GalleryImg2,
     title: "Gallery Image 1",
   },
   {
-    image: GalleryImg3, 
+    image: GalleryImg3,
     title: "Gallery Image 1",
   },
   {
-    image: GalleryImg4, 
+    image: GalleryImg4,
     title: "Gallery Image 1",
   },
   {
-    image: GalleryImg5, 
+    image: GalleryImg5,
     title: "Gallery Image 1",
   },
   {
-    image: GalleryImg6, 
+    image: GalleryImg6,
     title: "Gallery Image 1",
   },
   {
-    image: GalleryImg7, 
+    image: GalleryImg7,
     title: "Gallery Image 1",
   },
   {
-    image: GalleryImg8, 
+    image: GalleryImg8,
     title: "Gallery Image 1",
   },
 ];
+
+export const inst = {
+  instructors: [
+    {
+      id: "hoan",
+      name: "Mr. Hoành Nguyễn",
+      title: "Co-Founder & Instructor",
+      imageL: Instructor1,
+      imageS: Instructor1s,
+      bio: "Yoga and Meditation are paths of practice and application in life. My goal is to spread the spirit of Mantra meditation to help others practice and transform their lives positively.",
+      qualifications: [
+        "Co-Founder of Yên Yoga & Retreat",
+        "Founder of Kombucha by Mr.Ủ - a mantra energy-based beverage",
+        "9 years of experience in Yoga and Meditation practice",
+        "Trainer of international Yoga Teacher Training courses, Kundalini Yoga, and Mantra Meditation",
+        "Led numerous Healing Retreats in nature",
+        "Conducted Yoga and Meditation sessions for organizations like Elsa Speak, TTC Group, Viettravel, and TH True Milk",
+      ],
+    },
+    {
+      id: "yen",
+      name: "Mrs. Yến Nguyễn",
+      title: "Co-Founder & Instructor",
+      imageL: Instructor2,
+      imageS: Instructor2s,
+      bio: "I aim to share the positive lifestyle of Yoga and Meditation with the community. My passion is to guide others toward natural healing and inner peace through yoga and mantra music.",
+      qualifications: [
+        "Co-Founder of Yên Yoga & Retreat",
+        "10 years of experience practicing and teaching Yoga & Meditation",
+        "Trainer of Yoga and Meditation Teacher Training programs",
+        "Practitioner of a vegan lifestyle with extensive experience in natural healing",
+        "Founder and guide of 'Kirtan Night - Mantra Healing Music' events across Vietnam",
+      ],
+    },
+  ],
+};

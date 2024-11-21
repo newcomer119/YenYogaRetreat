@@ -7,7 +7,7 @@ import Logo from "../assets/img/logos/logo.png";
 import { FaYoutube, FaInstagram, FaFacebook } from "react-icons/fa";
 const Footer = () => {
   return (
-    <footer className="pb-[50px]">
+    <footer className="py-[30px]">
       <div className="container mx-auto max-w-[90%]">
         <div
           className="flex flex-col justify-between 
