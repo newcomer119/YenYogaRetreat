@@ -1,11 +1,13 @@
 import React from 'react';
 
 // Import images for instructors
-import Teacher1Image from '../assets/img/hero/guy.png'; // Replace with your image path
-import Teacher2Image from '../assets/img/hero/guy.png'; // Replace with your image path
+import Teacher1Image from '../assets/img/hero/guy.png'; 
+import Teacher2Image from '../assets/img/hero/guy.png'; 
+import Footer from './Footer';
 
 const Instructors = () => {
   return (
+    <>
     <section className="instructors-section py-10">
       <div className="container mx-auto">
         {/* Instructor 1 */}
@@ -15,7 +17,7 @@ const Instructors = () => {
           </div>
           <div className="flex-1 p-5">
             <h2 className="text-2xl font-bold mb-3">Teacher No. 1</h2>
-            <p className="text-lg">
+            <p className="text-lg font-bold">
               Teacher No. 1 has over 10 years of experience in yoga and meditation. They specialize in Hatha Yoga and have trained numerous students to achieve their wellness goals.
             </p>
           </div>
@@ -25,7 +27,7 @@ const Instructors = () => {
         <div className="flex flex-col lg:flex-row items-center">
           <div className="flex-1 p-5">
             <h2 className="text-2xl font-bold mb-3">Teacher No. 2</h2>
-            <p className="text-lg">
+            <p className="text-lg font-bold text-blue-600">
               Teacher No. 2 is a certified yoga instructor with a passion for teaching Vinyasa Yoga. They focus on creating a supportive environment for students of all levels.
             </p>
           </div>
@@ -35,6 +37,8 @@ const Instructors = () => {
         </div>
       </div>
     </section>
+<Footer/>
+    </>
   );
 };
 
