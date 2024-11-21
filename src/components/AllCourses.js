@@ -26,7 +26,7 @@ const AllCourses = () => {
         )}
         {/* Text */}
         <div className="text-center mb-16 lg:mb-32">
-          <h2 className="h2 mb-3 lg:mb-[18px] mt-[49px] text-2xl font-bold">Courses</h2>
+          <h2 className="h2 mb-3 lg:mb-[18px]  text-2xl font-bold">Courses</h2>
           <p className="max-w-[480px] mx-auto">
             Practice Anywhere, anytime. Explore a new way to exercises and
             learn more about yourself. We are providing the best.
@@ -47,7 +47,7 @@ const AllCourses = () => {
               mx-auto transition'
                key={index}>
                 {/* image */}
-                <div className="-mt-[38px] lg:-mt-12 mb-4 lg:mb-6">
+                <div className="-mt-[8px] lg:-mt-12 mb-4 lg:mb-6">
                   <img src={image} alt={title} />
                 </div>
                 {/* text */}

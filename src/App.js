@@ -39,7 +39,6 @@ const App = () => {
           <Route path="/AllCourses" element={<AllCourses />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/yoga-retreat" element={<Retreat />} />
-          <Route path="/instructors" element={<Instructor />} />
           <Route path="/course-selection/:link" element={<CourseSelection />} /> 
           <Route path="/" element={
             <>
@@ -48,6 +47,7 @@ const App = () => {
               <Facts />
               <Features />
               <Courses />
+              <Instructor />
               <Gallery/>
               <Newsletter />
               <Contact />
