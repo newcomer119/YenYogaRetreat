@@ -9,21 +9,11 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-
-// changed 
 app.use(cors({
-  origin: 'https://yen-yoga-retreat.vercel.app',
-  methods: ['GET', 'POST'],
-  credentials: true
+  origin: "https://yen-yoga-retreat-dox8.vercel.app"
 }));
 app.use(bodyParser.json());
 app.use("/api/payment", paymentRoutes);
-
-app.post('/api/payment/create-order', (req, res) => {
-  const orderData = req.body; // Extract data from the request body
-  // Process the orderData as needed
-  res.status(201).json({ message: "Order created successfully", order: orderData }); // Send a response
-});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
