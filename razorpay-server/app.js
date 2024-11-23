@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: "*",
+  origin: 'https://yen-yoga-retreat-dox8.vercel.app'
 }));
 app.use(bodyParser.json());
 app.use("/api/payment", paymentRoutes);
