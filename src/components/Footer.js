@@ -20,7 +20,7 @@ const Footer = () => {
           {/* CopyRight Text  */}
           <p>&copy; 2024. All Rights Reserved</p>
           {/* social icons  */}
-          <div className="flex gap-x-4 text-egreen text-lg">
+          <div className="flex gap-x-4 text-egreen text-[25px]">
             <div
               className="w-[50px] h-[50px] bg-white 
             rounded-full flex justify-center items-center 

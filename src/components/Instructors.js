@@ -16,7 +16,7 @@ const Instructors = () => {
               key={instructor.id}
               className={`flex ${
                 instructor.id === "yen" ? "md:flex-row-reverse" : "md:flex-row"
-              } items-center md:items-stretch md:flex-row flex-col w-full h-auto`}
+              } items-center md:items-stretch flex-col w-full h-auto`}
             >
               <Link
                 to={`/instructors/${instructor.id}`}

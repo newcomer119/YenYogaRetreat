@@ -19,6 +19,9 @@ module.exports = {
       xxl: "1441px",
     },
     colors: {
+      youtube: "#FF0000",
+      instagram: "#962fbf",
+      facebook: "#316FF6",
       egreen: {
         DEFAULT: "#9CB250",
         70: "#9CB25070",
