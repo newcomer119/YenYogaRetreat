@@ -32,25 +32,6 @@ const CourseSelection = () => {
     setFormSubmitted(false);
 
     try {
-      // Store form data in the database first
-      const formData = {
-        name,
-        email,
-        phone,
-        address,
-        referral,
-        retreat,
-        healthChallenges,
-        goal,
-        questions,
-        selectedCourse,
-        timestamp: new Date(),
-      };
-
-      const docRef = await addDoc(collection(db, "courseSelections"), formData);
-      console.log("Form data stored successfully with ID: ", docRef.id);
-
-      // Now create the payment order
       const response = await fetch("https://yen-yoga-retreat-dox8.vercel.app/api/payment/create-order", {
         method: "POST",
         headers: {
@@ -59,17 +40,17 @@ const CourseSelection = () => {
         body: JSON.stringify({ amount: coursePrice, currency: "INR" }),
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setOrderData(data);
-        setShowPayment(true);
-      } else {
-        setError("Error creating order. Please try again.");
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Error creating order. Please try again.");
       }
+
+      const data = await response.json();
+      setOrderData(data);
+      setShowPayment(true);
     } catch (e) {
       console.error("Error: ", e);
-      setError("Error submitting form. Please try again.");
+      setError(e.message || "Error submitting form. Please try again.");
     } finally {
       setLoading(false);
     }
