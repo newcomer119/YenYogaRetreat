@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import PaymentProcessing from "./PaymentProcessing";
+import { useNavigate } from "react-router-dom";
 
 const CourseSelection = () => {
   const [name, setName] = useState("");
@@ -16,9 +18,13 @@ const CourseSelection = () => {
   const [selectedCourse, setSelectedCourse] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [formSubmitted, setFormSubmitted] = useState(false); // New state for form submission status
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [orderData, setOrderData] = useState(null);
+  const [showPayment, setShowPayment] = useState(false);
+  const [coursePrice, setCoursePrice] = useState(0);
 
-  // Handle form submission
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -26,11 +32,10 @@ const CourseSelection = () => {
     setFormSubmitted(false);
 
     try {
-      // Add the form data to the Firestore collection
-      await addDoc(collection(db, "courseSelections"), {
+      // Store form data in the database first
+      const formData = {
         name,
         email,
-        dob,
         phone,
         address,
         referral,
@@ -40,30 +45,63 @@ const CourseSelection = () => {
         questions,
         selectedCourse,
         timestamp: new Date(),
+      };
+
+      const docRef = await addDoc(collection(db, "courseSelections"), formData);
+      console.log("Form data stored successfully with ID: ", docRef.id);
+
+      // Now create the payment order
+      const response = await fetch("http://localhost:5000/api/payment/create-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ amount: coursePrice, currency: "INR" }),
       });
 
-      setFormSubmitted(true);
+      const data = await response.json();
 
-      // Reset form fields
-      setName("");
-      setEmail("");
-      setDob("");
-      setPhone("");
-      setAddress("");
-      setReferral("");
-      setRetreat("");
-      setHealthChallenges("");
-      setGoal("");
-      setQuestions("");
-      setSelectedCourse("");
-
-      // Reload the page after successful submission
-      window.location.reload();
+      if (response.ok) {
+        setOrderData(data);
+        setShowPayment(true);
+      } else {
+        setError("Error creating order. Please try again.");
+      }
     } catch (e) {
-      console.error("Error adding document: ", e);
+      console.error("Error: ", e);
       setError("Error submitting form. Please try again.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handlePaymentSuccess = async (paymentData) => {
+    console.log("Payment data received:", paymentData);
+    try {
+      await addDoc(collection(db, "courseSelections"), {
+        ...paymentData,
+        timestamp: new Date(),
+        user: { name, email, phone },
+        course: selectedCourse,
+        formDetails: {
+          name,
+          email,
+          dob,
+          phone,
+          address,
+          referral,
+          retreat,
+          healthChallenges,
+          goal,
+          questions,
+        },
+        paymentStatus: "successful",
+      });
+      console.log("Payment information stored successfully.");
+      setFormSubmitted(true);
+    } catch (e) {
+      console.error("Error storing payment information: ", e);
+      setError("Error storing payment information. Please try again.");
     }
   };
 
@@ -83,7 +121,6 @@ const CourseSelection = () => {
         {error && <p className="text-red-500 text-center">{error}</p>}
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Personal Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="mb-4">
               <label className="block mb-2 text-black font-bold" htmlFor="name">
@@ -145,7 +182,6 @@ const CourseSelection = () => {
             </div>
           </div>
 
-          {/* Referral and Retreat */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="mb-4">
               <label
@@ -187,7 +223,6 @@ const CourseSelection = () => {
             </div>
           </div>
 
-          {/* Health and Goal */}
           <div className="mb-4">
             <label
               className="block mb-2 text-black font-bold"
@@ -233,7 +268,6 @@ const CourseSelection = () => {
             ></textarea>
           </div>
 
-          {/* Course Selection */}
           <div className="bg-blue-800 p-4 rounded-md shadow-lg">
             <h3 className="text-xl text-black font-bold mb-4">
               Select a Course
@@ -244,30 +278,38 @@ const CourseSelection = () => {
                   name: "Kundalini Yoga & Mantra Foundation",
                   description:
                     "A foundation course focusing on the principles of Kundalini Yoga and the power of mantra chanting.",
+                  price: 1,
                 },
                 {
                   name: "Yoga & Meditation Lifestyle",
                   description:
                     "Learn to incorporate yoga and meditation into your daily life for holistic wellness.",
+                  price: 1,
                 },
                 {
                   name: "Advanced Kundalini Yoga",
                   description:
                     "An advanced-level course to deepen your practice of Kundalini Yoga.",
+                  price: 1,
                 },
                 {
                   name: "Retreat & Wellness",
                   description:
                     "A rejuvenating retreat focusing on relaxation, wellness, and mindfulness.",
+                  price: 1,
                 },
               ].map((course, index) => (
                 <div
                   key={index}
                   className="p-4 bg-white border border-gray-300 rounded-md shadow-sm hover:shadow-lg cursor-pointer"
-                  onClick={() => setSelectedCourse(course.name)}
+                  onClick={() => {
+                    setSelectedCourse(course.name);
+                    setCoursePrice(course.price);
+                  }}
                 >
                   <h4 className="font-semibold text-gray-800">{course.name}</h4>
                   <p className="text-gray-600">{course.description}</p>
+                  <p className="text-gray-600">Price: ₹{course.price}</p>
                 </div>
               ))}
             </div>
@@ -278,11 +320,10 @@ const CourseSelection = () => {
             </div>
           </div>
 
-          {/* Submit Button */}
           <div className="flex justify-center">
             <button
               type="submit"
-              className="bg-orange-500 text-black font-bold font-bold py-3 px-6 rounded-md hover:bg-orange-600 focus:outline-none"
+              className="bg-orange-500 text-black font-bold py-3 px-6 rounded-md hover:bg-orange-600 focus:outline-none"
               disabled={loading}
             >
               {loading ? "Submitting..." : "Submit"}
@@ -290,6 +331,25 @@ const CourseSelection = () => {
           </div>
         </form>
       </div>
+      {showPayment && (
+        <PaymentProcessing
+          orderData={orderData}
+          userDetails={{ name, email, phone }}
+          onSuccess={(paymentResponse) => {  
+            console.log("Payment successful! Navigating to user profile.");
+            handlePaymentSuccess({ ...orderData, paymentStatus: "successful", paymentResponse });
+            setShowPayment(false);
+            navigate("/user-profile");
+          }}
+          onError={(error) => {
+            console.error("Payment failed:", error);
+            setError("Payment failed. Please try again.");
+            setShowPayment(false);
+            alert("Payment unsuccessful. Please try again.");
+            window.location.reload();
+          }}
+        />
+      )}
     </div>
   );
 };
