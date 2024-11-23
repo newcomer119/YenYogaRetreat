@@ -57,9 +57,9 @@ const Header = () => {
         <div className="flex gap-5">
           {user ? ( // Conditional rendering based on user state
             <>
-              <span className="text-heading font-medium text-sm lg:text-base">
+              <Link to="/user-profile" className="text-heading font-medium text-sm lg:text-base">
                 Welcome, {user.email} {/* Display user email */}
-              </span>
+              </Link>
               <button
                 onClick={handleLogout} // Call handleLogout on click
                 className="text-red-500 font-medium text-sm lg:text-base hover:text-red-700 transition"
