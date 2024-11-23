@@ -51,7 +51,7 @@ const CourseSelection = () => {
       console.log("Form data stored successfully with ID: ", docRef.id);
 
       // Now create the payment order
-      const response = await fetch("http://localhost:5000/api/payment/create-order", {
+      const response = await fetch("https://yen-yoga-retreat-dox8.vercel.app/api/payment/create-order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
