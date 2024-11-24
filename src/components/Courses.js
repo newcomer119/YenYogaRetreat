@@ -1,72 +1,222 @@
-import React from "react";
-import { Link } from 'react-router-dom';
-//  import data
-
-import { courses } from "../data";
-
-// import icons
-import { BsStarFill, BsStarHalf } from "react-icons/bs";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import { courses } from "../data"; // Import your course data
+import { FaLocationDot } from "react-icons/fa6";
+import { IoPerson } from "react-icons/io5";
+import { BsCalendar2DateFill } from "react-icons/bs";
 
 const Courses = () => {
+  const [hovered, setHovered] = useState({ id: null, type: null });
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: courses.length > 3,
+    autoplaySpeed: 3000,
+    pauseOnHover: true,
+    centerMode: false,
+    centerPadding: "60px",
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          centerPadding: "40px",
+          autoplay: true,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: "20px",
+          autoplay: true,
+        },
+      },
+    ],
+  };
+
   return (
-    <section className="section-sm lg:section-lg">
-      <div className="container mx-auto">
-        {/* Text */}
-        <div className="text-center mb-16 lg:mb-32">
-          <h2 className="h2 mb-3 lg:mb-[18px]">Courses</h2>
-          <p className="max-w-[480px] mx-auto">
-            Practice Anywhere, anytime. Explore a new way to excercises and
-            learn more about yourself.We are providing the best.
-          </p>
-        </div>
-        {/* Courses List */}
-        <div
-          className="flex flex-col lg:flex-row lg:gap-x-[33px] gap-y-24 mb-7
-      lg:mb-14"
-        >
-          {courses.map((item, index) => {
-            // destructure item
-            const { image, title, desc, link, delay } = item;
-            return (
-              <div className='w-full bg-white hover:shadow-primary 
-              max-width-[368px] px-[18px] pb-[26px] 
-              lg:pb-[38px] lg:px-[28px] flex flex-col rounded-[14px] 
-              mx-auto transition'
-               key={index}>
-                {/* image */}
-                <div className="-mt-[38px] lg:-mt-12 mb-4 lg:mb-6">
-                  <img src={image} alt="" />
-                </div>
-                {/* text  */}
-                <div>
-                  <h4 className="text-lg lg:text-xl font-semibold mb-2 lg:mb-4">
-                    {title}
-                  </h4>
-                  <p>{desc}</p>
-                </div>
-                {/* Bottom  */}
-                <div className="flex items-scenter 
-                justify-between mt-8 mb-2 lg:mb-0">
-                  {/* stars  */}
-                  <div className="flex text-orange gap-x-2">
-                    <BsStarFill />
-                    <BsStarFill />
-                    <BsStarFill />
-                    <BsStarHalf />
+    <section id="courses" className="py-12">
+      <div className="mx-auto">
+        <h1 className="h2 text-gray-800" data-aos="fade-up">
+          Upcoming Events & Classes
+        </h1>
+
+        {/* Courses Carousel */}
+        <div className="px-4 lg:px-16 mx-10 mb-16 ">
+          <style>
+            {`
+            .slick-slide {
+            padding: 0 10px;
+            }
+            .slick-slide:hover{
+            border: black;
+            }
+            .slick-list {
+            margin: 0 -10px;
+            }
+            
+    `}
+          </style>
+
+          <Slider {...settings}>
+            {courses.map((course, index) => {
+              const {
+                link,
+                hot,
+                mode,
+                image,
+                title,
+                summary,
+                date,
+                instructors,
+                location,
+                type,
+                duration,
+              } = course;
+              return (
+                  <div
+                    key={index}
+                    className={`${
+                      hot ? "hot" : ""
+                    } hover:border-4 hover:border-orange w-full max-w-md mx-auto bg-white rounded-lg shadow-lg focus:transition-none transition-all duration-300`}
+                    data-aos="fade-up"
+                    data-aos-delay="150"
+                  >
+                    <div className="relative">
+                      <img
+                        src={image}
+                        alt={title}
+                        className="w-full h-48 object-cover"
+                      />
+                      {type === "event" && (
+                        <span className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">
+                          Event
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="p-4">
+                    <p
+                        className={`${
+                          hot ? "text-red-500" : "text-orange"
+                        } text-xl font-semibold text-center text-gray-900`}
+                      >
+                        {title}
+                      </p>
+                      <p className="text-sm text-center text-gray-600 mt-2">
+                        {summary}
+                      </p>
+
+                      <div className="flex items-center justify-between mt-5 px-2">
+                        <div className="flex items-center gap-5 text-[20px]">
+                          {/* Tooltip for Person */}
+                          <div
+                            className="relative group"
+                            onMouseEnter={() =>
+                              setHovered({ id: index, type: "person" })
+                            }
+                            onMouseLeave={() =>
+                              setHovered({ id: null, type: null })
+                            }
+                          >
+                            <IoPerson className="text-2xl cursor-pointer" />
+                            {hovered.id === index &&
+                              hovered.type === "person" && (
+                                <div className="absolute left-4 bottom-8 mt-2 p-2 w-40 md:w-64 bg-gray-400 text-green text-sm rounded shadow-lg z-10">
+                                  {instructors.length === 0
+                                    ? "No instructors"
+                                    : instructors.map((instructor, i) => (
+                                        <div key={i} className="mb-1">
+                                          {instructor.name}
+                                        </div>
+                                      ))}
+                                </div>
+                              )}
+                          </div>
+
+                          {/* Tooltip for Location */}
+                          {mode === "Offline" && (
+                            <div
+                              className="relative group"
+                              onMouseEnter={() =>
+                                setHovered({ id: index, type: "location" })
+                              }
+                              onMouseLeave={() =>
+                                setHovered({ id: null, type: null })
+                              }
+                            >
+                              <FaLocationDot className="text-2xl cursor-pointer" />
+                              {hovered.id === index &&
+                                hovered.type === "location" && (
+                                  <div className="absolute left-4 bottom-8 mt-2 p-2 w-40 md:w-64 bg-gray-400 text-green text-sm rounded shadow-lg z-10">
+                                    {location === ""
+                                      ? "Location not available"
+                                      : location}
+                                  </div>
+                                )}
+                            </div>
+                          )}
+
+                          {/* Tooltip for Date */}
+                          <div
+                            className="relative group"
+                            onMouseEnter={() =>
+                              setHovered({ id: index, type: "date" })
+                            }
+                            onMouseLeave={() =>
+                              setHovered({ id: null, type: null })
+                            }
+                          >
+                            <BsCalendar2DateFill className="text-2xl cursor-pointer" />
+                            {hovered.id === index &&
+                              hovered.type === "date" && (
+                                <div className="absolute left-4 bottom-8 mt-2 p-2 w-40 md:w-64 bg-gray-400 text-green text-sm rounded shadow-lg z-10">
+                                  {date === "" ? "Date unavailable" : date}
+                                </div>
+                              )}
+                          </div>
+                        </div>
+                        <span className="text-sm text-green">{duration}</span>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between px-4 py-2 border-t">
+                      <Link
+                        to={`/course-selection/${link}`}
+                        className="text-orange py-2 px-4 rounded-lg hover:text-egreen transition"
+                      >
+                        Book Now
+                      </Link>
+                      <Link
+                        to={`/classes#${link}`}
+                        className="text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition"
+                      >
+                        More Info
+                      </Link>
+                    </div>
                   </div>
-                  {/* link  */}
-                  <Link className="font-medium" to={`/course-selection/${link}`}>Get Started</Link>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </Slider>
         </div>
-        {/* btn */}
-        <div className="flex justify-center">
-          <button className="btn btn-sm btn-orange">
-            <Link to="/AllCourses">Browse All</Link>
+
+        {/* Browse All Button */}
+        <Link to="/classes" className="flex justify-center">
+          <button className="bg-orange-200 text-lg text-white rounded-lg py-2 px-6 hover:bg-orange transition-all">
+            Browse All
           </button>
-        </div>
+        </Link>
       </div>
     </section>
   );

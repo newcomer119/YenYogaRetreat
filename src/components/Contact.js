@@ -6,7 +6,7 @@ import emailjs from '@emailjs/browser'
 const Contact = () => {
   const form = useRef();
   return (
-    <section id="contact" className="section-sm lg:pt-[250px]">
+    <section id="contact" className="py-12">
       <div className="container mx-auto">
         <div
           className="flex flex-col lg:flex-row lg:gap-x-[74px] 
@@ -18,11 +18,11 @@ const Contact = () => {
           justify-center pl-8"
           >
             <h2 className="h2 mb-3 lg:mb-7">
-              Get in touch with Us for yoga course
+              Get in Touch
             </h2>
-            <p className="mb-7 lg:mb-0">
-              Get in touch with use for any kind of help. We are here to give
-              you the best and also here to help you to find your yoga course.
+            <p className="mb-7 lg:mb-0 text-center">
+              Get in touch with us for any kind of help. We are here to give
+              you the best advice and to help you find your yoga course.
             </p>
           </div>
           {/* form  */}

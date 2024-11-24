@@ -22,6 +22,13 @@ module.exports = {
       youtube: "#FF0000",
       instagram: "#962fbf",
       facebook: "#316FF6",
+      gray:{
+        400: "#d1d5db",
+      },
+      yellow: {
+        DEFAULT: "#EDC988",
+        600: "#D97706",
+      },
       egreen: {
         DEFAULT: "#9CB250",
         70: "#9CB25070",
@@ -39,11 +46,14 @@ module.exports = {
         200: "#94CAC0",
         300: "#45A090",
       },
-      yellow: "#EDC988",
       pink: {
         DEFAULT: "FF7D6B",
         100: "#FFE9E4",
         200: "#FEAEA3",
+      },
+      red: {
+        DEFAULT: "FF0000",
+        500: "#EF4444",
       },
       heading: "#1C0A0A",
       paragraph: "#584F49",

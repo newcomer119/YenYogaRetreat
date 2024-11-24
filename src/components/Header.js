@@ -2,8 +2,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import logo from "../assets/img/logos/logo.png";
 import { Link } from "react-router-dom";
-import { auth } from '../firebase'; // Import auth from your Firebase configuration
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesomeIcon
+import { auth } from "../firebase"; // Import auth from your Firebase configuration
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import FontAwesomeIcon
 
 import Nav from "./Nav";
 import NavMobile from "./NavMobile";
@@ -39,7 +39,9 @@ const Header = () => {
 
   return (
     <header
-      className={`${header ? "top-0" : "top-4 lg:top-12"} fixed bg-white my-3 rounded-md w-full z-20 transition-all duration-300 shadow-primary flex items-center justify-between gap-[20px] max-w-[90%] xxl:max-w-[70%] h-[50px] lg:h-[80px] px-4 lg:px-6`}
+      className={`${
+        header ? "top-0" : "top-4 lg:top-12"
+      } fixed bg-white my-3 rounded-md w-full z-20 transition-all duration-300 shadow-primary flex items-center justify-between gap-[20px] max-w-[90%] xxl:max-w-[70%] h-[50px] lg:h-[80px] px-4 lg:px-6`}
       style={{ left: "50%", transform: "translateX(-50%)" }}
     >
       <div className="flex items-center xl:gap-[50px] gap-[20px]">
@@ -57,7 +59,10 @@ const Header = () => {
         <div className="flex gap-5">
           {user ? ( // Conditional rendering based on user state
             <>
-              <Link to="/user-profile" className="text-heading font-medium text-sm lg:text-base">
+              <Link
+                to="/user-profile"
+                className="text-heading font-medium text-sm lg:text-base"
+              >
                 Welcome, {user.email} {/* Display user email */}
               </Link>
               <button
@@ -72,9 +77,7 @@ const Header = () => {
               <button className="text-heading font-medium text-sm lg:text-base hover:text-orange transition">
                 <Link to="/sign-in">Sign In</Link>
               </button>
-              <button
-                className="btn btn-md lg:px-[30px] bg-orange-100 border border-orange text-orange font-medium text-sm lg:text-base hover:bg-orange-200 hover:text-white transition"
-              >
+              <button className="btn btn-md lg:px-[30px] bg-orange-100 border border-orange text-orange font-medium text-sm lg:text-base hover:bg-orange-200 hover:text-white transition">
                 <Link to="/sign-up">Sign Up</Link>
               </button>
             </>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { FaYoutube, FaInstagram, FaFacebook } from "react-icons/fa";
+import { RiInstagramFill } from "react-icons/ri";
 import { inst } from "../data";
 
 const Instructor = () => {
@@ -50,12 +51,9 @@ const Instructor = () => {
                 className="w-[50px] h-[50px] flex justify-center items-center 
             cursor-pointer hover:text-youtube transition"
               />
-
-              <FaInstagram
-                className="w-[50px] h-[50px] flex justify-center items-center 
-            cursor-pointer hover:text-instagram transition"
-              />
-
+              <RiInstagramFill 
+              className="w-[50px] h-[50px] flex justify-center items-center
+              cursor-pointer hover:text-instagram transition" />
               <FaFacebook
                 className="w-[50px] h-[50px] flex justify-center items-center 
             cursor-pointer hover:text-facebook transition"
@@ -73,7 +71,7 @@ const Instructor = () => {
               ))}
             </ul>
             <Link to={`/instructors`}>
-              <button className="btn-md bg-egreen-90 hover:bg-egreen text-white mt-4 transition-all duration-300">
+              <button className="btn-md bg-orange-200 hover:bg-orange text-white mt-4 transition-all duration-300">
                 Back to Instructors
               </button>
             </Link>

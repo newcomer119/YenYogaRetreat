@@ -87,19 +87,26 @@ const Gallery = () => {
   };
 
   return (
-    <div
-      id="gallery"
-      className="flex items-center justify-center min-h-screen bg-light-blue-200"
-    >
-      {" "}
+    <div id="gallery" className="flex items-center justify-center py-12">
       {/* Updated background color to a lighter blue */}
       <div className="w-full max-w-6xl p-8">
-        {" "}
         {/* Added padding to the container */}
-        <h2 className="text-5xl font-extrabold text-center mb-8 text-blue-100 text-gray-800 tracking-wide font-roboto">GALLERY</h2> {/* Enhanced font style */}
+        <h1
+          className="mt-8 mb-16 text-gray-800 h2 text-center"
+          data-aos="fade-up"
+        >
+          GALLERY
+        </h1>
+        {/* Enhanced font style */}
         <Slider {...sliderSettings}>
           {images.map((image, index) => (
-            <div key={index} className="px-2">
+            <div
+              key={index}
+              className="px-2"
+              data-aos="flip-left"
+              data-aos-easing="ease-out-cubic"
+              data-aos-duration="2000"
+            >
               <img
                 src={image}
                 alt={`Slideshow Image ${index + 1}`}

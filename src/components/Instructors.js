@@ -6,7 +6,10 @@ const Instructors = () => {
   return (
     <section id="instructors/hoan" className="bg-egreen-70 py-12">
       <div className="mx-auto">
-        <h1 className="mt-8 mb-16 text-gray-800 h2 text-center">
+        <h1
+          className="h2 text-gray-800"
+          data-aos="fade-up"
+        >
           Meet Our Yogis
         </h1>
 
@@ -17,6 +20,8 @@ const Instructors = () => {
               className={`flex ${
                 instructor.id === "yen" ? "md:flex-row-reverse" : "md:flex-row"
               } items-center md:items-stretch flex-col w-full h-auto`}
+              data-aos="zoom-out-up"
+              data-aos-delay="150"
             >
               <Link
                 to={`/instructors/${instructor.id}`}

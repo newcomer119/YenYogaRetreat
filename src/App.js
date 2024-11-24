@@ -21,6 +21,7 @@ import Instructors from "./components/Instructors";
 import Instructor from "./components/Instructor";
 import Aos from "aos";
 import UserProfile from "./components/UserProfile";
+import Unsure from "./components/Unsure";
 import "aos/dist/aos.css";
 
 const App = () => {
@@ -38,9 +39,9 @@ const App = () => {
           <Routes>
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/AllCourses" element={<AllCourses />} />
+            <Route path="/classes" element={<AllCourses />} />
             <Route path="/checkout" element={<Checkout />} />
-            <Route path="/yoga-retreat" element={<Retreat />} />
+            <Route path="/retreat" element={<Retreat />} />
             <Route path="/user-profile" element={<UserProfile />} /> {/* Use element prop */}
             <Route
               path="/course-selection/:link"
@@ -53,13 +54,13 @@ const App = () => {
               element={
                 <>
                   <Hero />
-                  <Cards />
-                  <Facts />
-                  <Features />
+                  {/* <Cards /> */}
+                  {/* <Features /> */}
                   <Courses />
                   <Instructors />
                   <Gallery />
-                  <Newsletter />
+                  <Facts />
+                  <Unsure/>
                   <Contact />
                 </>
               }
