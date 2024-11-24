@@ -20,34 +20,32 @@ const Facts = () => {
         {facts.map((item,index) => {
           // destructure item 
           const{ startNumber , endNumber, unit , title, desc } = item;
-          return <div className='w-[45%]' key={index}>
-            <h2 className='h2 mb-2 lg:mb-4'>
+          return <div className='w-[45%] flex flex-col items-center' key={index}>
+            <h2 className='h2 mb-2 lg:mb-4 text-center'>
               <CountUp
                 start={startNumber} 
                 end={endNumber}
                 duration={2}
-                enabLeScroLLSpy
+                enableScrollSpy
               />
               {unit}+
             </h2>
-            <div className='text-xl font-bold text-heading mb-3'>
+            <div className='text-xl font-bold text-heading mb-3 text-center'>
               {title}
             </div>
-            <p className='max-w-[240px]'>{desc}</p>
+            <p className='max-w-[240px] text-center'>{desc}</p>
           </div>
         })}
       </div>
       {/* Text  */}
-      <div className='flex-1 -order-1 lg:order-none'>
-        <div className='flex flex-col justify-center h-full lg:pl-[100px]'>
-          <h2 className='h2 mb-12 max-w-[295px] md:max-w-none'>Relax and Enjoy a Personalized Day Yoga With Us.</h2>
-          <div>
-            <img src={Image} alt=''/>
-          </div>
-          <div className='text-lg mb-6 font-bold text-heading'>
-            Yen <span className='text-base text-paragraph
-            font-normal'>/Founder</span>
-          </div>
+      <div className='flex-1 -order-1 lg:order-none flex flex-col justify-center h-full lg:pl-[100px]'>
+        <h2 className='h2 mb-12 max-w-[295px] md:max-w-none text-left'>Relax and Enjoy a Personalized Day Yoga With Us.</h2>
+        <div>
+          <img src={Image} alt=''/>
+        </div>
+        <div className='text-lg mb-6 font-bold text-heading'>
+          Yen <span className='text-base text-paragraph
+          font-normal'>/Founder</span>
         </div>
       </div>
 
