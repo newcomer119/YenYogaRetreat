@@ -32,7 +32,7 @@ const CourseSelection = () => {
     setFormSubmitted(false);
 
     try {
-      const response = await fetch("https://yen-yoga-retreat-dox8.vercel.app/api/payment/create-order", {
+      const response = await fetch("https://backend-theta-black.vercel.app/api/payment/create-order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
