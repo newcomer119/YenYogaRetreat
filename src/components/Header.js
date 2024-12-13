@@ -32,7 +32,8 @@ const Header = () => {
     try {
       await auth.signOut(); // Sign out the user
       setUser(null); // Clear user state
-      window.location.reload(); // Reload the page
+      // this will redirects us to home page so the upper one is not required 
+      window.location.href = "/"; // Redirect to home page
     } catch (error) {
       console.error("Error signing out:", error); // Handle errors
     }
