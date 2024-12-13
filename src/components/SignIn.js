@@ -15,7 +15,10 @@ const SignIn = () => {
   const handleSignIn = async (event) => {
     event.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password); // Sign in with email and password
+      const userCredential = await signInWithEmailAndPassword(auth, email, password); // Sign in with email and password
+      const user = userCredential.user; // Get the user object
+      const token = await user.getIdToken(); // Get the user's token
+      localStorage.setItem("userToken", token); // Store the token in local storage
       setMessage("Sign in successful!"); // Set success message
       login(); // Call login function to update isLoggedIn state
       navigate('/'); // Redirect to the main page (adjust the path as needed)
