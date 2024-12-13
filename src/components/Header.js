@@ -32,6 +32,7 @@ const Header = () => {
     try {
       await auth.signOut(); // Sign out the user
       setUser(null); // Clear user state
+      window.location.reload(); // Reload the page
     } catch (error) {
       console.error("Error signing out:", error); // Handle errors
     }
