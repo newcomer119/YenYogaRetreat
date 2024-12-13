@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import PaymentProcessing from "./PaymentProcessing";
@@ -25,12 +25,21 @@ const CourseSelection = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("userToken") !== null;
+    console.log("Is user logged in:", isLoggedIn);
+
+    if (!isLoggedIn) {
+      navigate("/sign-in");
+    }
+  }, [navigate]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
     setFormSubmitted(false);
-
+  
     try {
       const response = await fetch("https://backend-theta-black.vercel.app/api/payment/create-order", {
         method: "POST",
@@ -39,13 +48,15 @@ const CourseSelection = () => {
         },
         body: JSON.stringify({ amount: coursePrice, currency: "INR" }),
       });
-
+  
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || "Error creating order. Please try again.");
       }
-
+  
       const data = await response.json();
+      const orderId = data.orderId;
+
       setOrderData(data);
       setShowPayment(true);
     } catch (e) {
@@ -55,12 +66,14 @@ const CourseSelection = () => {
       setLoading(false);
     }
   };
+  
 
   const handlePaymentSuccess = async (paymentData) => {
     console.log("Payment data received:", paymentData);
     try {
       await addDoc(collection(db, "courseSelections"), {
         ...paymentData,
+        orderId: paymentData.orderId,
         timestamp: new Date(),
         user: { name, email, phone },
         course: selectedCourse,
