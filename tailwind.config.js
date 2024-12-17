@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     fontFamily: {
       primary: "Inter",
-      roboto: ['Roboto', 'sans-serif'],
+      roboto: ["Roboto", "sans-serif"],
     },
     container: {
       padding: {
@@ -22,7 +22,7 @@ module.exports = {
       youtube: "#FF0000",
       instagram: "#962fbf",
       facebook: "#316FF6",
-      gray:{
+      gray: {
         400: "#d1d5db",
       },
       yellow: {

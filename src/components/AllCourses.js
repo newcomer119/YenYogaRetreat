@@ -63,7 +63,7 @@ const AllCourses = () => {
                   index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
                 data-aos="fade-up"
-                data-aos-delay="100"
+                data-aos-delay="50"
               >
                 <div
                   key={index}

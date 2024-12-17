@@ -42,7 +42,8 @@ const App = () => {
             <Route path="/classes" element={<AllCourses />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/retreat" element={<Retreat />} />
-            <Route path="/user-profile" element={<UserProfile />} /> {/* Use element prop */}
+            <Route path="/user-profile" element={<UserProfile />} />{" "}
+            {/* Use element prop */}
             <Route
               path="/course-selection/:link"
               element={<CourseSelection />}
@@ -60,13 +61,13 @@ const App = () => {
                   <Instructors />
                   <Gallery />
                   <Facts />
-                  <Unsure/>
-                  <Contact />
                 </>
               }
             />
           </Routes>
         </div>
+        <Unsure />
+        <Contact />
         <Footer />
       </Router>
     </CartProvider>

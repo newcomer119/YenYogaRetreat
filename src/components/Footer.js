@@ -5,6 +5,8 @@ import Logo from "../assets/img/logos/logo.png";
 
 // import icons
 import { FaYoutube, FaInstagram, FaFacebook } from "react-icons/fa";
+import { FiExternalLink } from "react-icons/fi";
+
 const Footer = () => {
   return (
     <footer className="py-[30px]">
@@ -21,27 +23,34 @@ const Footer = () => {
           <p>&copy; 2024. All Rights Reserved</p>
           {/* social icons  */}
           <div className="flex gap-x-4 text-egreen text-[25px]">
-            <div
-              className="w-[50px] h-[50px] bg-white 
+            <a href="https://www.youtube.com/@Yenyogaretreat/videos" target="blank">
+              <div
+                className="w-[50px] h-[50px] bg-white 
             rounded-full flex justify-center items-center 
             shadow-primary cursor-pointer hover:text-orange transition"
-            >
-              <FaYoutube />
-            </div>
-            <div
-              className="w-[50px] h-[50px] bg-white 
+              >
+                <FaYoutube />
+              </div>
+            </a>
+
+            <a href="https://www.instagram.com/yenyogaretreat.nhatrang/" target="blank">
+              <div
+                className="w-[50px] h-[50px] bg-white 
             rounded-full flex justify-center items-center 
             shadow-primary cursor-pointer hover:text-orange transition"
-            >
-              <FaInstagram />
-            </div>
-            <div
-              className="w-[50px] h-[50px] bg-white 
+              >
+                <FaInstagram />
+              </div>
+            </a>
+            <a href="https://www.facebook.com/yenyoga.nt" target="blank">
+              <div
+                className="w-[50px] h-[50px] bg-white 
             rounded-full flex justify-center items-center 
             shadow-primary cursor-pointer hover:text-orange transition"
-            >
-              <FaFacebook />
-            </div>
+              >
+                <FaFacebook />
+              </div>
+            </a>
           </div>
         </div>
       </div>
