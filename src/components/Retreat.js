@@ -16,15 +16,17 @@ const Retreat = () => {
             Yoga Retreat in Vietnam
           </h1>
           
-          <button className="bg-pink-500 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-pink-600">
-            View our schedule
-          </button>
+          <Link to="/classes">
+            <button className="bg-pink-500 text-white px-6 py-3 rounded-lg text-lg font-medium hover:bg-pink-600">
+              View our schedule
+            </button>
+          </Link>
         </div>
       </div>
 
       {/* Event Details Section */}
       <div className="max-w-6xl mx-auto mt-12 px-4">
-        <h2 className="text-3xl text-dark font-bold mb-6">Hatha Yoga</h2>
+        <h2 className="text-4xl font-extrabold text-black mb-6 text-center">Hatha Yoga</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <img
@@ -33,18 +35,20 @@ const Retreat = () => {
               className="rounded-lg shadow-lg"
             />
           </div>
-          <div className="text-dark space-y-4">
-            <p>
+          <div className="text-dark space-y-4 text-center">
+            <p className="text-lg font-bold leading-relaxed mt-12 ">
               Hatha yoga is a branch of yoga. The Sanskrit word hatha literally
               means "force" and thus alludes to a system of physical techniques.
             </p>
-            <p>
+            <p className="text-lg font-bold leading-relaxed">
               In India, hatha yoga is associated with popular yoga traditions
               that emphasize strength, flexibility, and breathwork.
             </p>
-            <button className="mt-4 bg-blue-600 text-dark px-6 py-3 rounded-lg font-medium hover:bg-blue-700">
-              Learn More
-            </button>
+            <div className="flex justify-center px-4 py-2 border-t">
+              <Link to="/classes" className="border border-orange text-orange py-2 px-6 rounded-lg hover:bg-orange hover:text-white transition">
+                 Learn More
+             </Link>
+            </div>
           </div>
         </div>
       </div>
