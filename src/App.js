@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
 import SignUp from "./components/SignUp";
 import AllCourses from "./components/AllCourses";
@@ -24,6 +24,60 @@ import UserProfile from "./components/UserProfile";
 import Unsure from "./components/Unsure";
 import "aos/dist/aos.css";
 
+// Wrapper component to handle conditional rendering
+const AppContent = () => {
+  const location = useLocation();
+  
+  // Define paths where footer components should not appear
+  const hideFooterPaths = ['/sign-up','/sign-in', '/course-selection/:link'];
+  
+  // Check if current path matches any of the hideFooterPaths
+  const shouldHideFooter = hideFooterPaths.some(path => {
+    // Convert route parameter syntax to regex
+    const pathRegex = new RegExp('^' + path.replace(':link', '[^/]+') + '$');
+    return pathRegex.test(location.pathname);
+  });
+
+  return (
+    <>
+      <Header />
+      <div className="pt-[110px] b">
+        <Routes>
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/classes" element={<AllCourses />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/retreat" element={<Retreat />} />
+          <Route path="/user-profile" element={<UserProfile />} />
+          <Route path="/course-selection/:link" element={<CourseSelection />} />
+          <Route path="/instructors" element={<Instructors />} />
+          <Route path="/instructors/:id" element={<Instructor />} />
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero />
+                <Courses />
+                <Instructors />
+                <Gallery />
+                <Facts />
+                <Features/>
+              </>
+            }
+          />
+        </Routes>
+      </div>
+      {!shouldHideFooter && (
+        <>
+          <Unsure />
+          <Contact />
+          <Footer />
+        </>
+      )}
+    </>
+  );
+};
+
 const App = () => {
   // aos init
   Aos.init({
@@ -34,41 +88,7 @@ const App = () => {
   return (
     <CartProvider>
       <Router>
-        <Header />
-        <div className="pt-[110px] b">
-          <Routes>
-            <Route path="/sign-in" element={<SignIn />} />
-            <Route path="/sign-up" element={<SignUp />} />
-            <Route path="/classes" element={<AllCourses />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/retreat" element={<Retreat />} />
-            <Route path="/user-profile" element={<UserProfile />} />{" "}
-            {/* Use element prop */}
-            <Route
-              path="/course-selection/:link"
-              element={<CourseSelection />}
-            />
-            <Route path="/instructors" element={<Instructors />} />
-            <Route path="/instructors/:id" element={<Instructor />} />
-            <Route
-              path="/"
-              element={
-                <>
-                  <Hero />
-                  {/* <Cards /> */}
-                  {/* <Features /> */}
-                  <Courses />
-                  <Instructors />
-                  <Gallery />
-                  <Facts />
-                </>
-              }
-            />
-          </Routes>
-        </div>
-        <Unsure />
-        <Contact />
-        <Footer />
+        <AppContent />
       </Router>
     </CartProvider>
   );
