@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { db, auth } from "../firebase"; // Make sure to import auth
 import PaymentProcessing from "./PaymentProcessing";
 import { useNavigate } from "react-router-dom";
 
@@ -22,17 +22,49 @@ const CourseSelection = () => {
   const [orderData, setOrderData] = useState(null);
   const [showPayment, setShowPayment] = useState(false);
   const [coursePrice, setCoursePrice] = useState(0);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem("userToken") !== null;
-    console.log("Is user logged in:", isLoggedIn);
+    // Set up an auth state listener
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setIsAuthenticated(true);
+        // Pre-fill email if available
+        setEmail(user.email || '');
+        // Pre-fill name if available
+        setName(user.displayName || '');
+      } else {
+        // If not authenticated, redirect to sign-in
+        navigate('/sign-in', { 
+          state: { 
+            returnUrl: window.location.pathname,
+            message: "Please sign in to access course selection." 
+          }
+        });
+      }
+      setIsLoading(false);
+    });
 
-    if (!isLoggedIn) {
-      navigate("/sign-in");
-    }
+    // Cleanup subscription
+    return () => unsubscribe();
   }, [navigate]);
+
+  // Don't render the component content until authentication is checked
+  if (isLoading) {
+    return (
+      <div className="min-h-screen mt-[16px] bg-blue-900 py-8 px-4 flex items-center justify-center">
+        <div className="text-black text-xl">Loading...</div>
+      </div>
+    );
+  }
+
+  // If not authenticated, don't render the form
+  if (!isAuthenticated) {
+    return null;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,7 +103,7 @@ const CourseSelection = () => {
   const handlePaymentSuccess = async (paymentData) => {
     console.log("Payment data received:", paymentData);
     try {
-      await addDoc(collection(db, "courseSelections"), {
+      await addDoc(collection(db, "courseSelection"), {
         ...paymentData,
         orderId: paymentData.orderId,
         timestamp: new Date(),
@@ -349,3 +381,4 @@ const CourseSelection = () => {
 };
 
 export default CourseSelection;
+
