@@ -40,12 +40,14 @@ const Hero = () => {
             </p>
             {/* btn group */}
             <div className="mb-6 md:mb-12 space-x-4">
-              <button
-                className="btn btn-sm lg:btn-lg btn-orange hover:text-lg text-white bg-transparent-border border-stroke-1  
-              hover:bg-stroke-3 hover:shadow-lg hover:-translate-y-1 hover:text-orange transition-all duration-300 shadow-primary"
-              >
-                Book Now
-              </button>
+              <Link to="/classes">
+                <button
+                  className="btn btn-sm lg:btn-lg btn-orange hover:text-lg text-white bg-transparent-border border-stroke-1  
+                  hover:bg-stroke-3 hover:shadow-lg hover:-translate-y-1 hover:text-orange transition-all duration-300 shadow-primary"
+                >
+                  Book Now
+                </button>
+              </Link>
               <button
                 onClick={scrollToGallery}
                 className="btn btn-md lg:btn-xl bg-egreen hover:text-xl text-white
