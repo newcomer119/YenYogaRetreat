@@ -32,12 +32,16 @@ const Header = () => {
     try {
       await auth.signOut(); // Sign out the user
       setUser(null); // Clear user state
+
       // this will redirects us to home page so the upper one is not required 
+
       window.location.href = "/"; // Redirect to home page
     } catch (error) {
       console.error("Error signing out:", error); // Handle errors
     }
   };
+
+  const currentPath = window.location.pathname; // Get the current path
 
   return (
     <header
@@ -53,7 +57,7 @@ const Header = () => {
         </a>
         {/* nav */}
         <div className="hidden lg:flex">
-          <Nav />
+          <Nav currentPath={currentPath} />
         </div>
       </div>
       <div className="flex items-center">
