@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+  import { Link } from "react-router-dom";
 // Import Modal Video
 import ModalVideo from "react-modal-video";
 import "../video.scss";
@@ -8,7 +8,7 @@ const Features = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <section
-      className="bg-section min-h-[428px] pt-8 pb-[38px]
+      className="bg-light-blue min-h-[428px] pt-8 pb-[38px]
     lg:pb-[150px] mt-[120px] lg:mt-[130px]"
     >
       <div className="container mx-auto">
@@ -44,7 +44,9 @@ const Features = () => {
               Practice anywhere, anytime. Explore a new way to excercise and
               learn more about yourself. We are giving you the best
             </p>
-            <button className="btn btn-sm btn-orange">Get Started </button>
+            <Link to="/classes">
+              <button className="btn btn-sm btn-orange">Get Started </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -55,7 +57,7 @@ const Features = () => {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
 
-        videoId="MegZKii8tC4" />
+        videoId="Htgzlf9j0oA" />
     </section>
   );
 };
