@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
 import SignUp from "./components/SignUp";
 import AllCourses from "./components/AllCourses";
@@ -22,19 +27,20 @@ import Instructor from "./components/Instructor";
 import Aos from "aos";
 import UserProfile from "./components/UserProfile";
 import Unsure from "./components/Unsure";
+import About from "./components/About";
 import "aos/dist/aos.css";
 
 // Wrapper component to handle conditional rendering
 const AppContent = () => {
   const location = useLocation();
-  
+
   // Define paths where footer components should not appear
-  const hideFooterPaths = ['/sign-up','/sign-in', '/course-selection/:link'];
-  
+  const hideFooterPaths = ["/sign-up", "/sign-in", "/course-selection/:link"];
+
   // Check if current path matches any of the hideFooterPaths
-  const shouldHideFooter = hideFooterPaths.some(path => {
+  const shouldHideFooter = hideFooterPaths.some((path) => {
     // Convert route parameter syntax to regex
-    const pathRegex = new RegExp('^' + path.replace(':link', '[^/]+') + '$');
+    const pathRegex = new RegExp("^" + path.replace(":link", "[^/]+") + "$");
     return pathRegex.test(location.pathname);
   });
 
@@ -43,6 +49,7 @@ const AppContent = () => {
       <Header />
       <div className="pt-[110px] b">
         <Routes>
+          <Route path="/about" element={<About />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/classes" element={<AllCourses />} />
@@ -61,7 +68,7 @@ const AppContent = () => {
                 <Instructors />
                 <Gallery />
                 <Facts />
-                <Features/>
+                <Features />
               </>
             }
           />

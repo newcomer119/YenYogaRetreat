@@ -1,7 +1,7 @@
 import React from "react";
 
 // import logo
-import Logo from "../assets/img/logos/logo.png";
+import Logo from "../assets/img/logos/logo-og.png";
 
 // import icons
 import { FaYoutube, FaInstagram, FaFacebook } from "react-icons/fa";

@@ -25,7 +25,7 @@ const Instructors = () => {
             >
               <Link
                 to={`/instructors/${instructor.id}`}
-                className="relative w-full md:w-2/5 h-auto overflow-hidden"
+                className="relative w-full md:w-auto h-[400px] overflow-hidden"
               >
                 <img
                   src={instructor.imageL}

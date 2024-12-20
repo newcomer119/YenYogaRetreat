@@ -89,7 +89,7 @@ const Courses = () => {
                     key={index}
                     className={`${
                       hot ? "hot" : ""
-                    } hover:border-4 hover:border-orange w-full max-w-md mx-auto bg-white rounded-lg shadow-lg focus:transition-none transition-all duration-300`}
+                    } w-full max-w-md mx-auto bg-white rounded-lg shadow-lg focus:transition-none transition-all duration-300`}
                     data-aos="fade-up"
                     data-aos-delay="150"
                   >

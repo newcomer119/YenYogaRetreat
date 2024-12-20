@@ -12,13 +12,14 @@ module.exports = {
       },
     },
     screens: {
-      sm: "640px",
+      sm: "426px",
       md: "768px",
       lg: "1024px",
-      xl: "1170px",
-      xxl: "1441px",
+      xl: "1440px",
+      xxl: "2560px",
     },
     colors: {
+      white: "#FFFFFF",
       youtube: "#FF0000",
       instagram: "#962fbf",
       facebook: "#316FF6",
@@ -64,7 +65,6 @@ module.exports = {
       },
       section: "#F5F6F9",
       shape: "#E8EEF0",
-      white: "#FFFFFF",
       transparent: "transparent",
     },
     extend: {
@@ -81,4 +81,3 @@ module.exports = {
   },
   plugins: [],
 };
-s

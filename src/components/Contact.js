@@ -6,7 +6,7 @@ import emailjs from '@emailjs/browser'
 const Contact = () => {
   const form = useRef();
   return (
-    <section id="contact" className="py-12">
+    <section id="contact" className="pt-12">
       <div className="container mx-auto">
         <div
           className="flex flex-col lg:flex-row lg:gap-x-[74px] 

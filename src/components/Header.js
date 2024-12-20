@@ -1,12 +1,13 @@
 // src/components/Header.js
 import React, { useState, useEffect, useContext } from "react";
-import logo from "../assets/img/logos/logo.png";
+import logo from "../assets/img/logos/logo-og.png";
 import { Link } from "react-router-dom";
 import { auth } from "../firebase"; // Import auth from your Firebase configuration
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import FontAwesomeIcon
 
 import Nav from "./Nav";
 import NavMobile from "./NavMobile";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Header = () => {
   const [header, setHeader] = useState(false);
@@ -33,7 +34,7 @@ const Header = () => {
       await auth.signOut(); // Sign out the user
       setUser(null); // Clear user state
 
-      // this will redirects us to home page so the upper one is not required 
+      // this will redirects us to home page so the upper one is not required
 
       window.location.href = "/"; // Redirect to home page
     } catch (error) {
@@ -46,51 +47,55 @@ const Header = () => {
   return (
     <header
       className={`${
-        header ? "top-0" : "top-4 lg:top-12"
-      } fixed bg-white my-3 rounded-md w-full z-20 transition-all duration-300 shadow-primary flex items-center justify-between gap-[20px] max-w-[90%] xxl:max-w-[70%] h-[50px] lg:h-[80px] px-4 lg:px-6`}
-      style={{ left: "50%", transform: "translateX(-50%)" }}
+        header
+          ? "top-0 px-4"
+          : "top-0 sm:top-4 lg:top-12 px-4 sm:px-16 xl:px-20 xxl:px-40"
+      } fixed left-0 w-full h-16 lg:h-20 my-3 z-20 transition-all duration-300`}
     >
-      <div className="flex items-center xl:gap-[50px] gap-[20px]">
-        {/* Logo */}
-        <a href="/">
-          <img src={logo} alt="" className="w-20 lg:w-32 h-auto lg:p-2" />
-        </a>
-        {/* nav */}
-        <div className="hidden lg:flex">
-          <Nav currentPath={currentPath} />
+      <div className="bg-white px-2 lg:px-4 rounded-md shadow-primary flex items-center justify-between ">
+        <div className="flex items-center xl:gap-[50px] gap-[20px]">
+          {/* Logo */}
+          <a href="/">
+            <img
+              src={logo}
+              alt=""
+              className="w-auto h-12 lg:h-20 py-1 lg:py-2"
+            />
+          </a>
+          {/* nav */}
+          <div className="hidden lg:flex">
+            <Nav currentPath={currentPath} />
+          </div>
         </div>
-      </div>
-      <div className="flex items-center">
-        {/* buttons or user email */}
-        <div className="flex gap-5">
-          {user ? ( // Conditional rendering based on user state
-            <>
-              <Link
-                to="/user-profile"
-                className="text-heading font-medium text-sm lg:text-base"
-              >
-                Welcome, {user.email} {/* Display user email */}
-              </Link>
-              <button
-                onClick={handleLogout} // Call handleLogout on click
-                className="text-red-500 font-medium text-sm lg:text-base hover:text-red-700 transition"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <button className="text-heading font-medium text-sm lg:text-base hover:text-orange transition">
-                <Link to="/sign-in">Sign In</Link>
-              </button>
-              <button className="btn btn-md lg:px-[30px] bg-orange-100 border border-orange text-orange font-medium text-sm lg:text-base hover:bg-orange-200 hover:text-white transition">
-                <Link to="/sign-up">Sign Up</Link>
-              </button>
-            </>
-          )}
+        <div className="flex items-center">
+          {/* buttons or user email */}
+          <div className="flex gap-5">
+            {user ? ( // Conditional rendering based on user state
+              <>
+                <Link
+                  to="/user-profile"
+                  className="text-heading font-medium text-sm lg:text-base"
+                >
+                  Welcome, {user.email.split("@")[0]} {/* Display user email */}
+                </Link>
+                <button
+                  onClick={handleLogout} // Call handleLogout on click
+                  className="text-red-500 font-medium text-sm lg:text-base hover:text-red-700 transition"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <button className="btn btn-md lg:px-[30px] bg-orange-100 border border-orange text-orange font-medium text-sm lg:text-base hover:bg-orange-200 hover:text-white transition">
+                  <Link to="/sign-in">Sign In</Link>
+                </button>
+              </>
+            )}
+          </div>
+          {/* nav mobile */}
+          <NavMobile />
         </div>
-        {/* nav mobile */}
-        <NavMobile />
       </div>
     </header>
   );
