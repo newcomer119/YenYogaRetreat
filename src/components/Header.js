@@ -87,10 +87,13 @@ const Header = () => {
               </>
             ) : (
               <>
-                <button className="btn btn-md lg:px-[30px] bg-orange-100 border border-orange text-orange font-medium text-sm lg:text-base hover:bg-orange-200 hover:text-white transition">
-                  <Link to="/sign-in">Sign In</Link>
-                </button>
-              </>
+              <button className="text-heading font-medium text-sm lg:text-base hover:text-orange transition">
+                <Link to="/sign-in">Sign In</Link>
+              </button>
+              <button className="btn btn-md lg:px-[30px] bg-orange-100 border border-orange text-orange font-medium text-sm lg:text-base hover:bg-orange-200 hover:text-white transition">
+                <Link to="/sign-up">Sign Up</Link>
+              </button>
+            </>
             )}
           </div>
           {/* nav mobile */}
