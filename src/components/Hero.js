@@ -6,7 +6,6 @@ import { Parallax } from "react-parallax";
 
 // import images
 import Image from "../assets/img/hero/guy.png";
-import LanguageSwitcher from "./LanguageSwitcher";
 
 const Hero = () => {
   const scrollToGallery = () => {
@@ -18,7 +17,6 @@ const Hero = () => {
 
   return (
     <section className="sm:min-h-[450px] lg:min-h-[500px] pt-9 lg:bg-circle lg:bg-no-repeat lg:bg-right-top">
-      <LanguageSwitcher />
       <div className="lg:pl-32 mx-auto">
         <div className="flex flex-col items-center lg:flex-row lg:items-start pt-10 lg:pt-32 xxl:max-w-[70%]">
           <div className=" flex-1 mt-12 mx-8 md:mx-0 lg:min-w-[50%] ">

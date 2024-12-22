@@ -24,7 +24,7 @@ module.exports = {
       instagram: "#962fbf",
       facebook: "#316FF6",
       gray: {
-        400: "#d1d5db",
+        DEFAULT: "#d1d5db",
       },
       yellow: {
         DEFAULT: "#EDC988",

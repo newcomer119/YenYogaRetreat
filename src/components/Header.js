@@ -3,8 +3,6 @@ import React, { useState, useEffect, useContext } from "react";
 import logo from "../assets/img/logos/logo-og.png";
 import { Link } from "react-router-dom";
 import { auth } from "../firebase"; // Import auth from your Firebase configuration
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import FontAwesomeIcon
-
 import Nav from "./Nav";
 import NavMobile from "./NavMobile";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -69,7 +67,8 @@ const Header = () => {
         </div>
         <div className="flex items-center">
           {/* buttons or user email */}
-          <div className="flex gap-5">
+          <div className="flex gap-5 items-center">
+            <LanguageSwitcher />
             {user ? ( // Conditional rendering based on user state
               <>
                 <Link
@@ -87,13 +86,13 @@ const Header = () => {
               </>
             ) : (
               <>
-              <button className="text-heading font-medium text-sm lg:text-base hover:text-orange transition">
-                <Link to="/sign-in">Sign In</Link>
-              </button>
-              <button className="btn btn-md lg:px-[30px] bg-orange-100 border border-orange text-orange font-medium text-sm lg:text-base hover:bg-orange-200 hover:text-white transition">
-                <Link to="/sign-up">Sign Up</Link>
-              </button>
-            </>
+                <button className="text-heading font-medium text-sm lg:text-base hover:text-orange transition">
+                  <Link to="/sign-in">Sign In</Link>
+                </button>
+                <button className="btn btn-md lg:px-[30px] bg-orange-100 border border-orange text-orange font-medium text-sm lg:text-base hover:bg-orange-200 hover:text-white transition">
+                  <Link to="/sign-up">Sign Up</Link>
+                </button>
+              </>
             )}
           </div>
           {/* nav mobile */}

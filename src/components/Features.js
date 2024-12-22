@@ -44,8 +44,8 @@ const Features = () => {
               Practice anywhere, anytime. Explore a new way to excercise and
               learn more about yourself. We are giving you the best
             </p>
-            <Link to="/classes">
-              <button className="btn btn-sm btn-orange">Get Started </button>
+            <Link to="/retreat">
+              <button className="btn btn-sm btn-orange">View Retreat</button>
             </Link>
           </div>
         </div>
@@ -57,7 +57,7 @@ const Features = () => {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
 
-        videoId="Htgzlf9j0oA" />
+        videoId="pQknpvka4EY" />
     </section>
   );
 };
