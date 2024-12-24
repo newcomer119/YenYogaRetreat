@@ -9,8 +9,22 @@ import Image from '../assets/img/signature.png'
 // import data
 import {facts} from '../data'
 
+// import language context
+import { useLanguage } from '../context/LanguageContext';
 
 const Facts = () => {
+  const { language } = useLanguage();
+
+  // Define text based on the selected language
+  const titles = {
+    en: {
+      mainTitle: "Relax and Enjoy a Personalized Day Yoga With Us.",
+    },
+    vn: {
+      mainTitle: "Thư giãn và tận hưởng một ngày yoga cá nhân hóa với chúng tôi.",
+    },
+  };
+
   return( 
   <section className='py-12'>
     <div className="container mx-auto flex flex-col 
@@ -39,7 +53,9 @@ const Facts = () => {
       </div>
       {/* Text  */}
       <div className='flex-1 -order-1 lg:order-none flex flex-col justify-center h-full lg:pl-[100px]'>
-        <h2 className='h2 mb-12 max-w-[295px] md:max-w-none text-left'>Relax and Enjoy a Personalized Day Yoga With Us.</h2>
+        <h2 className='h2 mb-12 max-w-[295px] md:max-w-none text-left'>
+          {titles[language].mainTitle}
+        </h2>
         <div>
           <img src={Image} alt=''/>
         </div>
