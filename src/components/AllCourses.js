@@ -1,5 +1,5 @@
-// src/components/AllCourses.js
-import React, { useContext, useState } from "react";
+  // src/components/AllCourses.js
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import data
 import { courses } from "../data";
@@ -9,20 +9,9 @@ import { IoPerson } from "react-icons/io5";
 import { BsCalendar2DateFill } from "react-icons/bs";
 
 const AllCourses = () => {
-  // const { addToCart, cart, isLoggedIn } = useContext(CartContext); // Access addToCart function and isLoggedIn from context
   const [successMessage, setSuccessMessage] = useState(""); // State for success message
   const navigate = useNavigate(); // Initialize useNavigate
   const [hovered, setHovered] = useState({ id: null, type: null });
-  const [hoveredPricing, setHoveredPricing] = useState({
-    id: null,
-    type: null,
-  });
-  // Function to toggle state
-  const handleToggleHover = (id) => {
-    setHoveredPricing((prev) =>
-      prev.id === id ? { id: null, type: null } : { id, type: "view" }
-    );
-  };
 
   return (
     <section id="courses" className="py-12">
@@ -57,8 +46,10 @@ const AllCourses = () => {
               location,
               type,
             } = course;
+
             return (
               <div
+                key={index}
                 className={`flex flex-col gap-12 p-5 rounded-lg bg-egreen-70 shadow-primary items-start ${
                   index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                 }`}
@@ -66,11 +57,10 @@ const AllCourses = () => {
                 data-aos-delay="50"
               >
                 <div
-                  key={index}
                   id={link}
                   className={`${
                     hot ? "hot" : ""
-                  } w-full max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-lg focus:transition-none transition-all duration-300`}
+                  } w-full max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-lg transition-all duration-300`}
                 >
                   <div className="relative">
                     <img
@@ -98,7 +88,7 @@ const AllCourses = () => {
                     </p>
 
                     <div className="flex items-center justify-between mt-5 px-2">
-                      <div className={`flex items-center gap-5 text-[20px]`}>
+                      <div className="flex items-center gap-5 text-[20px]">
                         {/* Tooltip for Person */}
                         <div
                           className="relative group"
@@ -112,7 +102,7 @@ const AllCourses = () => {
                           <IoPerson className="text-2xl cursor-pointer hover:text-green" />
                           {hovered.id === index &&
                             hovered.type === "person" && (
-                              <div className=" absolute left-4 bottom-8 mt-2 p-2 w-40 md:w-64 bg-gray-400 text-green text-sm rounded shadow-lg z-10">
+                              <div className="absolute left-4 bottom-8 mt-2 p-2 w-40 md:w-64 bg-gray-400 text-green text-sm rounded shadow-lg z-10">
                                 {instructors.length === 0
                                   ? "No instructors"
                                   : instructors.map((instructor, i) => (
@@ -139,9 +129,7 @@ const AllCourses = () => {
                             {hovered.id === index &&
                               hovered.type === "location" && (
                                 <div className="absolute left-4 bottom-8 mt-2 p-2 w-40 md:w-64 bg-gray-400 text-green text-sm rounded shadow-lg z-10">
-                                  {location === ""
-                                    ? "Location not available"
-                                    : location}
+                                  {location || "Location not available"}
                                 </div>
                               )}
                           </div>
@@ -160,7 +148,7 @@ const AllCourses = () => {
                           <BsCalendar2DateFill className="text-2xl cursor-pointer hover:text-green" />
                           {hovered.id === index && hovered.type === "date" && (
                             <div className="absolute left-4 bottom-8 mt-2 p-2 w-40 md:w-64 bg-gray-400 text-green text-sm rounded shadow-lg z-10">
-                              {date === "" ? "Date unavailable" : date}
+                              {date || "Date unavailable"}
                             </div>
                           )}
                         </div>
@@ -171,30 +159,27 @@ const AllCourses = () => {
 
                   <Link to={`/course-selection/${link}`}>
                     <div
-                      className={`${
-                        hot
-                          ? "hover:bg-red-500 text-red-500"
-                          : "hover:bg-orange"
-                      } text-center p-4 border-t hover:bg-orange hover:text-white transition-all duration-200`}
+                      className={`text-center p-4 border-t hover:bg-orange hover:text-white transition-all duration-200 ${
+                        hot ? "hover:bg-red-500 text-red-500" : ""
+                      }`}
                     >
-                      <div className=" px-4">Book Now</div>
+                      Book Now
                     </div>
                   </Link>
                 </div>
+
                 <div className="w-full h-auto">
-                  <h2 className="my-3 text-xl font-semibold ">Description:</h2>
+                  <h2 className="my-3 text-xl font-semibold">Description:</h2>
                   {description}
 
-                  <h2 className="my-3 text-xl font-semibold ">Details:</h2>
-                  {details.map((instructor, i) => (
+                  <h2 className="my-3 text-xl font-semibold">Details:</h2>
+                  {details.map((detail, i) => (
                     <div key={i} className="mb-1">
-                      - {details[i]}
+                      - {detail}
                     </div>
                   ))}
 
-                  {certificate === "" ? (
-                    ""
-                  ) : (
+                  {certificate && (
                     <>
                       <h2 className="my-3 text-xl font-semibold">
                         Certification:
@@ -204,41 +189,6 @@ const AllCourses = () => {
                   )}
                 </div>
               </div>
-
-              /* { <div
-                  className="relative group text-center my-5"
-                  onClick={() => handleToggleHover(index)}
-                >
-                  <button
-                    className={`text-lg cursor-pointer p-4 text-green ${
-                      hot ? "hover:text-red-500" : "hover:text-orange"
-                    }`}
-                  >
-                    View Pricing »»
-                  </button>
-
-                  {hoveredPricing.id === index &&
-                    hoveredPricing.type === "view" && (
-                      <div className="w-full h-auto ">
-                        {Array.isArray(pricing) &&
-                          pricing.map((item, i) => (
-                            <div key={i} className="mb-2">
-                              <div className="font-semibold">{item.type}</div>
-                              <div>{item.price}</div>
-                              {item.discount && item.discount.price && (
-                                <div className="text-sm text-gray-700 mt-1">
-                                  <strong>Discount: </strong>
-                                  {item.discount.price}{" "}
-                                  <span className="block text-xs">
-                                    {item.discount.eligible}
-                                  </span>
-                                </div>
-                              )}
-                            </div>
-                          ))}
-                      </div>
-                    )}
-                </div> } */
             );
           })}
         </div>
