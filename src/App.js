@@ -29,14 +29,16 @@ import UserProfile from "./components/UserProfile";
 import Unsure from "./components/Unsure";
 import About from "./components/About";
 import "aos/dist/aos.css";
+import { LanguageProvider } from "./context/LanguageContext";
+import LanguageSwitcher from "./components/LanguageSwitcher";
 
 // Wrapper component to handle conditional rendering
 const AppContent = () => {
   const location = useLocation();
-
+  
   // Define paths where footer components should not appear
   const hideFooterPaths = ["/sign-up", "/sign-in", "/course-selection/:link"];
-
+  
   // Check if current path matches any of the hideFooterPaths
   const shouldHideFooter = hideFooterPaths.some((path) => {
     // Convert route parameter syntax to regex
@@ -47,6 +49,7 @@ const AppContent = () => {
   return (
     <>
       <Header />
+      <LanguageSwitcher />
       <div className="pt-[110px] b">
         <Routes>
           <Route path="/about" element={<About />} />
@@ -56,10 +59,7 @@ const AppContent = () => {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/retreat" element={<Retreat />} />
           <Route path="/user-profile" element={<UserProfile />} />
-          <Route
-            path="/course-selection/:link"
-            element={<CourseSelection />}
-          />
+          <Route path="/course-selection/:link" element={<CourseSelection />} />
           <Route path="/instructors" element={<Instructors />} />
           <Route path="/instructors/:id" element={<Instructor />} />
           <Route
@@ -97,9 +97,11 @@ const App = () => {
 
   return (
     <CartProvider>
-      <Router>
-        <AppContent />
-      </Router>
+      <LanguageProvider>
+        <Router>
+          <AppContent />
+        </Router>
+      </LanguageProvider>
     </CartProvider>
   );
 };
