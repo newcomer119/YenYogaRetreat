@@ -7,9 +7,21 @@ import { courses } from "../data"; // Import your course data
 import { FaLocationDot } from "react-icons/fa6";
 import { IoPerson } from "react-icons/io5";
 import { BsCalendar2DateFill } from "react-icons/bs";
+import { useLanguage } from "../context/LanguageContext";
 
 const Courses = () => {
   const [hovered, setHovered] = useState({ id: null, type: null });
+  const { language } = useLanguage();
+
+  // Define text based on the selected language
+  const titles = {
+    en: {
+      mainTitle: "Upcoming Events & Classes",
+    },
+    vn: {
+      mainTitle: "Sự kiện & Lớp học sắp tới",
+    },
+  };
 
   const settings = {
     dots: true,
@@ -49,7 +61,7 @@ const Courses = () => {
     <section id="courses" className="py-12">
       <div className="mx-auto">
         <h1 className="h2 text-gray-800" data-aos="fade-up">
-          Upcoming Events & Classes
+          {titles[language].mainTitle}
         </h1>
 
         {/* Courses Carousel */}
