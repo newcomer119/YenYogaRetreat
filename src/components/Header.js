@@ -1,15 +1,32 @@
 // src/components/Header.js
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/img/logos/logo-og.png";
 import { Link } from "react-router-dom";
 import { auth } from "../firebase"; // Import auth from your Firebase configuration
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import FontAwesomeIcon
+
 import Nav from "./Nav";
 import NavMobile from "./NavMobile";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { useLanguage } from "../context/LanguageContext"; // Import the useLanguage hook
+
+const translations = {
+  en: {
+    welcome: "Welcome",
+    signIn: "Sign In",
+    signUp: "Sign Up",
+  },
+  vn: {
+    welcome: "Chào mừng",
+    signIn: "Đăng nhập",
+    signUp: "Đăng ký",
+  }
+};
 
 const Header = () => {
   const [header, setHeader] = useState(false);
   const [user, setUser] = useState(null); // State to hold user information
+  const { language, changeLanguage } = useLanguage(); // Use the language context
 
   useEffect(() => {
     // scroll event listener
@@ -31,9 +48,6 @@ const Header = () => {
     try {
       await auth.signOut(); // Sign out the user
       setUser(null); // Clear user state
-
-      // this will redirects us to home page so the upper one is not required
-
       window.location.href = "/"; // Redirect to home page
     } catch (error) {
       console.error("Error signing out:", error); // Handle errors
@@ -66,16 +80,17 @@ const Header = () => {
           </div>
         </div>
         <div className="flex items-center">
+          {/* Language Switcher */}
+          {/* <LanguageSwitcher /> Use the same LanguageSwitcher */}
           {/* buttons or user email */}
-          <div className="flex gap-5 items-center">
-            <LanguageSwitcher />
+          <div className="flex gap-5">
             {user ? ( // Conditional rendering based on user state
               <>
                 <Link
                   to="/user-profile"
                   className="text-heading font-medium text-sm lg:text-base"
                 >
-                  Welcome, {user.email.split("@")[0]} {/* Display user email */}
+                  {translations[language].welcome}, {user.email.split("@")[0]} {/* Display user email */}
                 </Link>
                 <button
                   onClick={handleLogout} // Call handleLogout on click
@@ -87,10 +102,10 @@ const Header = () => {
             ) : (
               <>
                 <button className="text-heading font-medium text-sm lg:text-base hover:text-orange transition">
-                  <Link to="/sign-in">Sign In</Link>
+                  <Link to="/sign-in">{translations[language].signIn}</Link> {/* Use translation for Sign In */}
                 </button>
                 <button className="btn btn-md lg:px-[30px] bg-orange-100 border border-orange text-orange font-medium text-sm lg:text-base hover:bg-orange-200 hover:text-white transition">
-                  <Link to="/sign-up">Sign Up</Link>
+                  <Link to="/sign-up">{translations[language].signUp}</Link> {/* Use translation for Sign Up */}
                 </button>
               </>
             )}
