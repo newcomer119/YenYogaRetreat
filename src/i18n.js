@@ -1,24 +1,25 @@
-import i18next from "i18next";
-import { initReactI18next } from "react-i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
-import { fetchTranslations } from "./translations"; // Import the Firebase translation function
+// src/i18n.js
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
-i18next
-  .use(LanguageDetector) // Auto-detect language based on browser settings
-  .use(initReactI18next) // Bind i18next to React
+i18n
+  .use(initReactI18next)
   .init({
-    fallbackLng: "en-US", // Default language
-    supportedLngs: ["en-US", "vi-VN"],
-    detection: {
-      order: ["querystring", "cookie", "localStorage", "navigator"], // Detect based on URL, cookies, etc.
-      caches: ["localStorage", "cookie"],
+    resources: {
+      en: {
+        // translation: require('./locales/en/translation.json'),
+        // hero: require('./locales/en/hero.json')
+      },
+      vn: {
+        // translation: require('./locales/vn/translation.json'),
+        // hero: require('./locales/vn/hero.json')
+      },
     },
-    resources: {}, // We'll dynamically load translations from Firebase
+    lng: 'en', // Default language
+    fallbackLng: 'en',
     interpolation: {
-      escapeValue: false, // React already does escaping
-    },
-    react: {
-      useSuspense: false, // Disable Suspense for loading translations
+      escapeValue: false,
     },
   });
 
+export default i18n;
