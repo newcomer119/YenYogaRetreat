@@ -1,16 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { inst } from "../data";
+import { useLanguage } from "../context/LanguageContext";
 
 const Instructors = () => {
+  const { language } = useLanguage();
+
+  // Define text based on the selected language
+  const titles = {
+    en: {
+      mainTitle: "Meet Our Yogis",
+      learnMore: "Learn More",
+    },
+    vn: {
+      mainTitle: "Gặp Gỡ Các Yogi Của Chúng Tôi",
+      learnMore: "Tìm Hiểu Thêm",
+    },
+  };
+
   return (
     <section id="instructors/hoan" className="bg-egreen-70 py-12">
       <div className="mx-auto">
-        <h1
-          className="h2 text-gray-800"
-          data-aos="fade-up"
-        >
-          Meet Our Yogis
+        <h1 className="h2 text-gray-800" data-aos="fade-up">
+          {titles[language].mainTitle}
         </h1>
 
         <div className="flex flex-col gap-10 items-center md:px-32 px-10 mb-[50px] ">
@@ -45,7 +57,7 @@ const Instructors = () => {
 
                 <Link to={`/instructors/${instructor.id}`}>
                   <button className="btn-md bg-egreen-90 hover:bg-egreen text-white mt-2 transition-all duration-300">
-                    Learn More
+                    {titles[language].learnMore}
                   </button>
                 </Link>
               </div>
