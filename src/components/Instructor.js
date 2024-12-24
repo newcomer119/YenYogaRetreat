@@ -3,18 +3,34 @@ import { useParams, Link } from "react-router-dom";
 import { FaYoutube, FaInstagram, FaFacebook } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 import { inst } from "../data";
+import { useLanguage } from "../context/LanguageContext";
 
 const Instructor = () => {
   const { id } = useParams();
   const instructor = inst.instructors.find((ins) => ins.id === id);
+  const { language } = useLanguage();
+
+  // Define text based on the selected language
+  const titles = {
+    en: {
+      notFound: "Instructor Not Found",
+      backToInstructors: "Back to Instructors",
+      qualifications: "Qualifications",
+    },
+    vn: {
+      notFound: "Không tìm thấy giảng viên",
+      backToInstructors: "Quay lại giảng viên",
+      qualifications: "Chứng chỉ",
+    },
+  };
 
   if (!instructor) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">Instructor Not Found</h1>
+        <h1 className="text-3xl font-bold text-gray-800 mb-6">{titles[language].notFound}</h1>
         <Link to="/instructors">
           <button className="px-6 py-3 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition-all">
-            Back to Instructors
+            {titles[language].backToInstructors}
           </button>
         </Link>
       </div>
@@ -57,7 +73,7 @@ const Instructor = () => {
 
           {/* Right Section */}
           <div className="col-span-2">
-            <h2 className="text-2xl font-semibold text-gray-700 mb-4">Qualifications</h2>
+            <h2 className="text-2xl font-semibold text-gray-700 mb-4">{titles[language].qualifications}</h2>
             <ul className="space-y-4 text-gray-700 text-lg">
               {instructor.qualifications.map((qual, index) => (
                 <li key={index} className="flex items-start gap-2">
@@ -76,7 +92,7 @@ const Instructor = () => {
             <div className="mt-10 text-center lg:text-left">
               <Link to="/instructors">
                 <button className="px-6 py-3 bg-egreen text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition-all duration-300">
-                  Back to Instructors
+                  {titles[language].backToInstructors}
                 </button>
               </Link>
             </div>
