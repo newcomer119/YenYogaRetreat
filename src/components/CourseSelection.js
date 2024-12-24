@@ -28,43 +28,31 @@ const CourseSelection = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Set up an auth state listener
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setIsAuthenticated(true);
-        // Pre-fill email if available
-        setEmail(user.email || '');
-        // Pre-fill name if available
-        setName(user.displayName || '');
-      } else {
-        // If not authenticated, redirect to sign-in
-        navigate('/sign-in', { 
-          state: { 
-            returnUrl: window.location.pathname,
-            message: "Please sign in to access course selection." 
-          }
-        });
-      }
-      setIsLoading(false);
-    });
+    // Removed the auth state listener and redirection logic
+    // const unsubscribe = auth.onAuthStateChanged((user) => {
+    //   if (user) {
+    //     setIsAuthenticated(true);
+    //     setEmail(user.email || '');
+    //     setName(user.displayName || '');
+    //   } else {
+    //     navigate('/sign-in', { 
+    //       state: { 
+    //         returnUrl: window.location.pathname,
+    //         message: "Please sign in to access course selection." 
+    //       }
+    //     });
+    //   }
+    //   setIsLoading(false);
+    // });
 
     // Cleanup subscription
-    return () => unsubscribe();
+    // return () => unsubscribe();
   }, [navigate]);
 
-  // Don't render the component content until authentication is checked
-  if (isLoading) {
-    return (
-      <div className="min-h-screen mt-[16px] bg-blue-900 py-8 px-4 flex items-center justify-center">
-        <div className="text-black text-xl">Loading...</div>
-      </div>
-    );
-  }
-
-  // If not authenticated, don't render the form
-  if (!isAuthenticated) {
-    return null;
-  }
+  // Removed the check for isAuthenticated
+  // if (!isAuthenticated) {
+  //   return null;
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -132,7 +120,7 @@ const CourseSelection = () => {
   };
 
   return (
-    <div className="min-h-screen mt-[16px] bg-blue-900 py-8 px-4">
+    <div className="min-h-screen mt-[16px] bg blue-300 py-8 px-4">
       <div className="container mx-auto bg-blue-900 p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl text-center text-black font-bold mb-6">
           Course Selection
@@ -301,27 +289,38 @@ const CourseSelection = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[
                 {
-                  name: "Kundalini Yoga & Mantra Foundation",
-                  description:
-                    "A foundation course focusing on the principles of Kundalini Yoga and the power of mantra chanting.",
+                  name: "200h TTC Kundalini Yoga & Meditation",
+                  description: "Become a Kundalini Yoga & Meditation Instructor with an International Certificate.",
+                  price: 1,
+                },
+                {
+                  name: "Kundalini Yoga & Mantra Meditation - Foundation",
+                  description: "A course to become the master of your own self through Kundalini Yoga, mantra chanting, and energy balancing techniques.",
+                  price: 1,
+                },
+                {
+                  name: "30hrs Chakra Healing",
+                  description: "Learn to balance and align your chakras for better mental and physical well-being through guided practices, meditation, and energy work.",
+                  price: 1,
+                },
+                {
+                  name: "Mantra Meditation – Detox & Self-Cultivation",
+                  description: "Explore the art of self-cultivation and detoxify your mind and soul with ancient mantra meditation techniques.",
+                  price: 1,
+                },
+                {
+                  name: "Mantra - Healing Music",
+                  description: "Immerse yourself in the soothing and healing effects of mantra music, designed to calm your mind and rejuvenate your spirit.",
+                  price: 1,
+                },
+                {
+                  name: "Chakra Dance & Mind Liberation Art",
+                  description: "Combine movement and meditation in this transformative course designed to harmonize your energy and unlock creativity.",
                   price: 1,
                 },
                 {
                   name: "Yoga & Meditation Lifestyle",
-                  description:
-                    "Learn to incorporate yoga and meditation into your daily life for holistic wellness.",
-                  price: 1,
-                },
-                {
-                  name: "Advanced Kundalini Yoga",
-                  description:
-                    "An advanced-level course to deepen your practice of Kundalini Yoga.",
-                  price: 1,
-                },
-                {
-                  name: "Retreat & Wellness",
-                  description:
-                    "A rejuvenating retreat focusing on relaxation, wellness, and mindfulness.",
+                  description: "Learn how to integrate yoga and meditation into your daily routine for a balanced and fulfilling life.",
                   price: 1,
                 },
               ].map((course, index) => (
