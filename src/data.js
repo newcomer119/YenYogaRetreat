@@ -375,6 +375,32 @@ export const courses = [
       ],
     },
   },
+  {
+    id: 3,
+    image: CourseImage3,
+    en: {
+      title: "Chakra Healing 30h",
+      summary:
+        "Understand the Chakras and their impact on physical and mental health",
+      type: {
+        offline: {
+          startDate: "April 18–20, 2025",
+          endDate: "Kim Yoga Academy Đà nẵng",
+        },
+      },
+    },
+    vn: {
+      title: "Khóa học Chakra Healing 30h",
+      summary:
+        "Hiểu về các Chakra và ảnh hưởng của chúng đối với sức khỏe thể chất và tinh thần",
+      type: {
+        offline: {
+          startDate: "Ngày 18–20 tháng 4 năm 2025",
+          endDate: "Kim Yoga Academy Đà nẵng",
+        },
+      },
+    },
+  },
 ];
 
 export const prices = [

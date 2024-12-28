@@ -30,7 +30,7 @@ const CourseCard = ({ course, index }) => {
 
   return (
     <div
-      className={`relative flex flex-col w-full mx-auto bg-white rounded-b-lg shadow-lg `}
+      className={`relative flex flex-col w-full bg-white rounded-b-lg shadow-lg `}
       data-aos="fade-up"
       data-aos-delay={50 * index}
     >
@@ -89,14 +89,14 @@ const CourseCard = ({ course, index }) => {
           )}
         </div>
 
-        <div className="text-xs mt-2 h-10 text-[#000]">
-          <div className="pt-1 font-light line-clamp-1">
+        <div className="text-xs mt-2 min-h-16 text-[#000]">
+          <div className="pt-1 font-light">
             <span className="text-sm font-medium text-green">
               {buttons[language].online} :{" "}
             </span>
             {getDates("online")}
           </div>
-          <div className="pb-1 font-light line-clamp-1">
+          <div className="pb-1 font-light">
             <span className="text-sm font-medium text-yellow">
               {buttons[language].offline}:{" "}
             </span>
