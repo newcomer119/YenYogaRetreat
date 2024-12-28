@@ -1,33 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // import menu btn icon
 import { BiMenu } from "react-icons/bi";
+import { IoCloseSharp } from "react-icons/io5";
 
 // import data
-import { navigation } from "../data";
+import { nav } from "../data";
+import { useLanguage } from "../context/LanguageContext";
 
 const NavMobile = () => {
-  const[isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const { language } = useLanguage();
+
   return (
-    <nav>
-      {/* menu btn */}
-      <div onClick={() => setIsOpen(!isOpen)} className="cursor-pointer text-4xl text-heading 
-      ml-[10px] lg:hidden">
-        <BiMenu />
+    <nav className="ml-2 tab2:hidden">
+      <div
+        onClick={() => setIsOpen(!isOpen)}
+        className={`text-3xl transform transition-transform duration-300 ease-in-out ${isOpen ? 'rotate-180' : 'rotate-0'}`}
+      >
+        {isOpen ? <IoCloseSharp /> : <BiMenu />}
       </div>
-      {/* menu items */}
-      <ul
-        className={`${isOpen ? 'max-h-60 p-8' : 'max-h-0 p-0'} flex flex-col absolute w-full bg-white
-      top-24 left-0 shadow-primary space-y-6 
-      overflow-hidden transition-all`} >
-        {navigation.map((item, index) => {
-          return (
-            <li key={index}>
-              <a href={item.href}>{item.name}</a>
-            </li>
-          );
-        })}
-      </ul>
+      <div
+        className={`${
+          isOpen ? "h-auto" : "hidden"
+        } absolute top-20 right-4 w-full mob1:w-2/3 mob2:w-1/2 pl-8 tab:pr-12`}
+      >
+        <ul className="max-h-svh p-1 flex flex-col bg-white shadow-primary rounded-lg overflow-hidden divide-y divide-dotted transition-all">
+          {nav.map((item, index) => {
+            return (
+              <a href={item[language].href}>
+                <li key={index} className="p-4">
+                  {item[language].name}
+                </li>
+              </a>
+            );
+          })}
+        </ul>
+      </div>
     </nav>
   );
 };

@@ -1,13 +1,17 @@
 // src/context/LanguageContext.js
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('en'); // Default language
+  const [language, setLanguage] = useState(() => {
+    // Get the initial language from localStorage or default to 'en'
+    return localStorage.getItem("language") || "en";
+  });
 
   const changeLanguage = (lang) => {
     setLanguage(lang); // Update the language state
+    localStorage.setItem("language", lang); // Save the selected language to localStorage
   };
 
   return (
@@ -20,7 +24,7 @@ export const LanguageProvider = ({ children }) => {
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
   if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
+    throw new Error("useLanguage must be used within a LanguageProvider");
   }
   return context;
 };

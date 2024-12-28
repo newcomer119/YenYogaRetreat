@@ -14,18 +14,27 @@ import GalleryImg5 from "../galleryimg/galleryimg5.png";
 import GalleryImg6 from "../galleryimg/galleryimg6.png";
 import GalleryImg7 from "../galleryimg/galleryimg7.png";
 import GalleryImg8 from "../galleryimg/galleryimg8.png";
+import { BsXSquareFill } from "react-icons/bs";
+import { sectionHeaders } from "../data";
+import { useLanguage } from "../context/LanguageContext";
 
 // New Modal component for displaying the clicked image
-const Modal = ({ isOpen, image, onClose }) => {
+export const ImageModal = ({ isOpen, image, onClose }) => {
   if (!isOpen) return null; // Don't render if not open
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75">
-      <img
-        src={image}
-        alt="Zoomed"
-        className="max-w-full max-h-full object-contain cursor-pointer"
-        onClick={onClose}
-      />
+    <div className="fixed inset-0 flex items-center justify-center bg-transparent z-30 ">
+      <div className="relative max-w-[70%] max-h-[70%] m-4">
+        <img
+          src={image}
+          alt="Zoomed"
+          className="w-full h-full object-contain" // Use object-contain to maintain aspect ratio
+        />
+        <BsXSquareFill
+          className="absolute -right-8 top-0 text-red-100 cursor-pointerhover:scale-[0.8] transition-all" // Adjusted z-index for visibility
+          onClick={onClose}
+          size={30}
+        />
+      </div>
     </div>
   );
 };
@@ -33,6 +42,7 @@ const Modal = ({ isOpen, image, onClose }) => {
 const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null); // State for selected image
   const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
+  const { language } = useLanguage();
 
   const images = [
     GalleryImg,
@@ -93,9 +103,8 @@ const Gallery = () => {
         {/* Added padding to the container */}
         <h1
           className="mt-8 mb-16 text-gray-800 h2 text-center"
-          data-aos="fade-up"
         >
-          GALLERY
+          {sectionHeaders[language].gallery}
         </h1>
         {/* Enhanced font style */}
         <Slider {...sliderSettings}>
@@ -117,7 +126,11 @@ const Gallery = () => {
           ))}
         </Slider>
       </div>
-      <Modal isOpen={isModalOpen} image={selectedImage} onClose={closeModal} />{" "}
+      <ImageModal
+        isOpen={isModalOpen}
+        image={selectedImage}
+        onClose={closeModal}
+      />{" "}
       {/* Modal for zoomed image */}
     </div>
   );

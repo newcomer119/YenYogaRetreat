@@ -1,13 +1,10 @@
 import React from "react";
-
-// import logo
-import Logo from "../assets/img/logos/logo-og.png";
-
-// import icons
 import { FaYoutube, FaInstagram, FaFacebook } from "react-icons/fa";
-import { FiExternalLink } from "react-icons/fi";
+import { sectionHeaders, footer } from "../data";
+import { useLanguage } from "../context/LanguageContext";
 
 const Footer = () => {
+  const { language } = useLanguage();
   return (
     <footer className="py-[30px]">
       <div className="container mx-auto max-w-[90%]">
@@ -17,13 +14,13 @@ const Footer = () => {
         >
           {/* logo  */}
           <a href="/">
-            <img src={Logo} alt="" srcset="" className="w-32 h-auto" />
+            <img src={footer.logo} alt="" srcset="" className="w-20 h-auto" />
           </a>
           {/* CopyRight Text  */}
-          <p>&copy; 2024. All Rights Reserved</p>
+          <p>{sectionHeaders[language].footer}</p>
           {/* social icons  */}
           <div className="flex gap-x-4 text-egreen text-[25px]">
-            <a href="https://www.youtube.com/@Yenyogaretreat/videos" target="blank">
+            <a href={footer.social.youtube} target="blank">
               <div
                 className="w-[50px] h-[50px] bg-white 
             rounded-full flex justify-center items-center 
@@ -33,7 +30,7 @@ const Footer = () => {
               </div>
             </a>
 
-            <a href="https://www.instagram.com/yenyogaretreat.nhatrang/" target="blank">
+            <a href={footer.social.instagram} target="blank">
               <div
                 className="w-[50px] h-[50px] bg-white 
             rounded-full flex justify-center items-center 
@@ -42,7 +39,7 @@ const Footer = () => {
                 <FaInstagram />
               </div>
             </a>
-            <a href="https://www.facebook.com/yenyoga.nt" target="blank">
+            <a href={footer.social.facebook} target="blank">
               <div
                 className="w-[50px] h-[50px] bg-white 
             rounded-full flex justify-center items-center 

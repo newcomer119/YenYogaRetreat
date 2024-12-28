@@ -1,38 +1,27 @@
 // src/components/Header.js
 import React, { useState, useEffect } from "react";
-import logo from "../assets/img/logos/logo-og.png";
 import { Link } from "react-router-dom";
 import { auth } from "../firebase"; // Import auth from your Firebase configuration
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import FontAwesomeIcon
-
 import Nav from "./Nav";
 import NavMobile from "./NavMobile";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "../context/LanguageContext"; // Import the useLanguage hook
-
-const translations = {
-  en: {
-    welcome: "Welcome",
-    signIn: "Sign In",
-    signUp: "Sign Up",
-  },
-  vn: {
-    welcome: "Chào mừng",
-    signIn: "Đăng nhập",
-    signUp: "Đăng ký",
-  }
-};
+import { buttons, images } from "../data";
+import { FaUser } from "react-icons/fa6";
 
 const Header = () => {
   const [header, setHeader] = useState(false);
   const [user, setUser] = useState(null); // State to hold user information
-  const { language, changeLanguage } = useLanguage(); // Use the language context
+  const [isOpen, setIsOpen] = useState(false);
+  const { language } = useLanguage(); // Use the language context
 
   useEffect(() => {
-    // scroll event listener
-    window.addEventListener("scroll", () => {
-      window.scrollY > 24 ? setHeader(true) : setHeader(false);
-    });
+    // Scroll event listener
+    const handleScroll = () => {
+      setHeader(window.scrollY > 24);
+    };
+
+    window.addEventListener("scroll", handleScroll);
 
     // Monitor authentication state
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -40,6 +29,7 @@ const Header = () => {
     });
 
     return () => {
+      window.removeEventListener("scroll", handleScroll); // Cleanup scroll listener
       unsubscribe(); // Cleanup subscription on unmount
     };
   }, []);
@@ -59,60 +49,73 @@ const Header = () => {
   return (
     <header
       className={`${
-        header
-          ? "top-0 px-4"
-          : "top-0 sm:top-4 lg:top-12 px-4 sm:px-16 xl:px-20 xxl:px-40"
-      } fixed left-0 w-full h-16 lg:h-20 my-3 z-20 transition-all duration-300`}
+        header ? "navSolid" : "navTransparent"
+      } fixed left-0 w-full h-16 tab:h-20 my-3 z-20 transition-all duration-300`}
     >
-      <div className="bg-white px-2 lg:px-4 rounded-md shadow-primary flex items-center justify-between ">
-        <div className="flex items-center xl:gap-[50px] gap-[20px]">
-          {/* Logo */}
-          <a href="/">
-            <img
-              src={logo}
-              alt=""
-              className="w-auto h-12 lg:h-20 py-1 lg:py-2"
-            />
-          </a>
-          {/* nav */}
-          <div className="hidden lg:flex">
-            <Nav currentPath={currentPath} />
-          </div>
-        </div>
-        <div className="flex items-center">
-          {/* Language Switcher */}
-          {/* <LanguageSwitcher /> Use the same LanguageSwitcher */}
-          {/* buttons or user email */}
-          <div className="flex gap-5">
-            {user ? ( // Conditional rendering based on user state
-              <>
-                <Link
-                  to="/user-profile"
-                  className="text-heading font-medium text-sm lg:text-base"
-                >
-                  {translations[language].welcome}, {user.email.split("@")[0]} {/* Display user email */}
-                </Link>
-                <button
-                  onClick={handleLogout} // Call handleLogout on click
-                  className="text-red-500 font-medium text-sm lg:text-base hover:text-red-700 transition"
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <button className="text-heading font-medium text-sm lg:text-base hover:text-orange transition">
-                  <Link to="/sign-in">{translations[language].signIn}</Link> {/* Use translation for Sign In */}
-                </button>
-                <button className="btn btn-md lg:px-[30px] bg-orange-100 border border-orange text-orange font-medium text-sm lg:text-base hover:bg-orange-200 hover:text-white transition">
-                  <Link to="/sign-up">{translations[language].signUp}</Link> {/* Use translation for Sign Up */}
-                </button>
-              </>
-            )}
-          </div>
-          {/* nav mobile */}
-          <NavMobile />
-        </div>
+      <div className=" px-2 rounded-md flex items-center">
+        {/* Logo */}
+        <a href="/">
+          <img
+            src={images.logo}
+            alt="logo"
+            className="w-auto min-w-8 h-12 tab:h-16 lap:h-20 py-2 "
+          />
+        </a>
+
+        {/* nav */}
+        <Nav currentPath={currentPath} />
+        <LanguageSwitcher />
+        {user ? (
+          <>
+            <div
+              className="relative ml-2 tab2:mr-2 p-2 tab2:p-3 rounded-full border border-green text-green hover:bg-green hover:text-white font-medium text-sm"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              <FaUser />
+              {isOpen && (
+                <div className="absolute right-0 mt-3 z-21 bg-white border border-gray divide-y divide-gray text-heading w-24">
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setIsOpen(false);
+                    }}
+                    className="w-full text-left px-2 py-1.5 text-heading"
+                  >
+                    <Link to={"/user-profile"}>
+                      {buttons[language].profile}
+                    </Link>
+                  </button>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setIsOpen(false);
+                    }}
+                    className="w-full text-left px-2 py-1.5 text-red-100"
+                  >
+                    {buttons[language].logout}
+                  </button>
+                </div>
+              )}
+              {/* Welcome, {user.email.split("@")[0]} Display user email */}
+            </div>
+          </>
+        ) : (
+          <>
+            <button
+              id="signin"
+              className="ml-1 tab2:ml-3 font-bold text-xs tab:text-sm lap:text-base transition-all hover:scale-[1.05]"
+            >
+              <Link to="/sign-in">{buttons[language].signIn}</Link>
+            </button>
+            <button
+              id="signup"
+              className="ml-3 tab2:ml-4 px-2 py-2 mob1:px-3 tab:px-4 lap:px-5 rounded-md bg-primary border border-primary text-white font-medium text-xs tab:text-sm lap:text-base hover:bg-accent1 hover:text-body transition-all"
+            >
+              <Link to="/sign-up">{buttons[language].signUp}</Link>
+            </button>
+          </>
+        )}
+        <NavMobile />
       </div>
     </header>
   );

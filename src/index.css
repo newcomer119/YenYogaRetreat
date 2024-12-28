@@ -7,9 +7,6 @@
     @apply font-primary text-paragraph;
     background: linear-gradient(to bottom, #fafafa 0%, #cfcece 100%);
   }
-  nav a {
-    @apply hover:text-egreen transition;
-  }
 
   h1,
   h2,
@@ -28,17 +25,8 @@
   .h3 {
     @apply text-[18px] leading-[28px] lg:text-[34px] lg:leading-[44px] font-semibold;
   }
-  .section-sm {
-    @apply py-[70px];
-  }
-  .section-lg {
-    @apply py-[150px];
-  }
   .btn {
     @apply font-medium rounded text-base bg-shape;
-  }
-  .btn-sm {
-    @apply h-[35px] px-[10px];
   }
   .btn-md {
     @apply h-[50px] px-[30px];
@@ -66,6 +54,61 @@
   }
   .TdButton {
     @apply inline-block px-6 py-2.5 border rounded-md border-orange text-orange-200 hover:bg-orange hover:text-white font-medium;
+  }
+
+  .top-section {
+    @apply pt-16 tab:pt-28 lap:pt-36;
+  }
+  .section {
+    @apply big:px-64 lap:px-32 tab2:px-28 tab:px-16 mob2:px-8 px-4;
+  }
+  .heroOverlay {
+    @apply bg-gradient-to-br lap:bg-gradient-to-r from-bg1 from-10% big:from-20%;
+  }
+  .heroImage {
+    @apply bg-people bg-right-bottom bg-contain bg-no-repeat bg-[length:auto_20em] mob1:bg-[length:auto_20rem] tab:bg-[length:auto_32rem] tab2:bg-[length:auto_36rem] big:bg-[length:auto_44rem];
+  }
+  .preheader {
+    @apply text-sm tab:text-base lap1:text-2xl text-green font-bold text-green;
+  }
+  .headline {
+    @apply text-3xl tab:text-5xl lap:text-7xl lap2:text-8xl font-semibold text-body;
+  }
+  .tagline {
+    @apply text-lg tab:text-xl tab2:text-2xl lap2:text-3xl text-body leading-snug;
+  }
+  .btn-sm {
+    @apply px-4 py-3 lap:px-6 lap:py-4 text-sm tab2:text-xl lap2:px-6 lap2:py-4 lap2:text-3xl;
+  }
+  .navTransparent {
+    @apply big:px-64 lap:px-32 tab2:px-28 tab:px-16 px-4 top-0 tab:top-6 lap:top-12;
+
+    & #navlinks,
+    #language,
+    #signin {
+      @apply text-white hover:text-cta1;
+    }
+
+    & #navlinks > span {
+      @apply bg-cta1;
+    }
+  }
+  .navSolid {
+    @apply top-0 px-4;
+
+    & > div {
+      @apply bg-bg2 shadow-header;
+    }
+
+    & #navlinks,
+    #language,
+    #signin {
+      @apply text-headings1 hover:text-link;
+    }
+
+    & #navlinks > span {
+      @apply bg-link;
+    }
   }
 }
 
