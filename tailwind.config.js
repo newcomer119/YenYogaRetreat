@@ -45,6 +45,7 @@ module.exports = {
       hover1: "#F8C8A4",
       hover2: "#D4AF37",
       light: "#D3D3D3",
+      transparent: "#00000080",
 
       blue: "#003087",
       white: "#FFFFFF",

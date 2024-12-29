@@ -11,7 +11,7 @@ const CourseCard = ({ course, index }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      setMobile(window.innerWidth <= 769);
+      setMobile(window.innerWidth <= 1025);
     };
 
     window.addEventListener("resize", handleResize);
@@ -30,29 +30,28 @@ const CourseCard = ({ course, index }) => {
 
   return (
     <div
-      className={`relative flex flex-col w-full bg-white rounded-b-lg shadow-lg `}
-      data-aos="fade-up"
-      data-aos-delay={50 * index}
+      className={`relative flex flex-col min-w-72 max-w-[400px] bg-bg2 rounded-b-lg shadow-lg`}
+      // data-aos="fade-up"
+      // data-aos-delay={50 * index}
     >
       {/* Image Section */}
       <div className="relative">
         <img
           src={image}
           alt={title}
-          className="w-full object-cover"
-          style={{ height: "200px" }}
+          className="w-full object-cover object-center h-72"
         />
         {!mobile && (
-          <div className="absolute inset-0 flex justify-center items-center gap-4 opacity-0 hover:opacity-100 bg-blue bg-opacity-40 transition-all duration-200">
+          <div className="absolute inset-0 flex justify-center items-center gap-4 opacity-0 hover:opacity-100 bg-primary bg-opacity-40 transition-all duration-200">
             <Link
               to={`/course-selection/${id}`}
-              className="bg-orange text-white py-2 px-4 rounded-lg shadow-lg hover:bg-orange-hover transition-all"
+              className="bg-cta1 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-hover1 transition-all duration-300"
             >
               {buttons[language].bookNow}
             </Link>
             <Link
               to={`/courses/${id}`}
-              className="bg-gray text-green py-2 px-4 rounded-lg shadow-lg hover:bg-gray-600 hover:text-white transition-all"
+              className="bg-light text-headings2 py-2 px-4 rounded-lg shadow-lg hover:bg-hover2 hover:text-white transition-all"
             >
               {buttons[language].moreInfo}
             </Link>
@@ -61,47 +60,47 @@ const CourseCard = ({ course, index }) => {
       </div>
 
       {/* Text Section */}
-      <div className="p-4 divide-y divide-dotted divide-gray">
+      <div className="p-4 divide-y divide-dotted divide-gray flex flex-col justify-between h-full">
         <div>
-          <div className="text-base font-bold mb-12 leading-tight h-10 text-orange">
-            <Link to={`/courses/${id}`} className="hover:text-blue">
+          <div className="text-base tab:text-lg tab2:text-xl big:text-2xl font-bold mb-2 leading-tight text-cta1 line-clamp-2">
+            <Link to={`/courses/${id}`} className="hover:text-primary">
               {title}
             </Link>
-            <p className="text-xs font-medium mt-2 line-clamp-2 h-8 text-[#000]">
-              {summary}
-            </p>
+          </div>
+          <p className="text-xs tab1:text-base big:text-lg font-medium line-clamp-2 text-body mb-2">
+            {summary}
+          </p>
+        </div>
+
+        <div className="text-xs tab2:text-sm mt-2 text-body">
+          <div className="pt-1 tab2:pt-2">
+            <span className="text-sm tab2:text-base font-medium text-headings2">
+              {buttons[language].online} :{" "}
+            </span>
+            {getDates("online")}
+          </div>
+          <div className="pb-3 tab2:pb-5">
+            <span className="text-sm tab2:text-base font-medium text-highlight2">
+              {buttons[language].offline}:{" "}
+            </span>
+            {getDates("offline")}
           </div>
           {mobile && (
-            <div className="flex justify-center items-center gap-4 text-xs">
+            <div className="flex justify-center items-center gap-4">
               <Link
                 to={`/courses/${id}`}
-                className="bg-orange text-white py-2 px-4 rounded-lg hover:bg-orange-hover transition-all"
+                className="bg-cta1 text-white py-2 px-4 rounded-lg"
               >
                 {buttons[language].bookNow}
               </Link>
               <Link
                 to={`/courses/${id}`}
-                className="bg-gray text-green py-2 px-4 rounded-lg hover:bg-gray-600 hover:text-white transition-all"
+                className="bg-light text-headings2 py-2 px-4 rounded-lg"
               >
                 {buttons[language].moreInfo}
               </Link>
             </div>
           )}
-        </div>
-
-        <div className="text-xs mt-2 min-h-16 text-[#000]">
-          <div className="pt-1 font-light">
-            <span className="text-sm font-medium text-green">
-              {buttons[language].online} :{" "}
-            </span>
-            {getDates("online")}
-          </div>
-          <div className="pb-1 font-light">
-            <span className="text-sm font-medium text-yellow">
-              {buttons[language].offline}:{" "}
-            </span>
-            {getDates("offline")}
-          </div>
         </div>
       </div>
     </div>

@@ -18,18 +18,22 @@ const Courses = () => {
   }, [location]);
 
   return (
-    <section id="courses" className={newpage ? "top-section" : "section mt-8"}>
-      <h1 className="h2 text-gray-800 mx-3" data-aos="fade-up">
-        {sectionHeaders[language].courses}
-      </h1>
+    <section>
+      <div id="courses" className={newpage ? "top-section" : "section"}>
+        <div className="sectionHeaders" >
+          {sectionHeaders[language].courses}
+        </div>
 
-      {/* Courses List */}
-      <div className="grid grid-cols-1 mob2:grid-cols-2 lap:grid-cols-3 gap-8 mb-16 ">
-        {courses.map((course, index) => (
-          <div key={index} className="tab2:hover:scale-[1.1] transition-all col-span-1">
-            <CourseCard course={course} index={index} />
-          </div>
-        ))}
+        <div className="grid grid-cols-1 mob2:grid-cols-2 lap:grid-cols-3 gap-8">
+          {courses.map((course, index) => (
+            <div
+              key={index}
+              className="tab2:hover:scale-[1.1] transition-all w-full flex justify-center"
+            >
+              <CourseCard course={course} index={index} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

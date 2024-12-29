@@ -4,44 +4,10 @@
 
 @layer base {
   body {
-    @apply font-primary text-paragraph;
-    background: linear-gradient(to bottom, #fafafa 0%, #cfcece 100%);
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply text-heading;
-  }
-  .h1 {
-    @apply text-[36px] leading-[46px] lg:text-[70px] lg:leading-[80px] font-extrabold;
-  }
-  .h2 {
-    @apply text-[26px] leading-[36px] md:text-[50px] md:leading-[60px] font-bold  md:mt-8 mb-10 md:mb-16 text-center;
-  }
-  .h3 {
-    @apply text-[18px] leading-[28px] lg:text-[34px] lg:leading-[44px] font-semibold;
-  }
-  .btn {
-    @apply font-medium rounded text-base bg-shape;
-  }
-  .btn-md {
-    @apply h-[50px] px-[30px];
-  }
-  .btn-lg {
-    @apply h-[58px] rounded-md px-[40px];
-  }
-  .btn-orange {
-    @apply bg-orange text-white hover:bg-orange-hover transition;
+    @apply bg-gradient-to-r from-bg1 to-light;
   }
   .form-control {
     @apply h-[58px] border border-stroke-2 rounded pl-6 placeholder:text-paragraph text-paragraph outline-none;
-  }
-  .hot {
-    @apply border-4 border-red-500;
   }
   .ThStyle {
     @apply w-1/6 min-w-[160px] border-l border-transparent py-4 px-3 text-lg font-medium text-white lg:py-7 lg:px-4;
@@ -57,10 +23,10 @@
   }
 
   .top-section {
-    @apply pt-16 tab:pt-28 lap:pt-36;
+    @apply pt-16 tab:pt-28 lap:pt-36 big:px-64 pb-16 lap:px-32 tab2:px-28 tab:px-16 mob2:px-8 px-4;
   }
   .section {
-    @apply big:px-64 lap:px-32 tab2:px-28 tab:px-16 mob2:px-8 px-4;
+    @apply big:px-64 lap:px-32 tab2:px-28 tab:px-16 mob2:px-8 px-4 py-10 tab:py-12 big:py-16;
   }
   .heroOverlay {
     @apply bg-gradient-to-br lap:bg-gradient-to-r from-bg1 from-10% big:from-20%;
@@ -77,7 +43,7 @@
   .tagline {
     @apply text-lg tab:text-xl tab2:text-2xl lap2:text-3xl text-body leading-snug;
   }
-  .btn-sm {
+  .btn {
     @apply px-4 py-3 lap:px-6 lap:py-4 text-sm tab2:text-xl lap2:px-6 lap2:py-4 lap2:text-3xl;
   }
   .navTransparent {
@@ -86,7 +52,7 @@
     & #navlinks,
     #language,
     #signin {
-      @apply text-white hover:text-cta1;
+      @apply text-headings1 hover:text-cta1;
     }
 
     & #navlinks > span {
@@ -109,6 +75,10 @@
     & #navlinks > span {
       @apply bg-link;
     }
+  }
+
+  .sectionHeaders{
+    @apply font-bold text-body  mx-3 mb-8 tab:mb-10 tab2:mb-16 text-3xl tab:text-4xl tab2:text-5xl big:text-6xl text-center;
   }
 }
 
