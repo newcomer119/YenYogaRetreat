@@ -8,7 +8,7 @@ const InstructorCard = ({ instructor, all }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      setMobile(window.innerWidth <= 769);
+      setMobile(window.innerWidth <= 1025);
     };
 
     window.addEventListener("resize", handleResize);
@@ -19,14 +19,14 @@ const InstructorCard = ({ instructor, all }) => {
 
   return (
     <div
-      className={`relative flex flex-col bg-white w-auto rounded-lg hover:scale-[1.02] transition-all`}
+      className={`relative flex flex-col bg-white w-auto rounded-lg hover:scale-[1.02] transition-all max-w-96 tab:min-w-80`}
     >
       {/* Image Section */}
       <div className="relative w-auto h-auto">
         <img
           src={imageS}
           alt={title}
-          className="w-full max-h-96 object-cover rounded-t-lg"
+          className="w-full max-h-96 object-cover object-top rounded-t-lg"
         />
         {!mobile && (
           <div
@@ -34,20 +34,20 @@ const InstructorCard = ({ instructor, all }) => {
               all
                 ? "inset-2 justify-center gap-4 divide-y divide-dotted divide-white p-2 "
                 : "inset-0 justify-end"
-            } absolute flex flex-col items-center opacity-0 hover:opacity-100 bg-blue bg-opacity-50 rounded-t-lg transition-all duration-200`}
+            } absolute flex flex-col items-center opacity-0 hover:opacity-100 bg-headings1 bg-opacity-50 rounded-t-lg transition-all duration-200`}
           >
-            {all && <div className="text-sm text-white text-center">{bio}</div>}
+            {all && <div className="text-lg text-white text-center">{bio}</div>}
 
             <div className="flex py-2">
               <Link
-                className="border border-white p-3 m-1 hover:border-green hover:bg-green text-white rounded-[25px]"
+                className="border border-white p-3 m-1 hover:border-primary hover:bg-primary text-white rounded-[25px]"
                 to={social.facebook}
                 target="blank"
               >
                 <BiLogoFacebook />
               </Link>
               <Link
-                className="border border-white p-3 m-1 hover:border-green hover:bg-green text-white rounded-[25px]"
+                className="border border-white p-3 m-1 hover:border-primary hover:bg-primary text-white rounded-[25px]"
                 to={social.instagram}
                 target="blank"
               >
@@ -60,22 +60,22 @@ const InstructorCard = ({ instructor, all }) => {
 
       {/* Text Section */}
       <div className="flex flex-col justify-center items-center mx-auto p-4">
-        <div className="text-xl font-bold">{name}</div>
+        <div className="text-xl tab2:text-2xl font-bold text-headings1">{name}</div>
         <div className="text-base">{title}</div>
         {mobile && (
           <div className="">
             {all && (
-              <div className="text-sm text-center font-light py-2">{bio}</div>
+              <div className="text-sm tab2:text-lg text-center text-subtext py-2">{bio}</div>
             )}
             <div className="flex py-2 justify-center">
               <Link
-                className="border border-green p-3 m-1 hover:bg-green hover:text-white text-green rounded-[25px]"
+                className="border border-primary p-3 m-1 hover:bg-primary hover:text-white text-primary rounded-[25px]"
                 to={social.facebook}
               >
                 <BiLogoFacebook />
               </Link>
               <Link
-                className="border border-green p-3 m-1 hover:bg-green hover:text-white text-green rounded-[25px]"
+                className="border border-primary p-3 m-1 hover:bg-primary hover:text-white text-primary rounded-[25px]"
                 to={social.instagram}
               >
                 <BiLogoInstagram />

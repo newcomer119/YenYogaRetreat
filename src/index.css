@@ -58,6 +58,14 @@
     & #navlinks > span {
       @apply bg-cta1;
     }
+
+    & #navRight {
+      @apply lap:bg-light lap:rounded-md lap:py-2;
+    }
+
+    & #signup{
+      @apply lap:mr-1;
+    }
   }
   .navSolid {
     @apply top-0 px-4;

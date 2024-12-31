@@ -1,27 +1,29 @@
 import React from "react";
 import CountUp from "react-countup";
 import Image from "../assets/img/signature.png";
-import { facts, sectionHeaders } from "../data";
+import { inst, facts, sectionHeaders } from "../data";
 import { useLanguage } from "../context/LanguageContext";
+import InstructorCard from "./InstructorCard";
+import { Link } from "react-router-dom";
 
 const Facts = () => {
   const { language } = useLanguage();
 
   return (
-    <section className="py-12">
-      <div
-        className="container mx-auto flex flex-col 
-    lg:flex-row lg:gap-x-[30px]"
-      >
+    <section>
+      <div className="section flex flex-col-reverse lap:flex-row lap:items-center gap-10">
         {/* numbers */}
-        <div className="bg-flex-1 flex flex-wrap gap-x-[5%] gap-y-[35px]">
+        <div className="grid grid-cols-2 gap-4 lap:gap-10 lap:flex-1">
           {facts.map((item, index) => {
             // destructure item
             const { startNumber, endNumber, unit, title, desc } =
               item[language];
             return (
-              <div className="w-[45%] flex flex-col items-center" key={index}>
-                <h2 className="h2 mb-2 lg:mb-4 text-center">
+              <div
+                className="col-span-1 flex flex-col items-center text-center text-body"
+                key={index}
+              >
+                <div className="text-xl lap1:text-2xl big:text-4xl mb-2 text-link font-bold">
                   <CountUp
                     start={startNumber}
                     end={endNumber}
@@ -29,32 +31,29 @@ const Facts = () => {
                     enableScrollSpy
                   />
                   {unit}+
-                </h2>
-                <div className="text-xl font-bold text-heading mb-3 text-center">
+                </div>
+                <div className="text-2xl lap1:text-3xl big:text-4xl font-bold text-headings1 mb-1 lap2:mb-2">
                   {title}
                 </div>
-                <p className="max-w-[240px] text-center">{desc}</p>
+                <div className="max-w-60 big:text-xl">{desc}</div>
               </div>
             );
           })}
         </div>
         {/* Text  */}
-        <div className="flex-1 -order-1 lg:order-none flex flex-col justify-center h-full lg:pl-[100px]">
-          <h2 className="h2 mb-12 max-w-[295px] md:max-w-none text-left">
-            {sectionHeaders[language].facts}
-          </h2>
-          <div>
-            <img src={Image} alt="" />
+        <div className="flex flex-col-reverse lap:flex-col flex-1">
+          <div className="flex flex-row flex-wrap mob2:flex-nowrap gap-5 justify-center items-center">
+            {inst.map((instructor) => (
+              <Link
+                to={`/trainers/${instructor.id}`}
+                data-aos="flip-right"
+                data-aos-duration="1500"
+              >
+                <InstructorCard instructor={instructor[language]} all={true} />
+              </Link>
+            ))}
           </div>
-          <div className="text-lg mb-6 font-bold text-heading">
-            Yen{" "}
-            <span
-              className="text-base text-paragraph
-          font-normal"
-            >
-              /Founder
-            </span>
-          </div>
+          <div className="sectionHeaders lap:mt-6 lap:mb-0">{sectionHeaders[language].facts}</div>
         </div>
       </div>
     </section>

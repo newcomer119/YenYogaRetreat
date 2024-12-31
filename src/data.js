@@ -535,7 +535,7 @@ export const inst = [
   {
     id: "hoanh",
     en: {
-      name: "Mr. Hoành Nguyễn",
+      name: "Hoành Nguyễn",
       title: "Founder & Trainer",
       imageL: Instructor1s,
       imageS: Instructor1s,
@@ -554,7 +554,7 @@ export const inst = [
       },
     },
     vn: {
-      name: "Ông Hoành Nguyễn",
+      name: "Hoành Nguyễn",
       title: "Người Sáng Lập & Huấn Luyện Viên",
       imageL: Instructor1s,
       imageS: Instructor1s,
@@ -576,7 +576,7 @@ export const inst = [
   {
     id: "yen",
     en: {
-      name: "Mrs. Yến Nguyễn",
+      name: "Yến Nguyễn",
       title: "Founder & Trainer",
       imageL: Instructor2s,
       imageS: Instructor2s,
@@ -595,7 +595,7 @@ export const inst = [
       },
     },
     vn: {
-      name: "Bà Yến Nguyễn",
+      name: "Yến Nguyễn",
       title: "Người Sáng Lập & Huấn Luyện Viên",
       imageL: Instructor2s,
       imageS: Instructor2s,
@@ -669,7 +669,7 @@ export const sectionHeaders = {
     courseDetails: "Course Details",
     courseNotFound: "Course Not Found. Please check back later.",
     courses: "Upcoming Courses & Events",
-    facts: "Find Your Zen: Relax and Recharge with Us",
+    facts: "Our Founders",
     footer: "© 2024 Yen Yoga & Retreat. All Rights Reserved",
     gallery: "Retreat Highlights",
     aboutTrainer: "About",
@@ -683,7 +683,7 @@ export const sectionHeaders = {
     courseDetails: "Course Details",
     courseNotFound: "Không Tìm Thấy Khóa Học. Vui lòng kiểm tra lại sau.",
     courses: "Khóa Học & Sự Kiện Sắp Tới",
-    facts: "Tìm Sự Bình Yên: Thư Giãn và Nạp Lại Năng Lượng Cùng Chúng Tôi",
+    facts: "Những Người Sáng Lập Của Chúng Tôi",
     footer: "© 2024 Yen Yoga & Retreat. Mọi Quyền Được Bảo Lưu",
     gallery: "Điểm Nhấn Retreat",
     aboutTrainer: "Giới Thiệu",

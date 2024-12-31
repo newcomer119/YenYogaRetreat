@@ -19,7 +19,7 @@ const LanguageSwitcher = () => {
   ];
 
   return (
-    <div className="relative ml-auto tab2:ml-0">
+    <div className="relative">
       {/* Button with language icon */}
       <button
         id="language"
@@ -31,7 +31,7 @@ const LanguageSwitcher = () => {
 
       {/* Dropdown menu */}
       {isOpen && (
-        <div className="absolute right-0 mt-1 p-1 z-21 bg-orange-100 border border-orange divide-y divide-orange divide-dotted text-heading shadow-lg rounded-lg w-28">
+        <div className="absolute right-5 mt-2 p-1 z-21 bg-orange-100 border border-orange divide-y divide-orange divide-dotted text-heading shadow-lg rounded-lg w-28 lap1:w-36">
           {languages.map((lang) => (
             <button
               key={lang[language].code}
@@ -39,7 +39,7 @@ const LanguageSwitcher = () => {
                 changeLanguage(lang[language].code);
                 setIsOpen(false);
               }}
-              className="w-full text-left px-2 py-1.5 text-xs tab:py-2 tab:text-sm hover:text-orange"
+              className="w-full text-left px-2 py-1.5 text-xs tab:py-2 tab:text-sm hover:text-orange hover:bg-blue lap1:text-lg"
             >
               {lang[language].label}
             </button>

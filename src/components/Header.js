@@ -64,58 +64,60 @@ const Header = () => {
 
         {/* nav */}
         <Nav currentPath={currentPath} />
-        <LanguageSwitcher />
-        {user ? (
-          <>
-            <div
-              className="relative ml-2 tab2:mr-2 p-2 tab2:p-3 rounded-full border border-green text-green hover:bg-green hover:text-white font-medium text-sm"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              <FaUser />
-              {isOpen && (
-                <div className="absolute right-0 mt-3 z-21 bg-white border border-gray divide-y divide-gray text-heading w-24">
-                  <button
-                    onClick={() => {
-                      handleLogout();
-                      setIsOpen(false);
-                    }}
-                    className="w-full text-left px-2 py-1.5 text-heading"
-                  >
-                    <Link to={"/user-profile"}>
-                      {buttons[language].profile}
-                    </Link>
-                  </button>
-                  <button
-                    onClick={() => {
-                      handleLogout();
-                      setIsOpen(false);
-                    }}
-                    className="w-full text-left px-2 py-1.5 text-red-100"
-                  >
-                    {buttons[language].logout}
-                  </button>
-                </div>
-              )}
-              {/* Welcome, {user.email.split("@")[0]} Display user email */}
-            </div>
-          </>
-        ) : (
-          <>
-            <button
-              id="signin"
-              className="ml-1 tab2:ml-3 font-bold text-xs tab:text-sm lap:text-base transition-all hover:scale-[1.05]"
-            >
-              <Link to="/sign-in">{buttons[language].signIn}</Link>
-            </button>
-            <button
-              id="signup"
-              className="ml-3 tab2:ml-4 px-2 py-2 mob1:px-3 tab:px-4 lap:px-5 rounded-md bg-primary border border-primary text-white font-medium text-xs tab:text-sm lap:text-base hover:bg-accent1 hover:text-body transition-all"
-            >
-              <Link to="/sign-up">{buttons[language].signUp}</Link>
-            </button>
-          </>
-        )}
-        <NavMobile />
+        <div id="navRight" className="relative ml-auto tab2:ml-0 flex items-center">
+          <LanguageSwitcher />
+          {user ? (
+            <>
+              <div
+                className=" ml-2 tab2:mr-2 p-2 tab2:p-3 rounded-full border border-headings1 text-headings1 hover:bg-headings1 hover:text-white font-medium text-sm"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <FaUser />
+                {isOpen && (
+                  <div className="absolute right-6 mt-5 z-21 bg-white border border-gray divide-y divide-gray text-heading w-24">
+                    <button
+                      onClick={() => {
+                        handleLogout();
+                        setIsOpen(false);
+                      }}
+                      className="w-full text-left px-2 py-1.5 text-heading"
+                    >
+                      <Link to={"/user-profile"}>
+                        {buttons[language].profile}
+                      </Link>
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleLogout();
+                        setIsOpen(false);
+                      }}
+                      className="w-full text-left px-2 py-1.5 text-red-100"
+                    >
+                      {buttons[language].logout}
+                    </button>
+                  </div>
+                )}
+                {/* Welcome, {user.email.split("@")[0]} Display user email */}
+              </div>
+            </>
+          ) : (
+            <>
+              <button
+                id="signin"
+                className="ml-1 tab2:ml-3 font-bold text-xs tab:text-sm lap:text-base transition-all hover:scale-[1.05]"
+              >
+                <Link to="/sign-in">{buttons[language].signIn}</Link>
+              </button>
+              <button
+                id="signup"
+                className="ml-3 tab2:ml-4 px-2 py-2 mob1:px-3 tab:px-4 lap:px-5 rounded-md bg-primary border border-primary text-white font-medium text-xs tab:text-sm lap:text-base hover:bg-accent1 hover:text-body transition-all"
+              >
+                <Link to="/sign-up">{buttons[language].signUp}</Link>
+              </button>
+            </>
+          )}
+          <NavMobile />
+        </div>
       </div>
     </header>
   );

@@ -62,7 +62,7 @@ const CourseCard = ({ course, index }) => {
       {/* Text Section */}
       <div className="p-4 divide-y divide-dotted divide-gray flex flex-col justify-between h-full">
         <div>
-          <div className="text-base tab:text-lg tab2:text-xl big:text-2xl font-bold mb-2 leading-tight text-cta1 line-clamp-2">
+          <div className="text-base tab:text-lg tab2:text-xl big:text-2xl font-bold mb-2 leading-tight text-headings1 line-clamp-2">
             <Link to={`/courses/${id}`} className="hover:text-primary">
               {title}
             </Link>
@@ -74,13 +74,13 @@ const CourseCard = ({ course, index }) => {
 
         <div className="text-xs tab2:text-sm mt-2 text-body">
           <div className="pt-1 tab2:pt-2">
-            <span className="text-sm tab2:text-base font-medium text-headings2">
+            <span className="text-sm tab2:text-base font-medium text-cta1">
               {buttons[language].online} :{" "}
             </span>
             {getDates("online")}
           </div>
           <div className="pb-3 tab2:pb-5">
-            <span className="text-sm tab2:text-base font-medium text-highlight2">
+            <span className="text-sm tab2:text-base font-medium text-accent1">
               {buttons[language].offline}:{" "}
             </span>
             {getDates("offline")}
@@ -95,7 +95,7 @@ const CourseCard = ({ course, index }) => {
               </Link>
               <Link
                 to={`/courses/${id}`}
-                className="bg-light text-headings2 py-2 px-4 rounded-lg"
+                className="bg-highlight2 text-headings2 py-2 px-4 rounded-lg"
               >
                 {buttons[language].moreInfo}
               </Link>

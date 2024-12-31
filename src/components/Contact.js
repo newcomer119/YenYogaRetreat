@@ -8,15 +8,15 @@ const Contact = () => {
   const { language } = useLanguage();
 
   return (
-    <section id="contact" className="pt-12 section m-0">
+    <section id="contact" className="pt-12 section">
       <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row lg:gap-x-[74px] bg-contact bg-no-repeat bg-cover min-h-[600px]">
           {/* Text */}
-          <div className="flex-1 flex flex-col justify-center pl-8">
-            <h2 className="h2 mb-3 lg:mb-7">
+          <div className="flex-1 flex flex-col justify-center pl-8 ">
+            <h2 className="h2 mb-5 tab:mb-8 lg:mb-7 sectionHeaders text-cta1">
               {sectionHeaders[language].contact} {/* Title */}
             </h2>
-            <p className="mb-7 lg:mb-0 text-center">
+            <p className="mb-7 lg:mb-0 text-center lap:text-xl lap2:text-2xl text-subtext">
               {contact[language].text} {/* Description */}
             </p>
           </div>
@@ -51,7 +51,7 @@ const Contact = () => {
               placeholder={contact[language].placeholders.message} // Fixed here
               name="user_message"
             ></textarea>
-            <button className="btn btn-lg btn-orange">
+            <button className="btn w-full bg-cta2 text-white rounded-md">
               {buttons[language].sendMessage} {/* Button Text */}
             </button>
           </form>

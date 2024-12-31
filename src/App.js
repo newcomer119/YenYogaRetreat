@@ -67,10 +67,9 @@ const AppContent = () => {
               <>
                 <Hero />
                 <Courses />
-                <Instructors />
-                <Gallery />
-                <Facts />
                 <Features />
+                <Facts />
+                <Gallery />
               </>
             }
           />

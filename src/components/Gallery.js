@@ -30,7 +30,7 @@ export const ImageModal = ({ isOpen, image, onClose }) => {
           className="w-full h-full object-contain" // Use object-contain to maintain aspect ratio
         />
         <BsXSquareFill
-          className="absolute -right-8 top-0 text-red-100 cursor-pointerhover:scale-[0.8] transition-all" // Adjusted z-index for visibility
+          className="absolute -right-8 top-0 text-red-100 cursor-pointerhover:scale-[0.8] transition-all cursor-pointer" // Adjusted z-index for visibility
           onClick={onClose}
           size={30}
         />
@@ -102,7 +102,7 @@ const Gallery = () => {
       <div className="w-full max-w-6xl p-8">
         {/* Added padding to the container */}
         <h1
-          className="mt-8 mb-16 text-gray-800 h2 text-center"
+          className="sectionHeaders text-left"
         >
           {sectionHeaders[language].gallery}
         </h1>

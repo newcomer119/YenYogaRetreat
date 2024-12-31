@@ -16,7 +16,7 @@ const Hero = () => {
 
   return (
     <section className="relative h-svh max-h-[1000px] bg-hero bg-no-repeat tab:bg-fixed bg-bottom bg-cover">
-      <div className="heroOverlay top-section h-full">
+      <div className="heroOverlay top-section pb-0 h-full">
         <div className="h-full heroImage">
           <div className="grid grid-cols-1 tab:grid-cols-12 gap-x-8 pt-2 mob1:pt-16 lap1:pt-24 big:pt-32">
             <div
@@ -49,7 +49,7 @@ const Hero = () => {
               data-aos="fade-down"
               data-aos-delay="500"
             >
-              <button className="btn bg-cta2 rounded-lg text-white hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 hover:text-orange transition-all duration-300">
+              <button className="btn bg-cta2 rounded-lg text-white hover:bg-highlight2 hover:shadow-lg hover:-translate-y-1 hover:text-cta2 transition-all duration-300">
                 {buttons[language].viewCourses}
               </button>
             </Link>
