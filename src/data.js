@@ -60,16 +60,6 @@ export const nav = [
   },
   {
     en: {
-      name: "Retreat",
-      href: "/retreat",
-    },
-    vn: {
-      name: "Kỳ Nghỉ Dưỡng",
-      href: "/retreat",
-    },
-  },
-  {
-    en: {
       name: "Courses",
       href: "/courses",
     },
@@ -634,6 +624,7 @@ export const buttons = {
     sendMessage: "Send Message",
     signIn: "Sign In",
     signUp: "Sign Up",
+    submit: "Submit",
     viewAll: "View All",
     viewCourses: "View Courses",
     viewTrainers: "View Trainers",
@@ -655,6 +646,7 @@ export const buttons = {
     sendMessage: "Gửi Tin Nhắn",
     signIn: "Đăng Nhập",
     signUp: "Đăng Ký",
+    submit: "Gửi",
     viewAll: "Xem Tất Cả",
     viewCourses: "Xem Khóa Học",
     viewTrainers: "Xem Huấn Luyện Viên",

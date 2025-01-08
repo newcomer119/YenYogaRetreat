@@ -23,7 +23,7 @@
   }
 
   .top-section {
-    @apply pt-16 tab:pt-28 lap:pt-36 big:px-64 pb-16 lap:px-32 tab2:px-28 tab:px-16 mob2:px-8 px-4;
+    @apply pt-24 tab:pt-28 lap:pt-36 big:px-64 pb-16 lap:px-32 tab2:px-28 tab:px-16 mob2:px-8 px-4;
   }
   .section {
     @apply big:px-64 lap:px-32 tab2:px-28 tab:px-16 mob2:px-8 px-4 py-10 tab:py-12 big:py-16;
@@ -77,16 +77,27 @@
     & #navlinks,
     #language,
     #signin {
-      @apply text-headings1 hover:text-link;
+      @apply text-headings1 hover:text-primary;
     }
 
     & #navlinks > span {
-      @apply bg-link;
+      @apply bg-primary;
     }
   }
 
   .sectionHeaders{
     @apply font-bold text-body  mx-3 mb-8 tab:mb-10 tab2:mb-16 text-3xl tab:text-4xl tab2:text-5xl big:text-6xl text-center;
+  }
+
+  .form{
+    @apply px-4 tab:px-10 pb-20;
+  }
+  .formHeader{
+    @apply mt-12 tab2:mt-16 mb-5 pb-1 border-b border-dotted mx-4 tab:mx-10 lap:mx-20 text-center text-2xl big:text-4xl font-bold text-headings1;
+  }
+
+  .formBg{
+    @apply bg-gradient-to-b from-light to-bg1;
   }
 }
 

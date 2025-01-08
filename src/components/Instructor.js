@@ -6,66 +6,92 @@ import { buttons, sectionHeaders, inst } from "../data";
 import InstructorCard from "./InstructorCard";
 
 const Instructor = () => {
-  const { id } = useParams();
-  const instructor = inst.find((ins) => ins.id === id);
-  const { language } = useLanguage();
+	const { id } = useParams();
+	const instructor = inst.find((ins) => ins.id === id);
+	const { language } = useLanguage();
 
-  if (!instructor) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-        <TbFaceIdError size={60} className="text-red-100" />
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">
-          {sectionHeaders[language].trainerNotFound}
-        </h1>
-        <Link to="/trainers">
-          <button className="px-6 py-3 bg-green-200 text-white rounded-lg shadow-md hover:bg-green-700 transition-all">
-            {buttons[language].viewTrainers}
-          </button>
-        </Link>
-      </div>
-    );
-  }
+	if (!instructor) {
+		return (
+			<div className='min-h-screen flex flex-col items-center justify-center bg-gray-100'>
+				<TbFaceIdError
+					size={60}
+					className='text-red-100'
+				/>
+				<h1 className='text-3xl font-bold text-gray-800 mb-6'>
+					{sectionHeaders[language].trainerNotFound}
+				</h1>
+				<Link to='/trainers'>
+					<button className='px-6 py-3 bg-green-200 text-white rounded-lg shadow-md hover:bg-green-700 transition-all'>
+						{buttons[language].viewTrainers}
+					</button>
+				</Link>
+			</div>
+		);
+	}
 
-  return (
-    <section className="bg-gray-50  top-section">
-      <div className="container mx-auto px-6 md:px-12 lg:px-24">
+	const QualificationsSection = () => {
+		return (
+			<div className='grid grid-cols-1 tab2:grid-cols-2 big:grid-cols-3 gap-1 tab:gap-2'>
+				{instructor[language].qualifications.map((qual, index) => (
+					<div
+						key={index}
+						className='p-4 bg-light text-headings1 rounded-lg hover:scale-[1.02] transition-all border border-gray-400'>
+						<p className='text-lg font-semibold'>{qual}</p>
+					</div>
+				))}
+			</div>
+		);
+	};
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
-          {/* Left Section */}
-          <InstructorCard instructor={instructor[language]} all={false} className="col-span-1" />
+	const BioSection = () => {
+		return (
+			<div className='max-w-[1000px]'>
+				<blockquote className='border-l-4 border-primary px-4 text-primary italic text-xl bg-gradient-to-r from-bg1 py-3'>
+					{instructor[language].bio}
+				</blockquote>
+			</div>
+		);
+	};
 
-          {/* Right Section */}
-          <div className="col-span-2">
-            <h2 className="text-2xl font-semibold text-gray-700 mb-4">
-              {sectionHeaders[language].aboutTrainer} {instructor[language].name}
-            </h2>
-            <ul className="space-y-4 text-gray-700 text-lg">
-              {instructor[language].qualifications.map((qual, index) => (
-                <li key={index} className="flex items-start gap-2">
-                  <span className="text-green-600 font-bold">•</span>
-                  {qual}
-                </li>
-              ))}
-            </ul>
+	const RightSection = () => {
+		return (
+			<div className='tab:col-span-2 flex flex-col gap-8 text-left'>
+				<QualificationsSection />
+				<BioSection />
+				<div className='flex gap-4 justify-center tab:justify-start'>
+					<Link to='/trainers'>
+						<button className='px-6 py-3 text-cta2 font-semibold rounded-lg border border-cta2 shadow hover:bg-cta2 hover:text-white transition-all duration-300'>
+							{buttons[language].viewAll}
+						</button>
+					</Link>
+					<Link to='/trainers'>
+						<button className='px-6 py-3 text-cta2 font-semibold rounded-lg border border-cta2 shadow hover:bg-cta2 hover:text-white transition-all duration-300'>
+							{buttons[language].viewCourses}
+						</button>
+					</Link>
+				</div>
+			</div>
+		);
+	};
 
-            <div className="mt-8">
-              <blockquote className="border-l-4 border-green-500 pl-4 text-gray-700 italic text-xl">
-                {instructor.bio}
-              </blockquote>
-            </div>
-
-            <div className="mt-10 text-center lg:text-left">
-              <Link to="/trainers">
-                <button className="px-6 py-3 bg-green-200 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition-all duration-300">
-                  {buttons[language].viewTrainers}
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+	return (
+		<section className='top-section'>
+			<div className='sectionHeaders'>
+				{sectionHeaders[language].aboutTrainer} {instructor[language].name}
+			</div>
+			<div className='grid grid-cols-1 lap:grid-cols-3 gap-12 items-start'>
+				{/* Left Section */}
+				<div className='col-span-1 flex justify-center'>
+					<InstructorCard
+						instructor={instructor[language]}
+						all={false}
+					/>
+				</div>
+				{/* Right Section */}
+				<RightSection />
+			</div>
+		</section>
+	);
 };
 
 export default Instructor;

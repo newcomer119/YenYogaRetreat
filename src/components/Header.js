@@ -1,19 +1,19 @@
-// src/components/Header.js
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { auth } from "../firebase"; // Import auth from your Firebase configuration
 import Nav from "./Nav";
 import NavMobile from "./NavMobile";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useLanguage } from "../context/LanguageContext"; // Import the useLanguage hook
 import { buttons, images } from "../data";
-import { FaUser } from "react-icons/fa6";
+import { FaUser  } from "react-icons/fa6";
 
 const Header = () => {
   const [header, setHeader] = useState(false);
   const [user, setUser] = useState(null); // State to hold user information
   const [isOpen, setIsOpen] = useState(false);
   const { language } = useLanguage(); // Use the language context
+  const { pathname } = useLocation(); // Get the current path
 
   useEffect(() => {
     // Scroll event listener
@@ -44,12 +44,18 @@ const Header = () => {
     }
   };
 
-  const currentPath = window.location.pathname; // Get the current path
+  const getHeaderClass = () => {
+    if (pathname === "/") {
+      return header ? "navSolid" : "navTransparent";
+    } else {
+      return "navSolid";
+    }
+  };
 
   return (
     <header
       className={`${
-        header ? "navSolid" : "navTransparent"
+        getHeaderClass()
       } fixed left-0 w-full h-16 tab:h-20 my-3 z-20 transition-all duration-300`}
     >
       <div className=" px-2 rounded-md flex items-center">
@@ -63,7 +69,7 @@ const Header = () => {
         </a>
 
         {/* nav */}
-        <Nav currentPath={currentPath} />
+        <Nav currentPath={pathname} />
         <div id="navRight" className="relative ml-auto tab2:ml-0 flex items-center">
           <LanguageSwitcher />
           {user ? (
@@ -72,7 +78,7 @@ const Header = () => {
                 className=" ml-2 tab2:mr-2 p-2 tab2:p-3 rounded-full border border-headings1 text-headings1 hover:bg-headings1 hover:text-white font-medium text-sm"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                <FaUser />
+                <FaUser  />
                 {isOpen && (
                   <div className="absolute right-6 mt-5 z-21 bg-white border border-gray divide-y divide-gray text-heading w-24">
                     <button
