@@ -16,6 +16,9 @@ const Navbar = () => {
         </div>
         <div className="bg-white shadow-md rounded-lg p-4">
           <Link to="/contact" className="text-gray-800 text-lg font-semibold">Contact</Link>
+        </div>
+        <div className="bg-white shadow-md rounded-lg p-4">
+          <Link to="/blog" className="text-gray-800 text-lg font-semibold">Blog</Link>
         </div>  
       </div>
     </nav>

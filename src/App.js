@@ -27,6 +27,7 @@ import Unsure from "./components/Unsure";
 import About from "./components/About";
 import "aos/dist/aos.css";
 import { LanguageProvider } from "./context/LanguageContext";
+import Blog from "./components/Blog";
 // import { configDotenv } from "dotenv";
 
 // Wrapper component to handle conditional rendering
@@ -61,6 +62,7 @@ const AppContent = () => {
           <Route path="/course-selection/:link" element={<CourseSelection />} />
           <Route path="/trainers" element={<Instructors />} />
           <Route path="/trainers/:id" element={<Instructor />} />
+          <Route path="/blog" element={<Blog />} />
           <Route
             path="/"
             element={
