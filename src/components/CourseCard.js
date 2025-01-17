@@ -1,119 +1,62 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { buttons } from "../data";
+import React, { useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import CourseSelection from "./CourseSelection";
 
-const CourseCard = ({ course, index }) => {
+const CourseCard = ({ course }) => {
 	const { language } = useLanguage();
-	const [mobile, setMobile] = useState(window.innerWidth <= 769);
-	const { id, image } = course;
-	const { title, summary, type } = course[language];
+	const [showForm, setShowForm] = useState(false);
 
-	useEffect(() => {
-		const handleResize = () => {
-			setMobile(window.innerWidth <= 1025);
-		};
+	// Convert 'vn' to 'vi' to match Sanity schema
+	const langKey = language === 'vn' ? 'vi' : language;
 
-		window.addEventListener("resize", handleResize);
-		return () => {
-			window.removeEventListener("resize", handleResize);
-		};
-	}, []);
-
-	const getDates = (x) => {
-		if (!type[x]) {
-			return "Not Available";
-		}
-		const { startDate, endDate } = type[x];
-		return `${startDate} - ${endDate}`;
-	};
-
-	const [isOpen, setIsOpen] = useState(false);
-
-	const handleBookNow = () => {
-		setIsOpen(true);
-	};
+	console.log('Original language:', language);
+	console.log('Converted language key:', langKey);
+	console.log('Course title structure:', course.title);
 
 	return (
-		<div
-			className={`relative flex flex-col min-w-72 max-w-[400px] bg-bg2 rounded-b-lg shadow-lg`}
-			// data-aos="fade-up"
-			// data-aos-delay={50 * index}
-		>
-			{/* Image Section */}
-			<div className='relative'>
-				<img
-					src={image}
-					alt={title}
-					className='w-full object-cover object-center h-72'
-				/>
-				{!mobile && (
-					<div className='absolute inset-0 flex justify-center items-center gap-4 opacity-0 hover:opacity-100 bg-primary bg-opacity-40 transition-all duration-200'>
-						<button
-							onClick={handleBookNow}
-							className='bg-cta1 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-hover1 transition-all duration-300'>
-							{buttons[language].bookNow}
-						</button>
-						<Link
-							to={`/courses/${id}`}
-							className='bg-light text-headings2 py-2 px-4 rounded-lg shadow-lg hover:bg-hover2 hover:text-white transition-all'>
-							{buttons[language].moreInfo}
-						</Link>
-					</div>
+		<>
+			<div className="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden group relative">
+				{course.imageUrl && (
+					<img
+						className="w-full h-48 object-cover"
+						src={course.imageUrl}
+						alt={course.title[langKey]}
+					/>
 				)}
-			</div>
-
-			{/* Text Section */}
-			<div className='p-4 divide-y divide-dotted divide-gray flex flex-col justify-between h-full'>
-				<div>
-					<div className='text-base tab:text-lg tab2:text-xl big:text-2xl font-bold mb-2 leading-tight text-primary line-clamp-2'>
-						<Link
-							to={`/courses/${id}`}
-							className='hover:text-headings1'>
-							{title}
-						</Link>
+				<div className="p-5">
+					<h3 className="text-xl font-bold mb-2">{course.title[langKey]}</h3>
+					<p className="text-gray-600 mb-4">{course.description[langKey]}</p>
+					<div className="flex justify-between items-center mb-4">
+						<span className="text-gray-500">{course.duration[langKey]}</span>
+						<span className="text-blue-600 font-bold">{course.price[langKey]}</span>
 					</div>
-					<p className='text-xs tab1:text-base big:text-lg font-medium line-clamp-2 text-body mb-2'>
-						{summary}
-					</p>
+					<ul className="space-y-2">
+						{course.features?.map((feature, index) => (
+							<li key={index} className="flex items-center">
+								<svg className="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+									<path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+								</svg>
+								{feature[langKey]}
+							</li>
+						))}
+					</ul>
 				</div>
-
-				<div className='text-xs tab2:text-sm mt-2 text-body'>
-					<div className='pt-1 tab2:pt-2'>
-						<span className='text-sm tab2:text-base font-medium text-cta1'>
-							{buttons[language].online} :{" "}
-						</span>
-						{getDates("online")}
-					</div>
-					<div className='pb-3 tab2:pb-5'>
-						<span className='text-sm tab2:text-base font-medium text-accent1'>
-							{buttons[language].offline}:{" "}
-						</span>
-						{getDates("offline")}
-					</div>
-					{mobile && (
-						<div className='flex justify-center items-center gap-4'>
-							<button
-								className='bg-cta1 text-white py-2 px-4 rounded-lg'
-								onClick={handleBookNow}>
-								{buttons[language].bookNow}
-							</button>
-							<Link
-								to={`/courses/${id}`}
-								className='bg-highlight2 text-headings2 py-2 px-4 rounded-lg'>
-								{buttons[language].moreInfo}
-							</Link>
-						</div>
-					)}
+				<div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+					<button
+						onClick={() => setShowForm(true)}
+						className="bg-orange-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-orange-600 transition-colors duration-300 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+					>
+						Book Now
+					</button>
 				</div>
 			</div>
-			<CourseSelection
+			
+			<CourseSelection 
 				course={course}
-				isOpen={isOpen}
-				onClose={() => setIsOpen(false)}
+				isOpen={showForm}
+				onClose={() => setShowForm(false)}
 			/>
-		</div>
+		</>
 	);
 };
 

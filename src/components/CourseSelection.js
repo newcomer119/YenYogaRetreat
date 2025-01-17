@@ -39,7 +39,9 @@ const CourseSelection = ({ course, isOpen, onClose }) => {
 		billingAddress: "",
 	});
 	const [errors, setErrors] = useState({});
-	const price = prices[course.id];
+	
+	// Convert 'vn' to 'vi' to match Sanity schema
+	const langKey = language === 'vn' ? 'vi' : language;
 
 	// Handle input changes
 	const handleInputChange = (e) => {
@@ -97,7 +99,7 @@ const CourseSelection = ({ course, isOpen, onClose }) => {
 			}}>
 			<div className='h-full w-full overflow-y-scroll rounded-lg formBg'>
 				<h2 className='formHeader'>
-					{buttons[language].bookNow} - {course[language].title}
+					{buttons[language].bookNow} - {course.title[langKey]}
 				</h2>
 				<form
 					onSubmit={handleSubmit}
