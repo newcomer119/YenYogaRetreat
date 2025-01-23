@@ -73,11 +73,13 @@ const Blog = () => {
         {blogPosts.map((post, index) => (
           <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:shadow-xl max-w-md mx-auto">
             {post.imageUrl && (
-              <img 
-                src={post.imageUrl} 
-                alt={post.title[langKey]} 
-                className="w-full h-48 object-cover"
-              />
+              <div className="mb-4">
+                <img 
+                  src={post.imageUrl} 
+                  alt={post.title[langKey]} 
+                  className="w-full h-64 object-cover rounded-lg shadow-md"
+                />
+              </div>
             )}
             <div className="p-5">
               <div className="flex justify-between items-center mb-3">

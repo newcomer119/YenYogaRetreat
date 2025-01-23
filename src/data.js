@@ -689,18 +689,18 @@ export const hero = {
   en: {
     preheader: "1000+ students worldwide",
     headline: {
-      noSpan: "Reconnect with",
-      span: "Mind, Body and Soul",
+      noSpan: "Practicing the Yoga & Meditation Lifestyle to ",
+      span: "to become one's own teacher.",
     },
-    text: "Experience transformative yoga in the heart of Vietnam, or join us online\n from anywhere in the world. Book today and embark\n on a journey of wellness.",
+    text: "",
   },
   vn: {
     preheader: "Hơn 1000 học viên trên toàn thế giới",
     headline: {
-      noSpan: "Tái kết nối với",
-      span: "Tâm Trí, Cơ Thể và Tâm Hồn",
+      noSpan: "Thực hành Lối sống Yoga & Thiền ",
+      span: "để trở thành người thầy của chính mình",
     },
-    text: "Trải nghiệm yoga chuyển hóa tại trung tâm Việt Nam hoặc\n tham gia trực tuyến từ bất kỳ nơi nào trên thế giới.\n Đặt lịch ngay hôm nay và bắt đầu\n hành trình sức khỏe của bạn.",
+    text: "",
   },
 };
 
