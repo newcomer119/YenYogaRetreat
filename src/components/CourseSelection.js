@@ -26,7 +26,7 @@ const InputField = ({ id, type, value, label, error, onChange }) => (
 	</div>
 );
 
-const CourseSelection = ({ course, isOpen, onClose }) => {
+const CourseSelection = ({ course, title, isOpen, onClose }) => {
 	const { language } = useLanguage();
 	const [formData, setFormData] = useState({
 		name: "",
@@ -84,6 +84,18 @@ const CourseSelection = ({ course, isOpen, onClose }) => {
 		}
 	};
 
+	if (!isOpen) return null; // Don't render if not open
+
+	// Check if course is null
+	if (!course) {
+		return (
+			<div className="modal">
+				<p>No course selected.</p>
+				<button onClick={onClose}>Close</button>
+			</div>
+		);
+	}
+
 	return (
 		<Modal
 			open={isOpen}
@@ -99,7 +111,7 @@ const CourseSelection = ({ course, isOpen, onClose }) => {
 			}}>
 			<div className='h-full w-full overflow-y-scroll rounded-lg formBg'>
 				<h2 className='formHeader'>
-					{buttons[language].bookNow} - {course.title[langKey]}
+					{title}
 				</h2>
 				<form
 					onSubmit={handleSubmit}
