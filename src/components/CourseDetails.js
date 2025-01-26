@@ -55,7 +55,7 @@ const CourseDetails = () => {
             <p className="text-center text-lg text-gray-800 mb-10">Explore our courses and take the first step towards your journey!</p>
             <div className="space-y-10">
                 {courses.map((course) => (
-                    <div key={course.id} className="bg-white p-5 shadow-lg rounded-lg transition-transform transform hover:scale-105">
+                    <div key={course.id} className="bg-white p-5 shadow-lg rounded-lg transition-transform transform hover:scale-105 max-w-[80%] mx-auto">
                         <h2 className="text-3xl font-semibold mb-2 text-center text-blue-500">{course.title}</h2>
                         <img
                             src={course.image}

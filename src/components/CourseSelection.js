@@ -109,15 +109,15 @@ const CourseSelection = ({ course, title, isOpen, onClose }) => {
 					padding: "0",
 				},
 			}}>
-			<div className='h-full w-full overflow-y-scroll rounded-lg formBg'>
-				<h2 className='formHeader'>
+			<div className='h-full w-full overflow-y-scroll rounded-lg formBg p-4'>
+				<h2 className='formHeader text-center text-lg md:text-xl'>
 					{title}
 				</h2>
 				<form
 					onSubmit={handleSubmit}
 					className='form'>
 					{/* Personal Information */}
-					<div className='grid grid-cols-1 tab:grid-cols-2 gap-4 pb-4 mb-4 border-b border-dotted'>
+					<div className='grid grid-cols-1 gap-4 pb-4 mb-4 border-b border-dotted'>
 						<InputField
 							id='name'
 							type='text'
@@ -154,7 +154,7 @@ const CourseSelection = ({ course, title, isOpen, onClose }) => {
 
 					{/* Payment Information */}
 					<div className='pb-4 mb-4 border-b border-dotted flex flex-col'>
-						<div className='w-max bg-primary p-4 rounded-md border border-gray'>
+						<div className='w-full bg-primary p-4 rounded-md border border-gray'>
 							<p className='text-lg font-bold text-black'>Transfer to:</p>
 							<div className='mt-2 text-sm text-gray-700'>
 								<ul>
@@ -170,7 +170,7 @@ const CourseSelection = ({ course, title, isOpen, onClose }) => {
 					</div>
 
 					{/* Payment Mode and Transaction ID */}
-					<div className='grid grid-cols-1 tab:grid-cols-2 gap-4 pb-4 mb-4 border-b border-dotted'>
+					<div className='grid grid-cols-1 gap-4 pb-4 mb-4 border-b border-dotted'>
 						<InputField
 							id='amountPaid'
 							type='text'
@@ -205,7 +205,7 @@ const CourseSelection = ({ course, title, isOpen, onClose }) => {
 						/>
 					</div>
 
-					<div className='mt-6 py-4 text-xs text-subtext text-right space-y-1'>
+					<div className='mt-6 py-4 text-xs text-subtext text-center space-y-1'>
 						<div>
 							* Add Transaction Details as follows: Full Name + Contact No. +
 							Course Name.
@@ -219,7 +219,7 @@ const CourseSelection = ({ course, title, isOpen, onClose }) => {
 					<div className='flex justify-center'>
 						<button
 							type='submit'
-							className='bg-cta2 text-white border border-cta2 font-semibold py-2 px-6 rounded-md hover:bg-bg2 hover:text-cta2 hover:scale-[1.01] transition-all'>
+							className='bg-cta2 text-white border border-cta2 font-semibold py-2 px-6 rounded-md hover:bg-bg2 hover:text-cta2 hover:scale-[1.01] transition-all w-full sm:w-auto'>
 							{buttons[language].submit}
 						</button>
 					</div>
