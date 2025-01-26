@@ -3,7 +3,7 @@ import { BsCheck, BsChevronRight } from "react-icons/bs";
 
 import Logo from "../src/assets/img/logos/logo-og.png";
 import HeroImage from "../src/assets/img/hero/guy.png";
-import aboutImage from "../src/assets/img/retreat/as.jpg";
+import aboutImage from "../src/assets/img/retreat/about.jpg";
 
 // import images
 import CourseImage1 from "../src/assets/img/courses/course-1.jpg";
@@ -26,8 +26,8 @@ import GalleryImg8 from "../src/galleryimg/galleryimg8.png";
 
 import Instructor1 from "../src/assets/img/instructors/hoan.jpg";
 import Instructor2 from "../src/assets/img/instructors/yen.jpg";
-import Instructor1s from "../src/assets/img/instructors/hoan-s.jpg";
-import Instructor2s from "../src/assets/img/instructors/yen-s.jpg";
+import Instructor1s from "../src/assets/img/instructors/ins1.jpg";
+import Instructor2s from "../src/assets/img/instructors/ins2.jpg";
 
 const date = new Date();
 const discount = (first, second, price1, price2) => {
@@ -687,7 +687,8 @@ export const sectionHeaders = {
 
 export const hero = {
   en: {
-    preheader: "1000+ students worldwide",
+    preheader: "The Home of Kundalini Yoga and Mantra Meditation in Vietnam",
+    
     headline: {
       noSpan: "Practicing the Yoga & Meditation Lifestyle to ",
       span: "to become one's own teacher.",
@@ -695,7 +696,7 @@ export const hero = {
     text: "",
   },
   vn: {
-    preheader: "Hơn 1000 học viên trên toàn thế giới",
+    preheader: "Nơi thực hành Kundalini Yoga & Thiền Mantra tại Việt Nam",
     headline: {
       noSpan: "Thực hành Lối sống Yoga & Thiền ",
       span: "để trở thành người thầy của chính mình",
