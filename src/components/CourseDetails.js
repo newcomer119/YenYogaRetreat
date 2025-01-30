@@ -56,7 +56,7 @@ const CourseDetails = () => {
                 <img
                     src={RetreatImage}
                     alt="Retreat"
-                    className="w-full h-[600px] object-cover object-top"
+                    className="w-full h-80 object-cover"
                 />
             </div>
 
@@ -111,7 +111,7 @@ const CourseDetails = () => {
                         <img
                             src={course.image}
                             alt={course.title}
-                            className="w-full h-80 object-cover"
+                            className="w-full h-48 md:h-80 object-cover object-center"
                         />
                         <div className="p-8 flex flex-col justify-between items-center">
                             <div>
