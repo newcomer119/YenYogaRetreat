@@ -56,7 +56,7 @@ const CourseDetails = () => {
                 <img
                     src={RetreatImage}
                     alt="Retreat"
-                    className="w-full h-80 object-cover"
+                    className="w-full h-[600px] object-cover object-top"
                 />
             </div>
 
