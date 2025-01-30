@@ -7,6 +7,11 @@ const LanguageSwitcher = () => {
   const { changeLanguage, language } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
+  // Set the default language to Vietnamese on component mount
+  React.useEffect(() => {
+    changeLanguage("vn");
+  }, []); // This effect runs only once when the component mounts
+
   const languages = [
     {
       en: { code: "en", label: "English" },
