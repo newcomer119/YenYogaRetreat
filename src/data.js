@@ -60,11 +60,11 @@ export const nav = [
   },
   {
     en: {
-      name: "Courses",
+      name: "Courses & Training",
       href: "/courses",
     },
     vn: {
-      name: "Khoá Học",
+      name: "Khoá Học & Đào Tạo",
       href: "/courses",
     },
   },
@@ -690,7 +690,7 @@ export const hero = {
     preheader: "The Home of Kundalini Yoga and Mantra Meditation in Vietnam",
     
     headline: {
-      noSpan: "Practicing the Yoga & Meditation Lifestyle to ",
+      noSpan: "Practicing the Yoga & Meditation Lifestyle",
       span: "to become one's own teacher.",
     },
     text: "",
