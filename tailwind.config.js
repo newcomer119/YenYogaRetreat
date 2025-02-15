@@ -109,7 +109,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         hero: "url('/src/assets/img/hero/bg.jpg')",
-        people: "url('/src/assets/img/hero/guy.png')",
+        people: "url('/src/assets/img/courses/course-8-removebg.png')",
         cardsBg: "url('/src/assets/img/cards/bg.png')",
         video: "url('/src/assets/img/video/video.png')",
         contact: "url('/src/assets/img/contact/bg.png')",
