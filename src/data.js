@@ -2,7 +2,7 @@
 import { BsCheck, BsChevronRight } from "react-icons/bs";
 
 import Logo from "../src/assets/img/logos/logo-og.png";
-import HeroImage from "../src/assets/img/hero/guy.png";
+import HeroImage from "../src/assets/img/courses/course-8-removebg.png";
 import aboutImage from "../src/assets/img/retreat/about.jpg";
 
 // import images
@@ -64,17 +64,17 @@ export const nav = [
       href: "/courses",
     },
     vn: {
-      name: "Khoá Học & Đào Tạo",
+      name: "Khoá học",
       href: "/courses",
     },
   },
   {
     en: {
-      name: "Trainers",
+      name: "Event & Retreat",
       href: "/trainers",
     },
     vn: {
-      name: "Huấn Luyện Viên",
+      name: "Sự kiện & Retreat",
       href: "/trainers",
     },
   },
@@ -86,6 +86,16 @@ export const nav = [
     vn: {
       name: "Bài Viết",
       href: "/blog",
+    },
+  },
+  {
+    en: {
+      name: "Shop",
+      href: "/shop",
+    },
+    vn: {
+      name: "Shop",
+      href: "/shop",
     },
   },
   {

@@ -32,7 +32,7 @@
     @apply bg-gradient-to-br lap:bg-gradient-to-r from-bg1 from-10% big:from-20%;
   }
   .heroImage {
-    @apply bg-people bg-right-bottom bg-contain bg-no-repeat bg-[length:auto_20em] mob1:bg-[length:auto_20rem] tab:bg-[length:auto_32rem] tab2:bg-[length:auto_36rem] big:bg-[length:auto_44rem];
+    @apply bg-people bg-right-bottom bg-contain bg-no-repeat bg-[length:auto_10em] mob1:bg-[length:auto_16rem] tab:bg-[length:auto_20rem] tab2:bg-[length:auto_28rem] big:bg-[length:auto_44rem];
   }
   .preheader {
     @apply text-sm tab:text-base lap1:text-2xl text-green font-bold text-green;

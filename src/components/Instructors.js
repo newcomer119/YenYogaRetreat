@@ -10,7 +10,7 @@ const Instructors = () => {
 	return (
 		<section
 			id='instructors'
-			className={`top-section`}>
+			className={`section`}>
 			<div
 				className='sectionHeaders'
 				data-aos='fade-up'>
