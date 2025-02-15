@@ -12,7 +12,7 @@ const Instructor = () => {
 
 	if (!instructor) {
 		return (
-			<div className='min-h-screen flex flex-col items-center justify-center bg-gray-100'>
+			<div className='flex flex-col items-center justify-center bg-gray-100'>
 				<TbFaceIdError
 					size={60}
 					className='text-red-100'
@@ -75,7 +75,7 @@ const Instructor = () => {
 	};
 
 	return (
-		<section className='top-section'>
+		<section className='top-section mt-24'>
 			<div className='sectionHeaders'>
 				{sectionHeaders[language].aboutTrainer} {instructor[language].name}
 			</div>
