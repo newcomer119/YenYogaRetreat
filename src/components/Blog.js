@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { client } from '../lib/sanity'; // Make sure you have this configured
+import { useNavigate } from 'react-router-dom'; // Change this line
 
 const Blog = () => {
   const { language } = useLanguage();
   const [blogPosts, setBlogPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [expandedPosts, setExpandedPosts] = useState({});
+  const navigate = useNavigate(); // Change this line
 
   // Convert 'vn' to 'vi' to match Sanity schema
   const langKey = language === 'vn' ? 'vi' : language;
@@ -21,10 +23,12 @@ const Blog = () => {
             excerpt,
             fullContent,
             "imageUrl": mainImage.asset->url,
-            readingTime
+            readingTime,
+            slug
           }
         `;
         const posts = await client.fetch(query);
+        console.log(posts); // Check the structure of the fetched posts
         setBlogPosts(posts);
         setLoading(false);
       } catch (error) {
@@ -37,10 +41,13 @@ const Blog = () => {
   }, []);
 
   const togglePost = (index) => {
-    setExpandedPosts(prev => ({
-      ...prev,
-      [index]: !prev[index]
-    }));
+    const postSlug = blogPosts[index]?.slug?.current; // Use optional chaining
+    if (postSlug) {
+      navigate(`/blog/${postSlug}`); // Navigate only if slug exists
+    } else {
+      console.error('Slug not found for post at index:', index);
+      alert('This post does not have a valid slug.'); // Optional: Alert the user
+    }
   };
 
   const texts = {
@@ -76,7 +83,7 @@ const Blog = () => {
               <div className="mb-4">
                 <img 
                   src={post.imageUrl} 
-                  alt={post.title[langKey]} 
+                  alt={langKey === 'en' ? post.title.en : post.title.vi}
                   className="w-full h-64 object-cover rounded-lg shadow-md"
                 />
               </div>
@@ -86,14 +93,22 @@ const Blog = () => {
                 <span className="text-gray-500 text-sm">
                   {new Date(post.date).toLocaleDateString(langKey === 'en' ? 'en-US' : 'vi-VN')}
                 </span>
-                <span className="text-gray-500 text-sm">{post.readingTime[langKey]}</span>
+                <span className="text-gray-500 text-sm">
+                  {langKey === 'en' ? post.readingTime.en : post.readingTime.vi}
+                </span>
               </div>
-              <h2 className="text-xl font-bold mb-2">{post.title[langKey]}</h2>
+              <h2 className="text-xl font-bold mb-2">
+                {langKey === 'en' ? post.title.en : post.title.vi}
+              </h2>
               <div className="text-gray-600 text-sm">
                 {expandedPosts[index] ? (
-                  <p className="whitespace-pre-line">{post.fullContent[langKey]}</p>
+                  <p className="whitespace-pre-line">
+                    {langKey === 'en' ? post.fullContent.en : post.fullContent.vi}
+                  </p>
                 ) : (
-                  <p>{post.excerpt[langKey]}</p>
+                  <p>
+                    {langKey === 'en' ? post.excerpt.en : post.excerpt.vi}
+                  </p>
                 )}
               </div>
               <button 

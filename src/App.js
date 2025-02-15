@@ -29,6 +29,7 @@ import "aos/dist/aos.css";
 import { LanguageProvider } from "./context/LanguageContext";
 import Blog from "./components/Blog";
 import CourseDetails from "./components/CourseDetails";
+import BlogPost from "./components/BlogPost";
 // import { configDotenv } from "dotenv";
 
 // Wrapper component to handle conditional rendering
@@ -65,6 +66,7 @@ const AppContent = () => {
           <Route path="/trainers/:id" element={<Instructor />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/course-details/:id" element={<CourseDetails />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
           <Route
             path="/"
             element={
