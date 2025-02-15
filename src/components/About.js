@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
 import { about, buttons, sectionHeaders } from "../data";
+import Instructors from "./Instructors";
 
 const About = () => {
   const { language } = useLanguage();
@@ -56,6 +57,8 @@ const About = () => {
             {about[language].quote}
           </blockquote>
         </div>
+
+        <Instructors />
       </div>
     </section>
   );

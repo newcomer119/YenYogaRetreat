@@ -4,7 +4,7 @@ import CourseSelection from "./CourseSelection";
 import { Link } from "react-router-dom";
 import { buttons } from "../data";
 
-const CourseCard = ({ course }) => {
+const CourseCard = ({ course, index }) => {
 	const { language } = useLanguage();
 	const [showForm, setShowForm] = useState(false);
 	const [mobile, setMobile] = useState(window.innerWidth <= 769);
@@ -44,12 +44,15 @@ const CourseCard = ({ course }) => {
 							{buttons[language].bookNow}
 						</button>
 						<Link
-							to={`/course-details/${course.id}`}
+							to={`/course-details/${index+1}`}
 							className='bg-light text-headings2 py-2 px-4 rounded-lg shadow-lg hover:bg-hover2 hover:text-white transition-all'>
 							{buttons[language].moreInfo}
 						</Link>
 					</div>
 				)}
+				<div className='absolute top-1 right-2 bg-red-100 text-white font-bold text-sm px-3 py-1 rounded-lg '>
+					{course.price[langKey]}
+				</div>
 			</div>
 
 			{/* Text Section */}
@@ -57,7 +60,7 @@ const CourseCard = ({ course }) => {
 				<div>
 					<div className='text-base tab:text-lg tab2:text-xl big:text-2xl font-bold mb-2 leading-tight text-primary line-clamp-2'>
 						<Link
-							to={`/course-details/${course.id}`}
+							to={`/course-details/${index+1}`}
 							className='hover:text-headings1'>
 							{course.title[langKey]}
 						</Link>
@@ -67,17 +70,16 @@ const CourseCard = ({ course }) => {
 					</p>
 				</div>
 
-				<div className='text-xs tab2:text-sm mt-2 text-body'>
-
+				<div className='text-xs tab2:text-sm mt-2 text-body pt-4'>
 					{mobile && (
-						<div className='flex justify-center items-center gap-4 pt-4'>
+						<div className='flex justify-center items-center gap-4 '>
 							<button
 								className='bg-cta1 text-white py-2 px-4 rounded-lg'
 								onClick={() => setShowForm(true)}>
 								{buttons[language].bookNow}
 							</button>
 							<Link
-								to={`/course-details/${course.id}`}
+								to={`/course-details/${index+1}`}
 								className='bg-highlight2 text-headings2 py-2 px-4 rounded-lg'>
 								{buttons[language].moreInfo}
 							</Link>
