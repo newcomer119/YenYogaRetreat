@@ -38,6 +38,30 @@ const CourseDetails = () => {
 	const [showSlider, setShowSlider] = useState(false);
 	const [selectedImage, setSelectedImage] = useState(null);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [mobile, setMobile] = useState(window.innerWidth <= 769);
+
+	const certificateRequirements = {
+		en: [
+			"Complete 100% of required learning hours (online or offline) ✅",
+			"Submit all assigned homework within the given timeframe ✅",
+			"Pass an oral examination with the instructor ✅",
+			"Pass a written theoretical exam covering course content ✅",
+			"Complete 20 hours of self-study (not included in course fees) ✅",
+			"Teach 10 hours of Karma Yoga classes, including class design, posters, and lesson content ✅",
+			"Practice meditation for 40 consecutive days, with a minimum of 11 minutes per session ✅",
+			"Meet all certification assessment criteria as evaluated by Yên Yoga & Retreat ✅"
+		],
+		vi: [
+			"Hoàn thành 100% số giờ học yêu cầu (trực tuyến hoặc trực tiếp) ✅",
+			"Nộp đầy đủ bài tập được giao trong thời hạn quy định ✅",
+			"Vượt qua bài kiểm tra vấn đáp với giáo viên hướng dẫn ✅",
+			"Hoàn thành bài kiểm tra lý thuyết viết dựa trên nội dung khóa học ✅",
+			"Hoàn thành 20 giờ tự học (không bao gồm trong học phí khóa học) ✅",
+			"Dạy 10 giờ lớp Karma Yoga, bao gồm thiết kế lớp, poster và nội dung giảng dạy ✅",
+			"Thực hành thiền liên tục trong 40 ngày, tối thiểu 11 phút mỗi lần ✅",
+			"Đáp ứng đầy đủ các tiêu chí đánh giá của Yên Yoga & Retreat để cấp chứng chỉ ✅"
+		]
+	};
 
 	// Slider settings with continuous autoplay
 	const sliderSettings = {
@@ -119,6 +143,17 @@ const CourseDetails = () => {
 		fetchCourse();
 	}, [language, id]);
 
+	useEffect(() => {
+		const handleResize = () => {
+			setMobile(window.innerWidth <= 1025);
+		};
+
+		window.addEventListener("resize", handleResize);
+		return () => {
+			window.removeEventListener("resize", handleResize);
+		};
+	}, []);
+
 	if (loading) {
 		return <div>Loading...</div>;
 	}
@@ -149,29 +184,36 @@ const CourseDetails = () => {
 
 	console.log(course);
 
+	// Function to get other courses excluding the current one
+	const getOtherCourses = () => {
+		return results.filter((_, index) => index !== id);
+	};
+
 	return (
 		<div className='top-section'>
 			<div className='sectionHeaders text-cta2'>{title}</div>
 			<div className='flex flex-col tab2:flex-row gap-8'>
 				<div className='w-full tab2:w-1/2'>
 					<div className='relative flex flex-col gap-4'>
-						<img
-							src={course.imageUrl}
-							alt={course.title[langKey]}
-							className='  w-full object-cover'
-						/>
-						<div className='absolute top-1 right-2 bg-red-100 text-white font-bold text-sm px-3 py-1 rounded-lg z-10'>
-							{course.price[langKey]}
+						<div className="relative">
+							<img
+								src={course.imageUrl}
+								alt={course.title[langKey]}
+								className='w-full object-cover rounded-lg shadow-lg'
+							/>
+							<div className='absolute -bottom-2 right-4 bg-red-100 text-white font-bold text-xs px-2 py-1 rounded-full shadow-md whitespace-nowrap'>
+								{course.price[langKey]}
+							</div>
 						</div>
-						<div className='w-full flex justify-between gap-6 px-4'>
+						<div className='w-full flex justify-between items-center px-4'>
 							<div className='flex gap-2 items-center'>
-								<FaMapPin />
+								<FaMapPin className="text-cta2" />
 								<div className='text-wrap font-light text-sm'>
 									{course.duration[langKey]}
 								</div>
 							</div>
 							<button
-								className='text-nowrap text-bold text-white text-xl animate-bounce bg-cta2 rounded-lg px-2 py-1'
+								className='text-nowrap text-bold text-white text-xl bg-cta2 rounded-lg px-4 py-2 hover:bg-opacity-90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1'
 								onClick={() => setShowForm(true)}>
 								{buttons[language].bookNow}
 							</button>
@@ -179,17 +221,29 @@ const CourseDetails = () => {
 					</div>
 				</div>
 				<div className='w-full tab2:w-1/2 text-body'>
-					<div className='text-center font-semibold italic text-xl pb-2 mb-2 border-b border-dotted'>
-						"{description}"
+					<div className='text-xl font-semibold italic mb-6 leading-relaxed text-justify border-b-2 border-dotted border-cta2 pb-4'>
+						<span className="text-cta2 font-serif">"{description}"</span>
 					</div>
-					<div className='text-center text-lg pb-2 mb-2 '>{features[0][langKey]}</div>
+					<div className='text-lg leading-relaxed mb-6 text-justify font-light'>
+						{features[0][langKey]}
+					</div>
 				</div>
 			</div>
-			<div className="py-8 text-center">
-				<h2 className="text-2xl font-semi-bold mb-4">Course Details</h2>
-				<ul className="list-disc list-inside">
+
+			<div className="py-8">
+				<h2 className="text-2xl font-bold mb-6 text-center text-cta2 font-serif tracking-wide">
+					{language === 'vn' ? 'Chi Tiết Khóa Học' : 'Course Details'}
+				</h2>
+				<ul className="list-disc space-y-4 max-w-4xl mx-auto px-6">
 					{features.map((feature, index) => (
-						<li key={index} className={`mb-2 ${index % 2 === 0 ? 'text-blue-600' : 'text-green-600'} font-bold text-lg`}>
+						<li 
+							key={index} 
+							className={`${index % 2 === 0 ? 'text-blue-600' : 'text-green-600'} 
+								text-lg leading-relaxed 
+								${index === features.length - 1 ? 'text-center font-semibold' : 'text-justify font-medium'} 
+								hover:translate-x-2 transition-transform duration-300
+								tracking-wide`}
+						>
 							{feature[langKey]}
 						</li>
 					))}
@@ -201,16 +255,119 @@ const CourseDetails = () => {
 				isOpen={showForm}
 				onClose={() => setShowForm(false)}
 			/>
-			<div className="flex justify-center space-x-4 mt-4 mb-8">
-				<button 
-					className='px-6 py-3 bg-orange text-white rounded-lg shadow-md hover:bg-blue-500 transition-all'
-					onClick={handleAccommodationClick}
-				>
-					Accommodation
-				</button>
+			<div className="border border-gray-300 p-4 rounded-lg mb-8 max-w-4xl mx-auto">
+				<h3 className="text-2xl font-bold mb-6 text-center text-cta2 font-serif tracking-wide">
+					{language === 'vn' ? 'Yêu Cầu Chứng Chỉ' : 'Certificate Requirements'}
+				</h3>
+				<ul className="space-y-4 px-6">
+					{certificateRequirements[language === 'vn' ? 'vi' : 'en'].map((requirement, index, array) => {
+						const cleanRequirement = requirement.replace(' ✅', '');
+						return (
+							<li 
+								key={index} 
+								className="text-lg leading-relaxed text-center font-medium tracking-wide hover:text-cta2 transition-colors duration-300"
+							>
+								{cleanRequirement}
+							</li>
+						);
+					})}
+				</ul>
+			</div>
+
+			{/* Other Courses Section */}
+			<div className="my-12 bg-gray-50 py-8 rounded-lg">
+				<h3 className="text-2xl font-bold mb-8 text-center text-cta2">
+					{language === 'vn' ? 'Khóa Học Khác' : 'Other Courses'}
+				</h3>
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 justify-items-center max-w-7xl mx-auto">
+					{getOtherCourses().map((otherCourse, index) => (
+						<div 
+							key={index}
+							className="relative flex flex-col min-w-72 max-w-[400px] bg-bg2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+						>
+							{/* Image Section */}
+							<div className="relative">
+								<img
+									src={otherCourse.imageUrl}
+									alt={otherCourse.title[langKey]}
+									className="w-full object-cover object-center"
+								/>
+								{!mobile && (
+									<div className="absolute inset-0 flex justify-center items-center gap-4 opacity-0 hover:opacity-100 bg-primary bg-opacity-40 transition-all duration-200">
+										<button
+											onClick={() => setShowForm(true)}
+											className="bg-cta1 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-hover1 transition-all duration-300"
+										>
+											{buttons[language].bookNow}	
+										</button>
+										<Link
+											to={`/course-details/${index + 1}`}
+											className="bg-light text-headings2 py-2 px-4 rounded-lg shadow-lg hover:bg-hover2 hover:text-white transition-all"
+										>
+											{buttons[language].moreInfo}
+										</Link>
+									</div>
+								)}
+							</div>
+
+							{/* Text Section */}
+							<div className="p-4 divide-y divide-dotted divide-gray flex flex-col justify-between h-full">
+								<div>
+									<div className="text-base tab:text-lg tab2:text-xl big:text-2xl font-bold mb-2 leading-tight text-primary line-clamp-3">
+										<Link
+											to={`/course-details/${index + 1}`}
+											className="hover:text-headings1"
+										>
+											{otherCourse.title[langKey]}
+										</Link>
+									</div>
+									<p className="text-xs tab1:text-base big:text-lg font-medium line-clamp-4 text-body mb-2">
+										{otherCourse.description[langKey]}
+									</p>
+									<div className="flex justify-end">
+										<div className="inline-flex items-center bg-red-100 text-white font-bold text-sm px-3 py-1.5 rounded-full shadow-md whitespace-nowrap">
+											{otherCourse.price[langKey]}
+										</div>
+									</div>
+								</div>
+
+								<div className="text-xs tab2:text-sm mt-2 text-body pt-4">
+									{mobile && (
+										<div className="flex justify-center items-center gap-4">
+											<button
+												className="bg-cta1 text-white py-2 px-4 rounded-lg"
+												onClick={() => setShowForm(true)}
+											>
+												{buttons[language].bookNow}
+											</button>
+											<Link
+												to={`/course-details/${index + 1}`}
+												className="bg-highlight2 text-headings2 py-2 px-4 rounded-lg"
+											>
+												{buttons[language].moreInfo}
+											</Link>
+										</div>
+									)}
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+
+			{/* View Courses Button */}
+			<div className="flex justify-center space-x-4 mt-8 mb-12">
+				{id === 0 && (
+					<button 
+						className='px-6 py-3 bg-orange text-white rounded-lg shadow-md hover:bg-blue-500 transition-all duration-300 transform hover:-translate-y-1'
+						onClick={handleAccommodationClick}
+					>
+						Accommodation
+					</button>
+				)}
 				<Link to='/courses'>
 					<button 
-						className='px-6 py-3 bg-green-300 text-white rounded-lg shadow-md hover:bg-green-500 transition-all'
+						className='px-6 py-3 bg-green-300 text-white rounded-lg shadow-md hover:bg-green-500 transition-all duration-300 transform hover:-translate-y-1'
 						onClick={handleViewCoursesClick}
 					>
 						View Courses
