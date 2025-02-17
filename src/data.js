@@ -768,7 +768,7 @@ export const facts = [
     en: {
       startNumber: "1",
       endNumber: "1000",
-      unit: "+",
+      unit: "",
       title: "Retreat & Festival Clients",
       desc: "Proud to be a partner in organizing and guiding Retreat/Yoga events for luxury resorts and businesses in Vietnam.",
     },
