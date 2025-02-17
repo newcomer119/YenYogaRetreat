@@ -24,6 +24,19 @@ import DetailsImage11 from "../assets/img/DetailsImage/img11.jpg";
 import DetailsImage12 from "../assets/img/DetailsImage/img12.jpg";
 import DetailsImage13 from "../assets/img/DetailsImage/img13.jpg";
 import DetailsImage14 from "../assets/img/DetailsImage/img14.jpg";
+import ActivityImage1 from "../assets/img/actiimage/Ac1.jpeg";
+import ActivityImage2 from "../assets/img/actiimage/Ac2.jpeg";
+import ActivityImage3 from "../assets/img/actiimage/Ac3.jpeg";
+import ActivityImage4 from "../assets/img/actiimage/Ac4.jpeg";
+import ActivityImage5 from "../assets/img/actiimage/Ac5.jpeg";
+import ActivityImage6 from "../assets/img/actiimage/Ac6.jpeg";
+import ActivityImage7 from "../assets/img/actiimage/Ac7.jpeg";
+import ActivityImage8 from "../assets/img/actiimage/Ac8.jpeg";
+import ActivityImage9 from "../assets/img/actiimage/Ac9.jpeg";
+import ActivityImage10 from "../assets/img/actiimage/Ac10.jpeg";
+import ActivityImage11 from "../assets/img/actiimage/Ac11.jpeg";
+import ActivityImage12 from "../assets/img/actiimage/Ac12.jpeg";
+import ActivityImage13 from "../assets/img/actiimage/Ac13.jpeg";
 import { ImageModal } from "./Gallery";
 
 const CourseDetails = () => {
@@ -63,7 +76,7 @@ const CourseDetails = () => {
 		]
 	};
 
-	// Slider settings with continuous autoplay
+	// Optimize slider settings with lazy loading
 	const sliderSettings = {
 		dots: false, // Disable dots below the slider
 		infinite: true,
@@ -75,12 +88,17 @@ const CourseDetails = () => {
 		autoplay: true, // Enable autoplay
 		autoplaySpeed: 2000, // Set speed for autoplay (2 seconds)
 		focusOnSelect: true,
+		lazyLoad: true,
+		waitForAnimate: false,
+		swipeToSlide: true,
+		pauseOnHover: true,
 		responsive: [
 			{
 				breakpoint: 1024,
 				settings: {
 					slidesToShow: 2,
 					centerPadding: "40px",
+					swipeToSlide: true,
 				},
 			},
 			{
@@ -88,6 +106,7 @@ const CourseDetails = () => {
 				settings: {
 					slidesToShow: 1,
 					centerPadding: "20px",
+					swipeToSlide: true,
 				},
 			},
 		],
@@ -114,22 +133,40 @@ const CourseDetails = () => {
 	};
 
 	useEffect(() => {
+		// Preload critical images
+		const preloadImages = () => {
+			const imagesToPreload = [course?.imageUrl];
+			imagesToPreload.forEach((src) => {
+				if (src) {
+					const img = new Image();
+					img.src = src;
+				}
+			});
+		};
+
+		if (course) {
+			preloadImages();
+		}
+	}, [course]);
+
+	// Optimize data fetching
+	useEffect(() => {
 		const fetchCourse = async () => {
 			try {
 				const query = `*[_type == "course" && isActive == true] | order(order asc) {
-          "title": coalesce(${language === "vi" ? "titleVi" : "title"}, title),
-          "description": coalesce(${
-						language === "vi" ? "descriptionVi" : "description"
-					}, description),
-          duration,
-          price,
-          "imageUrl": image.asset->url,
-          "features": coalesce(${
-						language === "vi" ? "featuresVi" : "features"
-					}, features)
-        }`;
+					"title": coalesce(${language === "vi" ? "titleVi" : "title"}, title),
+					"description": coalesce(${language === "vi" ? "descriptionVi" : "description"}, description),
+					duration,
+					price,
+					"imageUrl": image.asset->url,
+					"features": coalesce(${language === "vi" ? "featuresVi" : "features"}, features)
+				}`;
 
-				const fetchedResults = await client.fetch(query);
+				// Add caching headers
+				const fetchedResults = await client.fetch(query, {}, {
+					cache: 'force-cache'
+				});
+				
 				setResults(fetchedResults);
 				setCourse(fetchedResults[id]);
 				setLoading(false);
@@ -141,6 +178,12 @@ const CourseDetails = () => {
 
 		setLoading(true);
 		fetchCourse();
+
+		// Cleanup function
+		return () => {
+			setResults([]);
+			setCourse(null);
+		};
 	}, [language, id]);
 
 	useEffect(() => {
@@ -155,7 +198,23 @@ const CourseDetails = () => {
 	}, []);
 
 	if (loading) {
-		return <div>Loading...</div>;
+		return (
+			<div className="min-h-screen p-4">
+				<div className="animate-pulse">
+					<div className="h-8 bg-gray-200 rounded w-3/4 mb-4"></div>
+					<div className="flex flex-col tab2:flex-row gap-8">
+						<div className="w-full tab2:w-1/2">
+							<div className="h-96 bg-gray-200 rounded"></div>
+						</div>
+						<div className="w-full tab2:w-1/2">
+							<div className="h-4 bg-gray-200 rounded w-full mb-4"></div>
+							<div className="h-4 bg-gray-200 rounded w-5/6 mb-4"></div>
+							<div className="h-4 bg-gray-200 rounded w-4/6"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
 	}
 
 	if (!course) {
@@ -250,12 +309,47 @@ const CourseDetails = () => {
 				</ul>
 			</div>
 
+			{/* Activity Images Slider */}
+			<div className="my-16">
+				<h2 className="text-2xl font-bold mb-6 text-center text-cta2 font-serif tracking-wide">
+					{language === 'vn' ? 'Hoạt Động Của Chúng Tôi' : 'Our Activities'}
+				</h2>
+				<div className="modal-content">
+					<Slider {...sliderSettings}>
+						{[
+							ActivityImage1,
+							ActivityImage2,
+							ActivityImage3,
+							ActivityImage4,
+							ActivityImage5,
+							ActivityImage6,
+							ActivityImage7,
+							ActivityImage8,
+							ActivityImage9,
+							ActivityImage10,
+							ActivityImage11,
+							ActivityImage12,
+							ActivityImage13,
+						].map((image, index) => (
+							<div key={index} className="px-2">
+								<img
+									src={image}
+									alt={`Activity ${index + 1}`}
+									className="rounded-lg shadow-md w-full h-[400px] object-cover transition-transform duration-300 transform hover:scale-105 focus:outline-none cursor-pointer"
+									onClick={() => openModal(image)}
+								/>
+							</div>
+						))}
+					</Slider>
+				</div>
+			</div>
+
 			<CourseSelection
 				course={course}
 				isOpen={showForm}
 				onClose={() => setShowForm(false)}
 			/>
-			<div className="border border-gray-300 p-4 rounded-lg mb-8 max-w-4xl mx-auto">
+			<div className="border border-gray-300 p-4 rounded-lg mb-8 mt-16 max-w-4xl mx-auto">
 				<h3 className="text-2xl font-bold mb-6 text-center text-cta2 font-serif tracking-wide">
 					{language === 'vn' ? 'Yêu Cầu Chứng Chỉ' : 'Certificate Requirements'}
 				</h3>
@@ -274,88 +368,7 @@ const CourseDetails = () => {
 				</ul>
 			</div>
 
-			{/* Other Courses Section */}
-			<div className="my-12 bg-gray-50 py-8 rounded-lg">
-				<h3 className="text-2xl font-bold mb-8 text-center text-cta2">
-					{language === 'vn' ? 'Khóa Học Khác' : 'Other Courses'}
-				</h3>
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 justify-items-center max-w-7xl mx-auto">
-					{getOtherCourses().map((otherCourse, index) => (
-						<div 
-							key={index}
-							className="relative flex flex-col min-w-72 max-w-[400px] bg-bg2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-						>
-							{/* Image Section */}
-							<div className="relative">
-								<img
-									src={otherCourse.imageUrl}
-									alt={otherCourse.title[langKey]}
-									className="w-full object-cover object-center"
-								/>
-								{!mobile && (
-									<div className="absolute inset-0 flex justify-center items-center gap-4 opacity-0 hover:opacity-100 bg-primary bg-opacity-40 transition-all duration-200">
-										<button
-											onClick={() => setShowForm(true)}
-											className="bg-cta1 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-hover1 transition-all duration-300"
-										>
-											{buttons[language].bookNow}	
-										</button>
-										<Link
-											to={`/course-details/${index + 1}`}
-											className="bg-light text-headings2 py-2 px-4 rounded-lg shadow-lg hover:bg-hover2 hover:text-white transition-all"
-										>
-											{buttons[language].moreInfo}
-										</Link>
-									</div>
-								)}
-							</div>
-
-							{/* Text Section */}
-							<div className="p-4 divide-y divide-dotted divide-gray flex flex-col justify-between h-full">
-								<div>
-									<div className="text-base tab:text-lg tab2:text-xl big:text-2xl font-bold mb-2 leading-tight text-primary line-clamp-3">
-										<Link
-											to={`/course-details/${index + 1}`}
-											className="hover:text-headings1"
-										>
-											{otherCourse.title[langKey]}
-										</Link>
-									</div>
-									<p className="text-xs tab1:text-base big:text-lg font-medium line-clamp-4 text-body mb-2">
-										{otherCourse.description[langKey]}
-									</p>
-									<div className="flex justify-end">
-										<div className="inline-flex items-center bg-red-100 text-white font-bold text-sm px-3 py-1.5 rounded-full shadow-md whitespace-nowrap">
-											{otherCourse.price[langKey]}
-										</div>
-									</div>
-								</div>
-
-								<div className="text-xs tab2:text-sm mt-2 text-body pt-4">
-									{mobile && (
-										<div className="flex justify-center items-center gap-4">
-											<button
-												className="bg-cta1 text-white py-2 px-4 rounded-lg"
-												onClick={() => setShowForm(true)}
-											>
-												{buttons[language].bookNow}
-											</button>
-											<Link
-												to={`/course-details/${index + 1}`}
-												className="bg-highlight2 text-headings2 py-2 px-4 rounded-lg"
-											>
-												{buttons[language].moreInfo}
-											</Link>
-										</div>
-									)}
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
-			</div>
-
-			{/* View Courses Button */}
+			{/* View Courses and Accommodation Buttons */}
 			<div className="flex justify-center space-x-4 mt-8 mb-12">
 				{id === 0 && (
 					<button 
@@ -414,10 +427,96 @@ const CourseDetails = () => {
 				image={selectedImage}
 				onClose={closeModal}
 			/>
+
+			{/* Other Courses Section */}
+			<div className="my-12 bg-gray-50 py-8 rounded-lg">
+				<h3 className="text-2xl font-bold mb-8 text-center text-cta2">
+					{language === 'vn' ? 'Khóa Học Khác' : 'Other Courses'}
+				</h3>
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 justify-items-center max-w-7xl mx-auto">
+					{getOtherCourses().map((otherCourse, index) => {
+						// Calculate the correct course ID
+						const courseId = index >= id ? index + 2 : index + 1;
+						
+						return (
+							<div 
+								key={index}
+								className="relative flex flex-col min-w-72 max-w-[400px] bg-bg2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+							>
+								{/* Image Section */}
+								<div className="relative">
+									<img
+										src={otherCourse.imageUrl}
+										alt={otherCourse.title[langKey]}
+										className="w-full object-cover object-center"
+									/>
+									{!mobile && (
+										<div className="absolute inset-0 flex justify-center items-center gap-4 opacity-0 hover:opacity-100 bg-primary bg-opacity-40 transition-all duration-200">
+											<button
+												onClick={() => setShowForm(true)}
+												className="bg-cta1 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-hover1 transition-all duration-300"
+											>
+												{buttons[language].bookNow}	
+											</button>
+											<Link
+												to={`/course-details/${courseId}`}
+												className="bg-light text-headings2 py-2 px-4 rounded-lg shadow-lg hover:bg-hover2 hover:text-white transition-all"
+											>
+												{buttons[language].moreInfo}
+											</Link>
+										</div>
+									)}
+								</div>
+
+								{/* Text Section */}
+								<div className="p-4 divide-y divide-dotted divide-gray flex flex-col justify-between h-full">
+									<div>
+										<div className="text-base tab:text-lg tab2:text-xl big:text-2xl font-bold mb-2 leading-tight text-primary line-clamp-3">
+											<Link
+												to={`/course-details/${courseId}`}
+												className="hover:text-headings1"
+											>
+												{otherCourse.title[langKey]}
+											</Link>
+										</div>
+										<p className="text-xs tab1:text-base big:text-lg font-medium line-clamp-4 text-body mb-2">
+											{otherCourse.description[langKey]}
+										</p>
+										<div className="flex justify-end">
+											<div className="inline-flex items-center bg-red-100 text-white font-bold text-sm px-3 py-1.5 rounded-full shadow-md whitespace-nowrap">
+												{otherCourse.price[langKey]}
+											</div>
+										</div>
+									</div>
+
+									<div className="text-xs tab2:text-sm mt-2 text-body pt-4">
+										{mobile && (
+											<div className="flex justify-center items-center gap-4">
+												<button
+													className="bg-cta1 text-white py-2 px-4 rounded-lg"
+													onClick={() => setShowForm(true)}
+												>
+													{buttons[language].bookNow}
+												</button>
+												<Link
+													to={`/course-details/${courseId}`}
+													className="bg-highlight2 text-headings2 py-2 px-4 rounded-lg"
+												>
+													{buttons[language].moreInfo}
+												</Link>
+											</div>
+										)}
+									</div>
+								</div>
+							</div>
+						);
+					})}
+				</div>
+			</div>
 		</div>
 	);
 };
 
-export default CourseDetails;
+export default React.memo(CourseDetails);
 
 

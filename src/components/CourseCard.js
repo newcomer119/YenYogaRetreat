@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import CourseSelection from "./CourseSelection";
@@ -67,8 +66,10 @@ const CourseCard = ({ course, index }) => {
           <p className="text-xs tab1:text-base big:text-lg font-medium line-clamp-2 text-body mb-2">
             {course.description[langKey]}
           </p>
-          <div className="flex justify-end bg-red-100 text-white font-bold text-sm px-2 py-1 rounded-lg w-1/3 ml-auto">
-            {course.price[langKey]}
+          <div className="flex justify-end">
+            <div className="bg-red-100 text-white font-bold text-xs tab1:text-sm px-2 py-1 rounded-lg w-fit">
+              {course.price[langKey]}
+            </div>
           </div>
         </div>
 
