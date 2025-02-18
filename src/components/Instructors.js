@@ -17,7 +17,7 @@ const Instructors = () => {
 				{sectionHeaders[language].trainers}
 			</div>
 
-			<div className='flex flex-col tab:flex-row gap-5 justify-center items-center '>
+			<div className='flex flex-col flex-wrap tab:flex-row gap-5 justify-center items-center '>
 				{inst.map((instructor) => (
 					<Link
 						to={`/trainers/${instructor.id}`}

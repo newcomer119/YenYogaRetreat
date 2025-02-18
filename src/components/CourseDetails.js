@@ -166,28 +166,22 @@ const CourseDetails = () => {
     const fetchCourse = async () => {
       try {
         const query = `*[_type == "course" && isActive == true] | order(order asc) {
-					"title": coalesce(${language === "vi" ? "titleVi" : "title"}, title),
-					"description": coalesce(${
-            language === "vi" ? "descriptionVi" : "description"
-          }, description),
-					duration,
-					price,
-					"imageUrl": image.asset->url,
-					"features": coalesce(${language === "vi" ? "featuresVi" : "features"}, features),
-					"detailsImages": detailsImage[]{
-						"url": asset->url,
-						"alt": asset->originalFilename
-					}
-				}`;
-
-        // Add caching headers
-        const fetchedResults = await client.fetch(
-          query,
-          {},
-          {
-            cache: "force-cache",
+          title,
+          description,
+          duration,
+          price,
+          summary,
+          "imageUrl": image.asset->url,
+          features,
+          "detailsImages": detailsImage[]{
+            "url": asset->url,
+            "alt": asset->originalFilename
           }
-        );
+        }`;
+
+        const fetchedResults = await client.fetch(query, {}, {
+          cache: "force-cache",
+        });
 
         setResults(fetchedResults);
         setCourse(fetchedResults[id]);
@@ -274,9 +268,18 @@ const CourseDetails = () => {
 
   return (
     <div className="top-section">
+      {/* Main Course Title Heading */}
+      <div className="text-center mb-8">
+        <h1 className="text-3xl md:text-4xl font-bold text-cta2 font-serif">
+          {language === "vn" ? "Chi Tiết Khóa Học" : "Course Details"}
+        </h1>
+      </div>
+
+      {/* Course Title */}
       <div className="sectionHeaders text-cta2 text-2xl md:text-3xl">
         {title}
       </div>
+
       <div className="flex flex-col tab2:flex-row gap-4 md:gap-8">
         <div className="w-full tab2:w-1/2">
           <div className="relative flex flex-col gap-4">
@@ -316,31 +319,36 @@ const CourseDetails = () => {
         </div>
       </div>
 
-      <div className="py-8">
-        <h2 className="text-2xl font-bold mb-6 text-center text-cta2 font-serif tracking-wide">
-          {language === "vn" ? "Chi Tiết Khóa Học" : "Course Details"}
-        </h2>
-        <ul className="list-disc space-y-4 max-w-4xl mx-auto px-6">
-          {features.map((feature, index) => (
-            <li
-              key={index}
-              className={`${
-                index % 2 === 0 ? "text-blue-600" : "text-green-600"
-              } 
-								text-lg leading-relaxed 
-								${
-                  index === features.length - 1
-                    ? "text-center font-semibold"
-                    : "text-justify font-medium"
-                } 
-								hover:translate-x-2 transition-transform duration-300
-								tracking-wide`}
-            >
-              {feature[langKey]}
-            </li>
-          ))}
-        </ul>
-      </div>
+      {/* New Course Details Section */}
+      {(course.summary || (course.features && course.features.length > 0)) && (
+        <div className="py-8">
+          <h2 className="text-2xl font-bold mb-6 text-center text-cta2 font-serif tracking-wide">
+            {language === "vn" ? "Chi Tiết Khóa Học" : "Course Details"}
+          </h2>
+          <div className="max-w-4xl mx-auto px-6 space-y-6">
+            {/* Summary Content */}
+            {course.summary && (
+              <p className="text-lg leading-relaxed text-justify font-medium text-body">
+                {course.summary[language === "vn" ? "vi" : "en"]}
+              </p>
+            )}
+            
+            {/* Features Content */}
+            {course.features && course.features.length > 0 && (
+              <ul className="space-y-4">
+                {course.features.map((feature, index) => (
+                  <li
+                    key={index}
+                    className="text-lg leading-relaxed text-center font-medium text-body before:content-['•'] before:mr-2 before:text-cta2"
+                  >
+                    {feature[language === "vn" ? "vi" : "en"]}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Activity Images Slider */}
       {course.detailsImages && course.detailsImages.length > 0 && (
@@ -371,11 +379,11 @@ const CourseDetails = () => {
       </div>
 
       {/* Certificate Requirements section */}
-      <div className="border border-gray-300 p-4 rounded-lg mb-8 mt-16 max-w-4xl mx-auto">
-        <h3 className="text-2xl font-bold mb-6 text-center text-cta2 font-serif tracking-wide">
+      <div className="border-4 border-gray-300 p-16 mb-8 mt-16 max-w-4xl mx-auto">
+        <h3 className="text-2xl font-bold mb-8 text-center text-cta2 font-serif tracking-wide">
           {language === "vn" ? "Yêu Cầu Chứng Chỉ" : "Certificate Requirements"}
         </h3>
-        <ul className="space-y-4 px-6">
+        <ul className="space-y-6 px-8">
           {certificateRequirements[language === "vn" ? "vi" : "en"].map(
             (requirement, index, array) => {
               const cleanRequirement = requirement.replace(" ✅", "");
@@ -457,8 +465,8 @@ const CourseDetails = () => {
       />
 
       {/* Other Courses Section */}
-      <div className="my-12 bg-gray-50 py-8 rounded-lg">
-        <h3 className="text-2xl font-bold mb-8 text-center text-cta2">
+      <div className="S py-8 w-full">
+        <h3 className="text-2xl font-bold mb-8 text-center text-black">
           {language === "vn" ? "Khóa Học Khác" : "Other Courses"}
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 justify-items-center max-w-7xl mx-auto">
@@ -469,7 +477,7 @@ const CourseDetails = () => {
             return (
               <div
                 key={index}
-                className="relative flex flex-col min-w-72 max-w-[400px] bg-bg2 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+                className="relative flex flex-col min-w-72 max-w-[400px] bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
               >
                 {/* Image Section */}
                 <div className="relative">
