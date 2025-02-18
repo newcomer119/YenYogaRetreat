@@ -24,19 +24,7 @@ import DetailsImage11 from "../assets/img/DetailsImage/img11.jpg";
 import DetailsImage12 from "../assets/img/DetailsImage/img12.jpg";
 import DetailsImage13 from "../assets/img/DetailsImage/img13.jpg";
 import DetailsImage14 from "../assets/img/DetailsImage/img14.jpg";
-import ActivityImage1 from "../assets/img/actiimage/Ac1.jpeg";
-import ActivityImage2 from "../assets/img/actiimage/Ac2.jpeg";
-import ActivityImage3 from "../assets/img/actiimage/Ac3.jpeg";
-import ActivityImage4 from "../assets/img/actiimage/Ac4.jpeg";
-import ActivityImage5 from "../assets/img/actiimage/Ac5.jpeg";
-import ActivityImage6 from "../assets/img/actiimage/Ac6.jpeg";
-import ActivityImage7 from "../assets/img/actiimage/Ac7.jpeg";
-import ActivityImage8 from "../assets/img/actiimage/Ac8.jpeg";
-import ActivityImage9 from "../assets/img/actiimage/Ac9.jpeg";
-import ActivityImage10 from "../assets/img/actiimage/Ac10.jpeg";
-import ActivityImage11 from "../assets/img/actiimage/Ac11.jpeg";
-import ActivityImage12 from "../assets/img/actiimage/Ac12.jpeg";
-import ActivityImage13 from "../assets/img/actiimage/Ac13.jpeg";
+
 import { ImageModal } from "./Gallery";
 import Instructors from "./Instructors";
 
@@ -313,39 +301,31 @@ const CourseDetails = () => {
           <div className="text-lg md:text-xl font-semibold italic mb-4 md:mb-6 leading-relaxed text-justify border-b-2 border-dotted border-cta2 pb-4">
             <span className="text-cta2 font-serif">"{description}"</span>
           </div>
-          <div className="text-base md:text-lg leading-relaxed mb-4 md:mb-6 text-justify font-light">
-            {features[0][langKey]}
-          </div>
+          {course.summary && (
+            <div className="text-base md:text-lg leading-relaxed mb-4 md:mb-6 text-justify font-light">
+              {course.summary[language === "vn" ? "vi" : "en"]}
+            </div>
+          )}
         </div>
       </div>
 
-      {/* New Course Details Section */}
-      {(course.summary || (course.features && course.features.length > 0)) && (
-        <div className="py-8">
-          <h2 className="text-2xl font-bold mb-6 text-center text-cta2 font-serif tracking-wide">
+      {/* Course Details Section - Features Only */}
+      {course.features && course.features.length > 0 && (
+        <div className="py-12">
+          <h2 className="text-3xl font-bold mb-8 text-center text-cta2 font-serif tracking-wide">
             {language === "vn" ? "Chi Tiết Khóa Học" : "Course Details"}
           </h2>
-          <div className="max-w-4xl mx-auto px-6 space-y-6">
-            {/* Summary Content */}
-            {course.summary && (
-              <p className="text-lg leading-relaxed text-justify font-medium text-body">
-                {course.summary[language === "vn" ? "vi" : "en"]}
-              </p>
-            )}
-            
-            {/* Features Content */}
-            {course.features && course.features.length > 0 && (
-              <ul className="space-y-4">
-                {course.features.map((feature, index) => (
-                  <li
-                    key={index}
-                    className="text-lg leading-relaxed text-center font-medium text-body before:content-['•'] before:mr-2 before:text-cta2"
-                  >
-                    {feature[language === "vn" ? "vi" : "en"]}
-                  </li>
-                ))}
-              </ul>
-            )}
+          <div className="max-w-5xl mx-auto px-6">
+            <ul className="space-y-6">
+              {course.features.map((feature, index) => (
+                <li
+                  key={index}
+                  className="text-xl leading-relaxed text-center font-bold text-body before:content-['•'] before:mr-3 before:text-cta2 hover:text-cta2 transition-colors duration-300"
+                >
+                  {feature[language === "vn" ? "vi" : "en"]}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       )}
@@ -379,8 +359,8 @@ const CourseDetails = () => {
       </div>
 
       {/* Certificate Requirements section */}
-      <div className="border-4 border-gray-300 p-16 mb-8 mt-16 max-w-4xl mx-auto">
-        <h3 className="text-2xl font-bold mb-8 text-center text-cta2 font-serif tracking-wide">
+      <div className="border-4 border-green-300 rounded-2xl p-16 mb-8 mt-16 max-w-4xl mx-auto">
+        <h3 className="text-3xl font-bold mb-8 text-center text-cta2 font-serif tracking-wide">
           {language === "vn" ? "Yêu Cầu Chứng Chỉ" : "Certificate Requirements"}
         </h3>
         <ul className="space-y-6 px-8">
@@ -390,7 +370,7 @@ const CourseDetails = () => {
               return (
                 <li
                   key={index}
-                  className="text-lg leading-relaxed text-center font-medium tracking-wide hover:text-cta2 transition-colors duration-300"
+                  className="text-xl leading-relaxed text-center font-medium tracking-wide hover:text-cta2 transition-colors duration-300"
                 >
                   {cleanRequirement}
                 </li>
