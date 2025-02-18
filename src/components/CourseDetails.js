@@ -173,7 +173,11 @@ const CourseDetails = () => {
 					duration,
 					price,
 					"imageUrl": image.asset->url,
-					"features": coalesce(${language === "vi" ? "featuresVi" : "features"}, features)
+					"features": coalesce(${language === "vi" ? "featuresVi" : "features"}, features),
+					"detailsImages": detailsImage[]{
+						"url": asset->url,
+						"alt": asset->originalFilename
+					}
 				}`;
 
         // Add caching headers
@@ -339,39 +343,27 @@ const CourseDetails = () => {
       </div>
 
       {/* Activity Images Slider */}
-      <div className="my-8 md:my-16">
-        <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-center text-cta2 font-serif tracking-wide">
-          {language === "vn" ? "Hoạt Động Của Chúng Tôi" : "Our Activities"}
-        </h2>
-        <div className="modal-content px-2 md:px-0">
-          <Slider {...sliderSettings}>
-            {[
-              ActivityImage1,
-              ActivityImage2,
-              ActivityImage3,
-              ActivityImage4,
-              ActivityImage5,
-              ActivityImage6,
-              ActivityImage7,
-              ActivityImage8,
-              ActivityImage9,
-              ActivityImage10,
-              ActivityImage11,
-              ActivityImage12,
-              ActivityImage13,
-            ].map((image, index) => (
-              <div key={index} className="px-2">
-                <img
-                  src={image}
-                  alt={`Activity ${index + 1}`}
-                  className="rounded-lg shadow-md w-full h-[400px] object-cover transition-transform duration-300 transform hover:scale-105 focus:outline-none cursor-pointer"
-                  onClick={() => openModal(image)}
-                />
-              </div>
-            ))}
-          </Slider>
+      {course.detailsImages && course.detailsImages.length > 0 && (
+        <div className="my-8 md:my-16">
+          <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-center text-cta2 font-serif tracking-wide">
+            {language === "vn" ? "Hoạt Động Của Chúng Tôi" : "Our Activities"}
+          </h2>
+          <div className="modal-content px-2 md:px-0">
+            <Slider {...sliderSettings}>
+              {course.detailsImages.map((image, index) => (
+                <div key={index} className="px-2">
+                  <img
+                    src={image.url}
+                    alt={image.alt || `Activity ${index + 1}`}
+                    className="rounded-lg shadow-md w-full h-[400px] object-cover transition-transform duration-300 transform hover:scale-105 focus:outline-none cursor-pointer"
+                    onClick={() => openModal(image.url)}
+                  />
+                </div>
+              ))}
+            </Slider>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Add Instructors section here */}
       <div className="my-16">

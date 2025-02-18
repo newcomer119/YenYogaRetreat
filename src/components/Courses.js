@@ -66,7 +66,7 @@ const Courses = () => {
           {headerText}
         </div>
 
-        <div className="grid grid-cols-1 mob2:grid-cols-2 lap:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 mob2:grid-cols-2 tab:grid-cols-4 gap-8">
           {courses.map((course, index) => (
             <div
               key={index}
