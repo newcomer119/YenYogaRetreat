@@ -66,11 +66,6 @@ const CourseCard = ({ course, index }) => {
           <p className="text-xs tab1:text-base big:text-lg font-medium line-clamp-2 text-body mb-2">
             {course.description[langKey]}
           </p>
-          <div className="flex justify-end">
-            <div className="bg-red-100 text-white font-bold text-xs tab1:text-sm px-2 py-1 rounded-lg w-fit">
-              {course.price[langKey]}
-            </div>
-          </div>
         </div>
 
         <div className="text-xs tab2:text-sm mt-2 text-body pt-4">
