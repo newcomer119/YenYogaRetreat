@@ -673,7 +673,7 @@ export const sectionHeaders = {
     courses: "Upcoming Courses & Events",
     facts: "Our Founders",
     footer: "© 2024 Yen Yoga & Retreat. All Rights Reserved",
-    gallery: "Retreat Highlights",
+    gallery: "Shine & Share ",
     aboutTrainer: "About",
     trainers: "Our Yoga Teachers",
     trainerNotFound: "Trainer Not Found. Please check back later.",
@@ -687,7 +687,7 @@ export const sectionHeaders = {
     courses: "Khóa Học & Sự Kiện Sắp Tới",
     facts: "Những Người Sáng Lập Của Chúng Tôi",
     footer: "© 2024 Yen Yoga & Retreat. Mọi Quyền Được Bảo Lưu",
-    gallery: "Điểm Nhấn Retreat",
+    gallery: "Hành trình rực rỡ",
     aboutTrainer: "Giới Thiệu",
     trainers: "Các Giáo Viên Yoga Của Chúng Tôi",
     trainerNotFound:

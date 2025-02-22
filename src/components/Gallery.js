@@ -1,22 +1,23 @@
 // Changed the gallery file now images are visible with slideshow
 
-import React, { useState } from "react"; // Added useState for managing modal state
+import React, { useState, useEffect } from "react"; // Add useEffect
 import "slick-carousel/slick/slick.css"; // Import slick-carousel styles
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import imageUrlBuilder from '@sanity/image-url';
 
-import GalleryImg from "../galleryimg/galleryimg.png";
-import GalleryImg1 from "../galleryimg/galleryimg1.png";
-import GalleryImg2 from "../galleryimg/galleryimg2.png";
-import GalleryImg3 from "../galleryimg/galleryimg3.png";
-import GalleryImg4 from "../galleryimg/galleryimg4.png";
-import GalleryImg5 from "../galleryimg/galleryimg5.png";
-import GalleryImg6 from "../galleryimg/galleryimg6.png";
-import GalleryImg7 from "../galleryimg/galleryimg7.png";
-import GalleryImg8 from "../galleryimg/galleryimg8.png";
 import { BsXSquareFill } from "react-icons/bs";
 import { sectionHeaders } from "../data";
 import { useLanguage } from "../context/LanguageContext";
+import { client } from "../lib/sanity"; // Add this import for Sanity client
+
+// Create the image builder
+const builder = imageUrlBuilder(client);
+
+// Function to generate image URL
+function urlFor(source) {
+  return builder.image(source);
+}
 
 // New Modal component for displaying the clicked image
 export const ImageModal = ({ isOpen, image, onClose }) => {
@@ -40,21 +41,31 @@ export const ImageModal = ({ isOpen, image, onClose }) => {
 };
 
 const Gallery = () => {
-  const [selectedImage, setSelectedImage] = useState(null); // State for selected image
-  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [images, setImages] = useState([]); // New state for Sanity images
   const { language } = useLanguage();
 
-  const images = [
-    GalleryImg,
-    GalleryImg1,
-    GalleryImg2,
-    GalleryImg3,
-    GalleryImg4,
-    GalleryImg5,
-    GalleryImg6,
-    GalleryImg7,
-    GalleryImg8,
-  ];
+  // Add useEffect to fetch images from Sanity
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const query = '*[_type == "gallery"][0].images[]';
+        const result = await client.fetch(query);
+        const imageUrls = result.map(image => ({
+          url: urlFor(image).url(),
+          alt: image.alt || 'Gallery image',
+          caption: image.caption || ''
+        }));
+        setImages(imageUrls);
+      } catch (error) {
+        console.error('Error fetching gallery images:', error);
+        console.log('Error details:', error.response);
+      }
+    };
+
+    fetchImages();
+  }, []);
 
   // Slider settings for a centered carousel with next/previous image preview
   const sliderSettings = {
@@ -117,10 +128,10 @@ const Gallery = () => {
               data-aos-duration="2000"
             >
               <img
-                src={image}
-                alt={`Slideshow Image ${index + 1}`}
+                src={image.url}
+                alt={image.alt}
                 className="rounded-lg shadow-md w-full h-80 md:h-96 lg:h-112 object-cover transition-transform duration-300 transform hover:scale-105 focus:outline-none cursor-pointer"
-                onClick={() => openModal(image)} // Open modal on click
+                onClick={() => openModal(image.url)}
               />
             </div>
           ))}
