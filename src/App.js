@@ -22,6 +22,7 @@ import Gallery from "./components/Gallery";
 import Retreat from "./components/Retreat";
 import Instructors from "./components/Instructors";
 import Instructor from "./components/Instructor";
+import Testimonials from "./components/Testimonials";
 import Aos from "aos";
 import UserProfile from "./components/UserProfile";
 import Unsure from "./components/Unsure";
@@ -76,6 +77,7 @@ const AppContent = () => {
                 <Courses />
                 <Features />
                 <Facts />
+                <Testimonials />
                 <Gallery />
               </>
             }

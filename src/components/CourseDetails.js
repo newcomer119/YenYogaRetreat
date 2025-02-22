@@ -42,33 +42,6 @@ const CourseDetails = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [mobile, setMobile] = useState(window.innerWidth <= 769);
 
-  const certificateRequirements = {
-    en: [
-      "After completing the course and meeting the graduation requirements, you will be awarded a 200-hour Yoga Alliance USA certificate, recognized by an international yoga organization with a large and reputable global yoga instructor community. ✅",
-      "Yên Yoga & Retreat is a branch of Kim Yoga Vietnam. ✅",
-      "Complete 100% of required learning hours (online or offline) ✅",
-      "Submit all assigned homework within the given timeframe ✅",
-      "Pass an oral examination with the instructor ✅",
-      "Pass a written theoretical exam covering course content ✅",
-      "Complete 20 hours of self-study (not included in course fees) ✅",
-      "Teach 10 hours of Karma Yoga classes, including class design, posters, and lesson content ✅",
-      "Practice meditation for 40 consecutive days, with a minimum of 11 minutes per session ✅",
-      "Meet all certification assessment criteria as evaluated by Yên Yoga & Retreat ✅",
-    ],
-    vi: [
-      "Sau khi hoàn thành khóa học và đáp ứng các điều kiện tốt nghiệp, bạn sẽ được cấp chứng chỉ 200 giờ Yoga Alliance Mỹ, được công nhận bởi một tổ chức yoga quốc tế với cộng đồng huấn luyện viên yoga lớn và uy tín trên toàn cầu. ✅",
-      "Yên Yoga & Retreat là một chi nhánh của Kim Yoga Việt Nam. ✅",
-      "Hoàn thành 100% số giờ học yêu cầu (trực tuyến hoặc trực tiếp) ✅",
-      "Nộp đầy đủ bài tập được giao trong thời hạn quy định ✅",
-      "Vượt qua bài kiểm tra vấn đáp với giáo viên hướng dẫn ✅",
-      "Hoàn thành bài kiểm tra lý thuyết viết dựa trên nội dung khóa học ✅",
-      "Hoàn thành 20 giờ tự học (không bao gồm trong học phí khóa học) ✅",
-      "Dạy 10 giờ lớp Karma Yoga, bao gồm thiết kế lớp, poster và nội dung giảng dạy ✅",
-      "Thực hành thiền liên tục trong 40 ngày, tối thiểu 11 phút mỗi lần ✅",
-      "Đáp ứng đầy đủ các tiêu chí đánh giá của Yên Yoga & Retreat để cấp chứng chỉ ✅",
-    ],
-  };
-
   // Updated slider settings to ensure continuous movement
   const sliderSettings = {
     dots: false,
@@ -149,7 +122,7 @@ const CourseDetails = () => {
     }
   }, [course]);
 
-  // Optimize data fetching
+  // Modify the fetch query to include certificate requirements
   useEffect(() => {
     const fetchCourse = async () => {
       try {
@@ -164,7 +137,8 @@ const CourseDetails = () => {
           "detailsImages": detailsImage[]{
             "url": asset->url,
             "alt": asset->originalFilename
-          }
+          },
+          certificateRequirements[]
         }`;
 
         const fetchedResults = await client.fetch(query, {}, {
@@ -277,9 +251,6 @@ const CourseDetails = () => {
                 alt={course.title[langKey]}
                 className="w-full object-cover rounded-lg shadow-lg"
               />
-              <div className="absolute -bottom-2 right-4 bg-red-100 text-white font-bold text-xs px-2 py-1 rounded-full shadow-md whitespace-nowrap">
-                {course.price[langKey]}
-              </div>
             </div>
             <div className="w-full flex justify-between items-center px-4">
               <div className="flex gap-2 items-center">
@@ -288,12 +259,14 @@ const CourseDetails = () => {
                   {course.duration[langKey]}
                 </div>
               </div>
-              <button
-                className="text-nowrap text-bold text-white text-xl bg-cta2 rounded-lg px-4 py-2 hover:bg-opacity-90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
-                onClick={() => setShowForm(true)}
-              >
-                {buttons[language].bookNow}
-              </button>
+              <div className="flex justify-end">
+                <button
+                  className="text-nowrap text-bold text-white text-xl bg-cta2 rounded-lg px-4 py-2 hover:bg-opacity-90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
+                  onClick={() => setShowForm(true)}
+                >
+                  {buttons[language].bookNow}
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -359,25 +332,74 @@ const CourseDetails = () => {
       </div>
 
       {/* Certificate Requirements section */}
-      <div className="border-4 border-green-300 rounded-2xl p-16 mb-8 mt-16 max-w-4xl mx-auto">
-        <h3 className="text-3xl font-bold mb-8 text-center text-cta2 font-serif tracking-wide">
-          {language === "vn" ? "Yêu Cầu Chứng Chỉ" : "Certificate Requirements"}
-        </h3>
-        <ul className="space-y-6 px-8">
-          {certificateRequirements[language === "vn" ? "vi" : "en"].map(
-            (requirement, index, array) => {
-              const cleanRequirement = requirement.replace(" ✅", "");
-              return (
-                <li
-                  key={index}
-                  className="text-xl leading-relaxed text-center font-medium tracking-wide hover:text-cta2 transition-colors duration-300"
+      {course.certificateRequirements && course.certificateRequirements.length > 0 && (
+        <div className="border-4 border-green-300 rounded-2xl p-16 mb-8 mt-16 max-w-4xl mx-auto">
+          <h3 className="text-3xl font-bold mb-8 text-center text-cta2 font-serif tracking-wide">
+            {language === "vn" ? "Chứng chỉ Hình ảnh của khoá học" : "Certificate Requirements"}
+          </h3>
+          <ul className="space-y-6 px-8">
+            {course.certificateRequirements.map((requirement, index) => (
+              <li
+                key={index}
+                className="text-xl leading-relaxed text-center font-medium tracking-wide hover:text-cta2 transition-colors duration-300"
+              >
+                {requirement[language === "vn" ? "vi" : "en"]}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Price Section */}
+      <div className="py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <h3 className="text-3xl font-bold mb-8 text-center text-cta2 font-serif tracking-wide">
+            {language === "vn" ? "Học Phí" : "Course Pricing"}
+          </h3>
+          
+          <div className="p-8">
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-6">
+                <div className="text-gray-600 text-2xl">
+                  {language === "vn" 
+                    ? "Bao gồm tất cả các tài liệu học tập và chứng chỉ" 
+                    : "Including all study materials and certification"}
+                </div>
+                <div className="text-4xl font-bold text-cta2">
+                  {course.price?.[langKey] || (language === "vn" ? "Liên hệ" : "Contact us")}
+                </div>
+              </div>
+              <div className="text-gray-700 space-y-3 mb-8">
+                <p className="flex items-center">
+                  <span className="text-cta2 mr-2">✓</span>
+                  {language === "vn" 
+                    ? "Giáo trình và tài liệu học tập chất lượng cao" 
+                    : "High-quality curriculum and study materials"}
+                </p>
+                <p className="flex items-center">
+                  <span className="text-cta2 mr-2">✓</span>
+                  {language === "vn" 
+                    ? "Hướng dẫn trực tiếp từ giảng viên có kinh nghiệm" 
+                    : "Direct guidance from experienced instructors"}
+                </p>
+                <p className="flex items-center">
+                  <span className="text-cta2 mr-2">✓</span>
+                  {language === "vn" 
+                    ? "Chứng chỉ được công nhận quốc tế" 
+                    : "Internationally recognized certification"}
+                </p>
+              </div>
+              <div className="flex justify-end">
+                <button
+                  onClick={() => setShowForm(true)}
+                  className="text-nowrap text-bold text-white text-xl bg-cta2 rounded-lg px-4 py-2 hover:bg-opacity-90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
                 >
-                  {cleanRequirement}
-                </li>
-              );
-            }
-          )}
-        </ul>
+                  Book Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* View Courses and Accommodation Buttons */}
@@ -390,14 +412,6 @@ const CourseDetails = () => {
             {language === "vn" ? "Chỗ Ở" : "Accommodation"}
           </button>
         )}
-        <Link to="/courses">
-          <button
-            className="px-6 py-3 bg-green-300 text-white rounded-lg shadow-md hover:bg-green-500 transition-all duration-300 transform hover:-translate-y-1"
-            onClick={handleViewCoursesClick}
-          >
-            {language === "vn" ? "Xem Khóa Học" : "View Courses"}
-          </button>
-        </Link>
       </div>
 
       {/* Accommodation Slider */}
@@ -498,11 +512,6 @@ const CourseDetails = () => {
                     <p className="text-xs tab1:text-base big:text-lg font-medium line-clamp-4 text-body mb-2">
                       {otherCourse.description[langKey]}
                     </p>
-                    <div className="flex justify-end">
-                      <div className="inline-flex items-center bg-red-100 text-white font-bold text-sm px-3 py-1.5 rounded-full shadow-md whitespace-nowrap">
-                        {otherCourse.price[langKey]}
-                      </div>
-                    </div>
                   </div>
 
                   <div className="text-xs tab2:text-sm mt-2 text-body pt-4">
