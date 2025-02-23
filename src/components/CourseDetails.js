@@ -24,7 +24,6 @@ import DetailsImage11 from "../assets/img/DetailsImage/img11.jpg";
 import DetailsImage12 from "../assets/img/DetailsImage/img12.jpg";
 import DetailsImage13 from "../assets/img/DetailsImage/img13.jpg";
 import DetailsImage14 from "../assets/img/DetailsImage/img14.jpg";
-
 import { ImageModal } from "./Gallery";
 import Instructors from "./Instructors";
 
@@ -116,7 +115,7 @@ const CourseDetails = () => {
     }
   }, [course]);
 
-  // Modify the fetch query to include certificate requirements
+  // Update the fetch query to include priceImages
   useEffect(() => {
     const fetchCourse = async () => {
       try {
@@ -132,7 +131,15 @@ const CourseDetails = () => {
             "url": asset->url,
             "alt": asset->originalFilename
           },
-          certificateRequirements[]
+          "priceImages": priceImages[]{
+            "url": asset->url,
+            "alt": asset->originalFilename
+          },
+          certificateRequirements[],
+          priceSection {
+            mainText,
+            features
+          }
         }`;
 
         const fetchedResults = await client.fetch(query, {}, {
@@ -169,10 +176,18 @@ const CourseDetails = () => {
     };
   }, []);
 
-  // Modify the button click handler
+  // First button scrolls to price section
   const handleBookNowClick = () => {
     priceRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+
+  // Second button opens the form
+  const handleBookingFormClick = () => {
+    setShowForm(true);
+  };
+
+  // Add state for showing price section
+  const [showPriceSection, setShowPriceSection] = useState(false);
 
   if (loading) {
     return (
@@ -334,7 +349,7 @@ const CourseDetails = () => {
       {course.certificateRequirements && course.certificateRequirements.length > 0 && (
         <div className="border-4 border-green-300 rounded-2xl p-16 mb-8 mt-16 max-w-4xl mx-auto">
           <h3 className="text-3xl font-bold mb-8 text-center text-cta2 font-serif tracking-wide">
-            {language === "vn" ? "Chứng chỉ Hình ảnh của khoá học" : "Certificate Requirements"}
+            {language === "vn" ? "CHỨNG CHỈ Hình ảnh của khoá học" : "Certificate Requirements"}
           </h3>
           <ul className="space-y-6 px-8">
             {course.certificateRequirements.map((requirement, index) => (
@@ -349,53 +364,72 @@ const CourseDetails = () => {
         </div>
       )}
 
-      {/* Price Section */}
+      {/* Price Section with buttons */}
       <div className="py-16 px-4" ref={priceRef}>
         <div className="max-w-4xl mx-auto">
-          <h3 className="text-3xl font-bold mb-8 text-center text-cta2 font-serif tracking-wide">
-            {language === "vn" ? "Học Phí" : "Course Pricing"}
-          </h3>
-          
-          <div className="mb-6">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
-              <div className="text-gray-600 text-lg md:text-2xl text-center md:text-left">
-                {language === "vn" 
-                  ? "Bao gồm tất cả các tài liệu học tập và chứng chỉ" 
-                  : "Including all study materials and certification"}
-              </div>
-              <div className="text-3xl md:text-4xl font-bold text-cta2">
-                {course.price?.[langKey] || (language === "vn" ? "Liên hệ" : "Contact us")}
-              </div>
-            </div>
-            <div className="text-gray-700 space-y-3 mb-8">
-              <p className="flex items-center text-sm md:text-base">
-                <span className="text-cta2 mr-2">✓</span>
-                {language === "vn" 
-                  ? "Giáo trình và tài liệu học tập chất lượng cao" 
-                  : "High-quality curriculum and study materials"}
-              </p>
-              <p className="flex items-center text-sm md:text-base">
-                <span className="text-cta2 mr-2">✓</span>
-                {language === "vn" 
-                  ? "Hướng dẫn trực tiếp từ giảng viên có kinh nghiệm" 
-                  : "Direct guidance from experienced instructors"}
-              </p>
-              <p className="flex items-center text-sm md:text-base">
-                <span className="text-cta2 mr-2">✓</span>
-                {language === "vn" 
-                  ? "Chứng chỉ được công nhận quốc tế" 
-                  : "Internationally recognized certification"}
-              </p>
-            </div>
-            <div className="flex justify-center">
-              <button
-                onClick={handleBookNowClick}
-                className="w-full md:w-auto text-nowrap text-bold text-white text-xl md:text-2xl bg-cta2 rounded-lg px-8 py-4 hover:bg-opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-              >
-                {language === "vn" ? "Đăng Ký Ngay" : "Book Now"}
-              </button>
-            </div>
+          <div className="flex justify-center mb-8">
+            <button
+              onClick={() => setShowPriceSection(!showPriceSection)}
+              className="text-nowrap text-bold text-white text-xl md:text-2xl bg-cta2 rounded-lg px-8 py-4 hover:bg-opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
+              {language === "vn" ? "Chi Phí" : "PAYMENT OPTIONS"}
+            </button>
           </div>
+
+          {showPriceSection && (
+            <>
+              <h3 className="text-3xl font-bold mb-8 text-center text-cta2 font-serif tracking-wide">
+                {language === "vn" ? "Học Phí" : "Course Pricing"}
+              </h3>
+              
+              <div className="mb-6">
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
+                  <div className="text-gray-600 text-lg md:text-2xl text-center md:text-left">
+                    {course.priceSection?.mainText?.[langKey] || 
+                      (language === "vn" 
+                        ? "Bao gồm tất cả các tài liệu học tập và chứng chỉ" 
+                        : "Including all study materials and certification")}
+                  </div>
+                  <div className="text-3xl md:text-4xl font-bold text-cta2">
+                    {course.price?.[langKey] || (language === "vn" ? "Liên hệ" : "Contact us")}
+                  </div>
+                </div>
+                <div className="text-gray-700 space-y-3 mb-8">
+                  {(course.priceSection?.features || []).map((feature, index) => (
+                    <p key={index} className="flex items-center text-sm md:text-base">
+                      <span className="text-cta2 mr-2">✓</span>
+                      {feature[langKey]}
+                    </p>
+                  ))}
+                </div>
+              </div>
+
+              {/* Price Images Grid */}
+              <div className="mt-8 mb-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {course.priceImages && course.priceImages.map((image, index) => (
+                    <div key={index} className="aspect-w-16 aspect-h-9">
+                      <img
+                        src={image.url}
+                        alt={image.alt || `Price ${index + 1}`}
+                        className="rounded-lg shadow-md w-full h-full object-cover transition-transform duration-300 transform hover:scale-105 focus:outline-none cursor-pointer"
+                        onClick={() => openModal(image.url)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex justify-center">
+                <button
+                  onClick={handleBookingFormClick}
+                  className="text-nowrap text-bold text-white text-xl md:text-2xl bg-cta2 rounded-lg px-8 py-4 hover:bg-opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                >
+                  {language === "vn" ? "Đăng Ký Ngay" : "Book Now"}
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
@@ -508,6 +542,13 @@ const CourseDetails = () => {
           })}
         </div>
       </div>
+
+      {/* Add CourseSelection component */}
+      <CourseSelection
+        course={course}
+        isOpen={showForm}
+        onClose={() => setShowForm(false)}
+      />
     </div>
   );
 };
