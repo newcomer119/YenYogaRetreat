@@ -98,11 +98,13 @@ const CourseDetails = () => {
   const openModal = (image) => {
     setSelectedImage(image);
     setIsModalOpen(true);
+    document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedImage(null);
+    document.body.style.overflow = 'unset';
   };
 
   useEffect(() => {
@@ -357,46 +359,44 @@ const CourseDetails = () => {
             {language === "vn" ? "Học Phí" : "Course Pricing"}
           </h3>
           
-          <div className="p-8">
-            <div className="mb-6">
-              <div className="flex justify-between items-center mb-6">
-                <div className="text-gray-600 text-2xl">
-                  {language === "vn" 
-                    ? "Bao gồm tất cả các tài liệu học tập và chứng chỉ" 
-                    : "Including all study materials and certification"}
-                </div>
-                <div className="text-4xl font-bold text-cta2">
-                  {course.price?.[langKey] || (language === "vn" ? "Liên hệ" : "Contact us")}
-                </div>
+          <div className="mb-6">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
+              <div className="text-gray-600 text-lg md:text-2xl text-center md:text-left">
+                {language === "vn" 
+                  ? "Bao gồm tất cả các tài liệu học tập và chứng chỉ" 
+                  : "Including all study materials and certification"}
               </div>
-              <div className="text-gray-700 space-y-3 mb-8">
-                <p className="flex items-center">
-                  <span className="text-cta2 mr-2">✓</span>
-                  {language === "vn" 
-                    ? "Giáo trình và tài liệu học tập chất lượng cao" 
-                    : "High-quality curriculum and study materials"}
-                </p>
-                <p className="flex items-center">
-                  <span className="text-cta2 mr-2">✓</span>
-                  {language === "vn" 
-                    ? "Hướng dẫn trực tiếp từ giảng viên có kinh nghiệm" 
-                    : "Direct guidance from experienced instructors"}
-                </p>
-                <p className="flex items-center">
-                  <span className="text-cta2 mr-2">✓</span>
-                  {language === "vn" 
-                    ? "Chứng chỉ được công nhận quốc tế" 
-                    : "Internationally recognized certification"}
-                </p>
+              <div className="text-3xl md:text-4xl font-bold text-cta2">
+                {course.price?.[langKey] || (language === "vn" ? "Liên hệ" : "Contact us")}
               </div>
-              <div className="flex justify-end">
-                <button
-                  onClick={() => setShowForm(true)}
-                  className="text-nowrap text-bold text-white text-xl bg-cta2 rounded-lg px-4 py-2 hover:bg-opacity-90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
-                >
-                  Book Now
-                </button>
-              </div>
+            </div>
+            <div className="text-gray-700 space-y-3 mb-8">
+              <p className="flex items-center text-sm md:text-base">
+                <span className="text-cta2 mr-2">✓</span>
+                {language === "vn" 
+                  ? "Giáo trình và tài liệu học tập chất lượng cao" 
+                  : "High-quality curriculum and study materials"}
+              </p>
+              <p className="flex items-center text-sm md:text-base">
+                <span className="text-cta2 mr-2">✓</span>
+                {language === "vn" 
+                  ? "Hướng dẫn trực tiếp từ giảng viên có kinh nghiệm" 
+                  : "Direct guidance from experienced instructors"}
+              </p>
+              <p className="flex items-center text-sm md:text-base">
+                <span className="text-cta2 mr-2">✓</span>
+                {language === "vn" 
+                  ? "Chứng chỉ được công nhận quốc tế" 
+                  : "Internationally recognized certification"}
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <button
+                onClick={() => setShowForm(true)}
+                className="w-full md:w-auto text-nowrap text-bold text-white text-xl md:text-2xl bg-cta2 rounded-lg px-8 py-4 hover:bg-opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+              >
+                {language === "vn" ? "Đăng Ký Ngay" : "Book Now"}
+              </button>
             </div>
           </div>
         </div>
@@ -465,7 +465,6 @@ const CourseDetails = () => {
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 justify-items-center max-w-7xl mx-auto">
           {getOtherCourses().map((otherCourse, index) => {
-            // Calculate the correct course ID
             const courseId = index >= id ? index + 2 : index + 1;
 
             return (
@@ -481,13 +480,7 @@ const CourseDetails = () => {
                     className="w-full object-cover object-center"
                   />
                   {!mobile && (
-                    <div className="absolute inset-0 flex justify-center items-center gap-4 opacity-0 hover:opacity-100 bg-primary bg-opacity-40 transition-all duration-200">
-                      <button
-                        onClick={() => setShowForm(true)}
-                        className="bg-cta1 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-hover1 transition-all duration-300"
-                      >
-                        {buttons[language].bookNow}
-                      </button>
+                    <div className="absolute inset-0 flex justify-center items-center opacity-0 hover:opacity-100 bg-primary bg-opacity-40 transition-all duration-200">
                       <Link
                         to={`/course-details/${courseId}`}
                         className="bg-light text-headings2 py-2 px-4 rounded-lg shadow-lg hover:bg-hover2 hover:text-white transition-all"
@@ -516,13 +509,7 @@ const CourseDetails = () => {
 
                   <div className="text-xs tab2:text-sm mt-2 text-body pt-4">
                     {mobile && (
-                      <div className="flex justify-center items-center gap-4">
-                        <button
-                          className="bg-cta1 text-white py-2 px-4 rounded-lg"
-                          onClick={() => setShowForm(true)}
-                        >
-                          {buttons[language].bookNow}
-                        </button>
+                      <div className="flex justify-center items-center">
                         <Link
                           to={`/course-details/${courseId}`}
                           className="bg-highlight2 text-headings2 py-2 px-4 rounded-lg"
