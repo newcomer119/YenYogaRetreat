@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext";
 import CourseSelection from "./CourseSelection";
@@ -37,10 +37,12 @@ const CourseDetails = () => {
   const { pathname } = useLocation();
   const id = pathname.split("/").pop() - 1;
   const langKey = language === "vn" ? "vi" : language;
-  const [showSlider, setShowSlider] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [mobile, setMobile] = useState(window.innerWidth <= 769);
+
+  // Add ref for price section
+  const priceRef = useRef(null);
 
   // Updated slider settings to ensure continuous movement
   const sliderSettings = {
@@ -83,16 +85,6 @@ const CourseDetails = () => {
         },
       },
     ],
-  };
-
-  const handleViewCoursesClick = () => {
-    setShowSlider(true);
-    setIsModalOpen(false);
-  };
-
-  const handleAccommodationClick = () => {
-    setShowSlider((prev) => !prev);
-    setIsModalOpen(false);
   };
 
   const openModal = (image) => {
@@ -176,6 +168,11 @@ const CourseDetails = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  // Modify the button click handler
+  const handleBookNowClick = () => {
+    priceRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   if (loading) {
     return (
@@ -264,7 +261,7 @@ const CourseDetails = () => {
               <div className="flex justify-end">
                 <button
                   className="text-nowrap text-bold text-white text-xl bg-cta2 rounded-lg px-4 py-2 hover:bg-opacity-90 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
-                  onClick={() => setShowForm(true)}
+                  onClick={handleBookNowClick}
                 >
                   {buttons[language].bookNow}
                 </button>
@@ -353,7 +350,7 @@ const CourseDetails = () => {
       )}
 
       {/* Price Section */}
-      <div className="py-16 px-4">
+      <div className="py-16 px-4" ref={priceRef}>
         <div className="max-w-4xl mx-auto">
           <h3 className="text-3xl font-bold mb-8 text-center text-cta2 font-serif tracking-wide">
             {language === "vn" ? "Học Phí" : "Course Pricing"}
@@ -392,7 +389,7 @@ const CourseDetails = () => {
             </div>
             <div className="flex justify-center">
               <button
-                onClick={() => setShowForm(true)}
+                onClick={handleBookNowClick}
                 className="w-full md:w-auto text-nowrap text-bold text-white text-xl md:text-2xl bg-cta2 rounded-lg px-8 py-4 hover:bg-opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
                 {language === "vn" ? "Đăng Ký Ngay" : "Book Now"}
@@ -402,55 +399,41 @@ const CourseDetails = () => {
         </div>
       </div>
 
-      {/* View Courses and Accommodation Buttons */}
-      <div className="flex justify-center space-x-4 mt-8 mb-12">
-        {id === 0 && (
-          <button
-            className="px-6 py-3 bg-orange text-white rounded-lg shadow-md hover:bg-blue-500 transition-all duration-300 transform hover:-translate-y-1"
-            onClick={handleAccommodationClick}
-          >
-            {language === "vn" ? "Chỗ Ở" : "Accommodation"}
-          </button>
-        )}
-      </div>
-
       {/* Accommodation Slider */}
-      {showSlider && (
-        <div className="my-16">
-          <h2 className="text-2xl font-bold mb-6 text-center text-cta2 font-serif tracking-wide">
-            {language === "vn" ? "Chỗ Ở" : "Accommodation"}
-          </h2>
-          <div className="modal-content">
-            <Slider {...sliderSettings}>
-              {[
-                DetailsImage1,
-                DetailsImage2,
-                DetailsImage3,
-                DetailsImage4,
-                DetailsImage5,
-                DetailsImage6,
-                DetailsImage7,
-                DetailsImage8,
-                DetailsImage9,
-                DetailsImage10,
-                DetailsImage11,
-                DetailsImage12,
-                DetailsImage13,
-                DetailsImage14,
-              ].map((image, index) => (
-                <div key={index} className="px-2">
-                  <img
-                    src={image}
-                    alt={`Accommodation ${index + 1}`}
-                    className="rounded-lg shadow-md w-full h-[400px] object-cover transition-transform duration-300 transform hover:scale-105 focus:outline-none cursor-pointer"
-                    onClick={() => openModal(image)}
-                  />
-                </div>
-              ))}
-            </Slider>
-          </div>
+      <div className="my-16">
+        <h2 className="text-2xl font-bold mb-6 text-center text-cta2 font-serif tracking-wide">
+          {language === "vn" ? "Chỗ Ở" : "Accommodation"}
+        </h2>
+        <div className="modal-content">
+          <Slider {...sliderSettings}>
+            {[
+              DetailsImage1,
+              DetailsImage2,
+              DetailsImage3,
+              DetailsImage4,
+              DetailsImage5,
+              DetailsImage6,
+              DetailsImage7,
+              DetailsImage8,
+              DetailsImage9,
+              DetailsImage10,
+              DetailsImage11,
+              DetailsImage12,
+              DetailsImage13,
+              DetailsImage14,
+            ].map((image, index) => (
+              <div key={index} className="px-2">
+                <img
+                  src={image}
+                  alt={`Accommodation ${index + 1}`}
+                  className="rounded-lg shadow-md w-full h-[400px] object-cover transition-transform duration-300 transform hover:scale-105 focus:outline-none cursor-pointer"
+                  onClick={() => openModal(image)}
+                />
+              </div>
+            ))}
+          </Slider>
         </div>
-      )}
+      </div>
 
       <ImageModal
         isOpen={isModalOpen}
